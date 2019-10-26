@@ -6,14 +6,14 @@
     >
       <div class="beer-item"><flag :iso="beer.beer_country" :squared="false" /> <strong>{{beer.beer_rating}} ({{beer.beer_rating_count}})</strong> {{beer.beer_name}} ({{beer.beer_style}})</div>
       <div class="bar-item-area">
-        <span
+        <div
           class="bar-item"
           v-for="(bar, barKey) in barsArray(beer)"
           :key="barKey"
         >
           {{bar}}
-          ({{ +daysAgoArray(beer)[barKey] === 0 ? 'today' : daysAgoArray(beer)[barKey] + ' days ago'}})<span v-if="(+barKey + 1) <= barsArray(beer).length - 1">, </span>
-        </span>
+          ({{ +daysAgoArray(beer)[barKey] === 0 ? 'today' : daysAgoArray(beer)[barKey] + ' days ago'}})
+        </div>
       </div>
     </div>
   </div>
