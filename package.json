@@ -1,5 +1,6 @@
 {
   "name": "craft-beer-finder-frontend-vue",
+  "author": "Jetro Suni",
   "version": "0.1.0",
   "private": true,
   "scripts": {
