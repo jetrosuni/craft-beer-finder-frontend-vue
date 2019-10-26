@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="container">
+    <div class="cbf-main container">
       <MainPage />
     </div>
   </div>
@@ -25,5 +25,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.cbf-main {
+  padding: 0 2rem;
 }
 </style>
