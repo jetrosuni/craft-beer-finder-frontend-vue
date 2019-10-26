@@ -2,19 +2,20 @@
   <div class="section">
     <h1 class="title is-1">Craft Beer Finder</h1>
     <div v-if="errorMessage" style="color: red">{{errorMessage}}</div>
-    <ul v-if="!waitingForResponse">
-      <li v-for="(beer, beerKey) in beerList" :key="beerKey">
-        {{beer}}
-      </li>
-    </ul>
+    <BeerList v-if="!waitingForResponse" :data="beerList" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 
+import BeerList from "@/components/BeerList.vue";
+
 export default {
   name: "MainPage",
+  components: {
+    BeerList
+  },
   data() {
     return {
       errorMessage: "",
