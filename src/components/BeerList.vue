@@ -4,7 +4,7 @@
       v-for="(beer, beerKey) in data"
       :key="beerKey"
     >
-      <div class="beer-item">{{beer.beer_country}} <strong>{{beer.beer_rating}}</strong> {{beer.beer_name}} ({{beer.beer_style}})</div>
+      <div class="beer-item">{{beer.beer_country}} <strong>{{beer.beer_rating}} ({{beer.beer_rating_count}})</strong> {{beer.beer_name}} ({{beer.beer_style}})</div>
       <div class="bar-item-area">
         <span
           class="bar-item"
