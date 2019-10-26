@@ -5,6 +5,9 @@
 npm install
 ```
 
+* Rename the `.env.example` file to `.env`
+* Change the `VUE_APP_CRAFT_BEER_FINDER_API_URL` value in the `.env` file to match the real backend URL
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
