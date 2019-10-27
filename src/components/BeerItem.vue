@@ -5,10 +5,16 @@
       <div class="columns is-gapless">
         <div class="column is-two-fifths">
           <div class="cbf-flag">
-            <flag
-              :iso="item.beer_country"
-              :squared="false"
-            />
+            <b-tooltip
+              :label="item.beer_country"
+              type="is-white"
+              position="is-left"
+            >
+              <flag
+                :iso="item.beer_country"
+                :squared="false"
+              />
+            </b-tooltip>
           </div>
         </div>
         <div class="column is-two-fifths">
