@@ -14,12 +14,7 @@
             </div>
             <div class="column is-half">
               <div class="cbf-pint">
-                <b-icon
-                  pack="fas"
-                  icon="beer"
-                  size="is-medium"
-                  :class="getBeerColor(item.beer_style)"
-                />
+                <img :src="tulipGlassSvg(item.beer_style)" width="18px" />
               </div>
             </div>
           </div>
@@ -61,7 +56,7 @@ export default {
     daysAgoArray(item) {
       return item.days_ago_bars.split(",");
     },
-    getBeerColor(style) {
+    tulipGlassSvg(style) {
       if (
         style.includes("Barleywine") ||
         style.includes("Bock") ||
@@ -77,7 +72,7 @@ export default {
         style.includes("Schwarzbier") ||
         style.includes("Stout")
       ) {
-        return "cbf-is-dark";
+        return require('@/assets/img/tulip-glass-dark.svg');
       } else if (
         style.includes("Cider") ||
         style.includes("Fruit") ||
@@ -91,7 +86,7 @@ export default {
         style.includes("Spiced") ||
         style.includes("Wild")
       ) {
-        return "cbf-is-special";
+        return require('@/assets/img/tulip-glass.svg');
       } else if (
         style.includes("Blonde") ||
         style.includes("IPA") ||
@@ -117,7 +112,7 @@ export default {
         style.includes("Saison") ||
         style.includes("Extra Special / Strong Bitter")
       ) {
-        return "cbf-is-light";
+        return require('@/assets/img/tulip-glass-light.svg');
       }
     }
   }
@@ -135,7 +130,7 @@ export default {
 }
 .cbf-pint {
   float: left;
-  margin-top: 0.4rem;
+  margin-top: 0.35rem;
   margin-left: 0.5rem;
 }
 .cbf-rating {
@@ -149,14 +144,5 @@ export default {
 }
 .cbf-bar-item {
   margin-bottom: 1rem;
-}
-.cbf-is-dark {
-  color: #5d4037; /* brown 700 */
-}
-.cbf-is-special {
-  color: #ff3d00; /* deepOrange A400 */
-}
-.cbf-is-light {
-  color: #ffab00; /* #ffc400 A700 */
 }
 </style>

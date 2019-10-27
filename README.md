@@ -28,7 +28,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Credits
 
-* Loading animation heavily inspired by codepen by clemishow with some minor changes: https://codepen.io/clemishow/pen/ZYPPeE/
+* Loading animation heavily inspired by CodePen by clemishow, with several tweaks: https://codepen.io/clemishow/pen/ZYPPeE/
+* `tulip-glass.svg` is a modified version of: https://commons.wikimedia.org/wiki/File:Alcohol_glass_beer_tulip.svg
+  * The **original file** `Alcohol glass beer tulip.svg` is made available under the Creative Commons CC0 1.0 Universal Public Domain Dedication
 
 ## License
 
