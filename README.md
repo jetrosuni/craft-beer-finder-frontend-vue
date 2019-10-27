@@ -26,6 +26,10 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## Credits
+
+* Loading animation heavily inspired by codepen by clemishow with some minor changes: https://codepen.io/clemishow/pen/ZYPPeE/
+
 ## License
 
 Craft Beer Finder by [Jetro Suni](https://www.jetrosuni.com) is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).

@@ -1,16 +1,27 @@
 <template>
   <div class="section">
     <h1 class="title is-1">Craft Beer Finder</h1>
-    <BeerFilters
-      :data="beerList"
-      @change-filter-search-string="onFilterSearchStringChanged"
-    />
+
     <div
       v-if="errorMessage"
-      style="color: red"
+      class="cbf-is-warning"
     >{{errorMessage}}</div>
+
+    <div v-if="!waitingForResponse">
+      <BeerFilters
+        :data="beerList"
+        @change-filter-search-string="onFilterSearchStringChanged"
+      />
+    </div>
+
+    <div v-if="waitingForResponse">
+      <div class="cbf-loading">
+        <Loading />
+      </div>
+    </div>
+
     <BeerList
-      v-if="!waitingForResponse"
+      v-if="beerListHasItems"
       :data="filteredBeers"
     />
   </div>
@@ -21,12 +32,14 @@ import axios from "axios";
 
 import BeerFilters from "@/components/BeerFilters.vue";
 import BeerList from "@/components/BeerList.vue";
+import Loading from "@/components/Loading.vue";
 
 export default {
   name: "MainPage",
   components: {
     BeerFilters,
-    BeerList
+    BeerList,
+    Loading
   },
   data() {
     return {
@@ -40,7 +53,7 @@ export default {
     this.requestData();
   },
   computed: {
-    filteredBeers() {
+    filteredBeers: function() {
       return this.beerList.filter(beer => {
         return this.searchBeerString && this.searchBeerString.length > 2
           ? beer.beer_name
@@ -52,7 +65,11 @@ export default {
   },
   methods: {
     beerListHasItems() {
-      return !this.waitingForResponse && !(this.filteredBeerList.length > 0);
+      return (
+        !this.waitingForResponse &&
+        this.beerList &&
+        this.beerList.length > 0
+      );
     },
     requestData() {
       this.waitingForResponse = true;
@@ -76,3 +93,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.cbf-is-warning {
+  color: red;
+}
+.cbf-loading {
+  margin-top: 4rem;
+}
+</style>
