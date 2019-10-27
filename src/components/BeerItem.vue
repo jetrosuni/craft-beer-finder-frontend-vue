@@ -48,7 +48,7 @@
           {{item.beer_name}}
         </div>
       </div>
-      <div class="columns is-multine is-gapless cbf-bar-item-area is-size-7">
+      <div class="columns is-multiline is-gapless cbf-bar-item-area is-size-7">
         <div
           class="column is-one-fifth cbf-bar-item"
           v-for="(bar, barKey) in barsArray(item)"
