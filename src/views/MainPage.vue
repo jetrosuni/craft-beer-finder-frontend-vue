@@ -66,9 +66,7 @@ export default {
   methods: {
     beerListHasItems() {
       return (
-        !this.waitingForResponse &&
-        this.beerList &&
-        this.beerList.length > 0
+        !this.waitingForResponse && this.beerList && this.beerList.length > 0
       );
     },
     requestData() {
