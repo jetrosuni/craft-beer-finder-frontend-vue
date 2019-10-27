@@ -100,6 +100,7 @@ export default {
         style.includes("Radler") ||
         style.includes("Sour") ||
         style.includes("Spiced") ||
+        style.includes("Freeze-distilled") ||
         style.includes("Wild")
       ) {
         return require("@/assets/img/tulip-glass.svg");
@@ -130,6 +131,7 @@ export default {
       ) {
         return require("@/assets/img/tulip-glass-light.svg");
       }
+      return require("@/assets/img/tulip-glass.svg");
     }
   }
 };

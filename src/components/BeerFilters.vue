@@ -4,14 +4,9 @@
       label="Find a beer"
       type="is-dark"
     >
-      <b-autocomplete
+      <b-input
         v-model="searchStr"
-        placeholder=""
-        :keep-first="keepFirst"
-        :open-on-focus="openOnFocus"
-        :data="beerNames"
-        field="beer.beer_name"
-        @select="option => onSearchStringChanged(option)"
+        @input="option => onSearchStringChanged(option)"
       />
     </b-field>
 
@@ -22,8 +17,8 @@
       <b-autocomplete
         v-model="venueStr"
         placeholder=""
-        :keep-first="keepFirst"
-        :open-on-focus="openOnFocus"
+        :keep-first="false"
+        :open-on-focus="false"
         :data="venueNames"
         field="venue_name"
         @select="option => onVenueStringChanged(option)"
@@ -43,11 +38,8 @@ export default {
   },
   data() {
     return {
-      keepFirst: false,
-      openOnFocus: false,
       searchStr: "",
       venueStr: "",
-      selected: null,
       venueList: []
     };
   },
@@ -69,19 +61,6 @@ export default {
     }, []);
   },
   computed: {
-    beerNames: function() {
-      return this.data.reduce((results, beer) => {
-        if (
-          beer.beer_name
-            .toString()
-            .toLowerCase()
-            .indexOf(this.searchStr.toLowerCase()) >= 0
-        ) {
-          results.push(beer.beer_name);
-        }
-        return results;
-      }, []);
-    },
     venueNames: function() {
       return this.venueList.reduce((results, venue) => {
         if (
@@ -98,7 +77,9 @@ export default {
   },
   methods: {
     onSearchStringChanged(searchStr) {
-      this.$emit("change-filter-search-string", searchStr);
+      if (searchStr === '' || searchStr.length > 2) {
+        this.$emit("change-filter-search-string", searchStr);
+      }
     },
     onVenueStringChanged(searchStr) {
       this.$emit("change-filter-venue-string", searchStr);
