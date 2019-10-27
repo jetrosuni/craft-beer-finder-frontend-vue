@@ -1,6 +1,6 @@
 <template>
   <div class="section">
-    <h1 class="title is-1">Craft Beer Finder</h1>
+    <h1 class="title is-1">{{titleText}}</h1>
 
     <div
       v-if="errorMessage"
@@ -58,6 +58,9 @@ export default {
     this.requestData();
   },
   computed: {
+    titleText: function() {
+      return process.env.VUE_APP_CRAFT_BEER_FINDER_TITLE;
+    },
     filteredBeers: function() {
       return this.beerList.filter(beer => {
         return this.searchBeerString && this.searchBeerString.length > 2
