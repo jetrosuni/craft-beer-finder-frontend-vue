@@ -5,7 +5,7 @@
       type="is-dark"
     >
       <b-autocomplete
-        v-model="name"
+        v-model="searchStr"
         placeholder=""
         :keep-first="keepFirst"
         :open-on-focus="openOnFocus"
@@ -31,31 +31,28 @@ export default {
     return {
       keepFirst: false,
       openOnFocus: false,
-      name: "",
+      searchStr: "",
       selected: null
     };
   },
   computed: {
     beerNames: function() {
-      const beerNames = [];
-
-      this.data.map(beer => {
+      return this.data.reduce((results, beer) => {
         if (
           beer.beer_name
             .toString()
             .toLowerCase()
-            .indexOf(this.name.toLowerCase()) >= 0
+            .indexOf(this.searchStr.toLowerCase()) >= 0
         ) {
-          beerNames.push(beer.beer_name);
+          results.push(beer.beer_name);
         }
-      });
-
-      return beerNames;
+        return results;
+      }, []);
     }
   },
   methods: {
-    onSearchStringChanged(searchString) {
-      this.$emit("change-filter-search-string", searchString);
+    onSearchStringChanged(searchStr) {
+      this.$emit("change-filter-search-string", searchStr);
     }
   }
 };
