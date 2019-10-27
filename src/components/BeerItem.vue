@@ -12,12 +12,18 @@
           </div>
         </div>
         <div class="column is-two-fifths">
-          <div class="cbf-pint">
-            <img
-              :src="tulipGlassSvg(item.beer_style)"
-              class="cbf-tulip"
-            />
-          </div>
+          <b-tooltip
+            :label="item.beer_style"
+            type="is-white"
+            position="is-left"
+          >
+            <div class="cbf-pint">
+              <img
+                :src="tulipGlassSvg(item.beer_style)"
+                class="cbf-tulip"
+              />
+            </div>
+          </b-tooltip>
         </div>
         <div class="column is-one-fifth">
           <div class="cbf-rating">
