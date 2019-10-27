@@ -12,8 +12,22 @@
         :data="beerNames"
         field="beer.beer_name"
         @select="option => onSearchStringChanged(option)"
-      >
-      </b-autocomplete>
+      />
+    </b-field>
+
+    <b-field
+      label="Filter by venue"
+      type="is-dark"
+    >
+      <b-autocomplete
+        v-model="venueStr"
+        placeholder=""
+        :keep-first="keepFirst"
+        :open-on-focus="openOnFocus"
+        :data="venueNames"
+        field="venue_name"
+        @select="option => onVenueStringChanged(option)"
+      />
     </b-field>
   </div>
 </template>
@@ -32,8 +46,27 @@ export default {
       keepFirst: false,
       openOnFocus: false,
       searchStr: "",
-      selected: null
+      venueStr: "",
+      selected: null,
+      venueList: []
     };
+  },
+  mounted() {
+    this.venueList = this.data.reduce((results, beer) => {
+      if (beer.bars.includes(",")) {
+        const bars = beer.bars.split(",");
+        bars.forEach(bar => {
+          if (!results.includes(bar)) {
+            results.push(bar);
+          }
+        });
+      } else {
+        if (!results.includes(beer.bars)) {
+          results.push(beer.bars);
+        }
+      }
+      return results;
+    }, []);
   },
   computed: {
     beerNames: function() {
@@ -48,12 +81,28 @@ export default {
         }
         return results;
       }, []);
+    },
+    venueNames: function() {
+      return this.venueList.reduce((results, venue) => {
+        if (
+          venue
+            .toString()
+            .toLowerCase()
+            .indexOf(this.venueStr.toLowerCase()) >= 0
+        ) {
+          results.push(venue);
+        }
+        return results;
+      }, []);
     }
   },
   methods: {
     onSearchStringChanged(searchStr) {
       this.$emit("change-filter-search-string", searchStr);
-    }
+    },
+    onVenueStringChanged(searchStr) {
+      this.$emit("change-filter-venue-string", searchStr);
+    },
   }
 };
 </script>

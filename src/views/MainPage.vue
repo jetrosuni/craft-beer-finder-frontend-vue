@@ -11,6 +11,7 @@
       <BeerFilters
         :data="beerList"
         @change-filter-search-string="onFilterSearchStringChanged"
+        @change-filter-venue-string="onFilterVenueStringChanged"
       />
     </div>
 
@@ -22,8 +23,11 @@
 
     <BeerList
       v-if="beerListHasItems"
-      :data="filteredBeers"
+      :data="filteredVenues"
     />
+    <div v-if="!waitingForResponse && filteredVenues && !filteredVenues.length">
+      No results found with the selected filters.
+    </div>
   </div>
 </template>
 
@@ -46,7 +50,8 @@ export default {
       errorMessage: "",
       beerList: [],
       waitingForResponse: false,
-      searchBeerString: ""
+      searchBeerString: "",
+      searchVenueString: "",
     };
   },
   mounted() {
@@ -61,7 +66,16 @@ export default {
               .includes(this.searchBeerString.toLowerCase())
           : true;
       });
-    }
+    },
+    filteredVenues: function() {
+      return this.filteredBeers.filter(beer => {
+        return this.searchVenueString && this.searchVenueString.length > 2
+          ? beer.bars
+              .toLowerCase()
+              .includes(this.searchVenueString.toLowerCase())
+          : true;
+      });
+    },
   },
   methods: {
     beerListHasItems() {
@@ -87,6 +101,9 @@ export default {
     },
     onFilterSearchStringChanged(searchStr) {
       this.searchBeerString = searchStr;
+    },
+    onFilterVenueStringChanged(searchStr) {
+      this.searchVenueString = searchStr;
     }
   }
 };
