@@ -1,13 +1,21 @@
 <template>
-  <div>
-    <div class="beer-item">
-      <flag
-        :iso="item.beer_country"
-        :squared="false"
-      /> <strong>{{item.beer_rating}} ({{item.beer_rating_count}})</strong> {{item.beer_name}} ({{item.beer_style}})</div>
-    <div class="bar-item-area">
+  <div class="columns">
+    <div class="column is-three-fifths">
+      <div class="columns">
+        <div class="column is-one-fifth">
+          <flag
+            :iso="item.beer_country"
+            :squared="false"
+          /> <strong>{{item.beer_rating}} ({{item.beer_rating_count}})</strong>
+        </div>
+        <div class="column is-four-fifths cbf-beer-item">
+          {{item.beer_name}} ({{item.beer_style}})
+        </div>
+      </div>
+    </div>
+    <div class="column is-two-fifths cbf-bar-item-area">
       <div
-        class="bar-item"
+        class="cbf-bar-item"
         v-for="(bar, barKey) in barsArray(item)"
         :key="barKey"
       >
@@ -39,8 +47,13 @@ export default {
 </script>
 
 <style scoped>
-.bar-item-area {
+.cbf-beer-item {
+  margin-bottom: 2rem;
+}
+.cbf-bar-item-area {
   color: #90a4ae; /* blueGrey 300 */
-  margin: 1rem 0 2rem 0;
+}
+.cbf-bar-item {
+  margin-bottom: 1rem;
 }
 </style>
