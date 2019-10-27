@@ -23,7 +23,7 @@
 }
 
 #glass {
-  width: 70px;
+  width: $glass-width;
   height: 90px;
   background: transparent;
   border: solid 5px #37474f; /* blueGrey 800 */
@@ -31,7 +31,7 @@
   border-radius: 0 0 10px 10px;
   position: absolute;
   top: 250px;
-  left: calc(50% - 70px / 2);
+  left: calc(50% - #{$glass-width} / 2);
   overflow: hidden;
 }
 
@@ -42,7 +42,7 @@
   border: solid 5px #37474f; /* blueGrey 800 */
   position: absolute;
   top: 262px;
-  left: calc(50% - 70px / 2 + 70px);
+  left: calc(50% - #{$glass-width} / 2 + #{$glass-width});
   border-radius: 0 16px 16px 0;
   border-left: none;
 }
@@ -73,7 +73,7 @@
 #foam_1 {
   position: absolute;
   top: 242px;
-  left: calc(50% - 70px / 2 - 2px);
+  left: calc(50% - #{$glass-width} / 2 - 2px);
   z-index: 4;
 
   &::before {
@@ -104,7 +104,7 @@
 #foam_2 {
   position: absolute;
   top: 242px;
-  left: calc(50% - 70px / 2 + 12px);
+  left: calc(50% - #{$glass-width} / 2 + 12px);
   z-index: 4;
 
   &::before {
@@ -135,7 +135,7 @@
 #foam_3 {
   position: absolute;
   top: 242px;
-  left: calc(50% - 70px / 2 + 28px);
+  left: calc(50% - #{$glass-width} / 2 + 28px);
   z-index: 4;
 
   &::before {
@@ -166,7 +166,7 @@
 #foam_4 {
   position: absolute;
   top: 242px;
-  left: calc(50% - 70px / 2 + 42px);
+  left: calc(50% - #{$glass-width} / 2 + 42px);
   z-index: 4;
 
   &::before {
@@ -197,7 +197,7 @@
 #foam_5 {
   position: absolute;
   top: 242px;
-  left: calc(50% - 70px / 2 + 52px);
+  left: calc(50% - #{$glass-width} / 2 + 52px);
   z-index: 4;
   -webkit-animation: foam 10s infinite;
   animation: foam 10s infinite;
@@ -215,7 +215,7 @@
 #foam_bubbly {
   position: absolute;
   top: 262px;
-  left: calc(50% - 70px / 2 + 12px);
+  left: calc(50% - #{$glass-width} / 2 + 12px);
   z-index: 4;
 
   &::before {
@@ -246,7 +246,7 @@
 #foam_inner {
   position: absolute;
   top: 272px;
-  left: calc(50% - 70px / 2 + 18px);
+  left: calc(50% - #{$glass-width} / 2 + 18px);
   z-index: 4;
   opacity: 0.9;
 
@@ -278,7 +278,7 @@
 #foam_inner_2 {
   position: absolute;
   top: 270px;
-  left: calc(50% - 70px / 2 + 25px);
+  left: calc(50% - #{$glass-width} / 2 + 25px);
   z-index: 4;
   opacity: 0.9;
 
@@ -310,7 +310,7 @@
 #foam_inner_3 {
   position: absolute;
   top: 280px;
-  left: calc(50% - 70px / 2 + 32px);
+  left: calc(50% - #{$glass-width} / 2 + 32px);
   z-index: 4;
   opacity: 0.9;
 
@@ -342,7 +342,7 @@
 #foam_inner_4 {
   position: absolute;
   top: 285px;
-  left: calc(50% - 70px / 2 + 38px);
+  left: calc(50% - #{$glass-width} / 2 + 38px);
   z-index: 4;
   opacity: 0.9;
 
