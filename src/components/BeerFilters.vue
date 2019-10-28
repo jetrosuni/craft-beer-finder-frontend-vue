@@ -25,6 +25,45 @@
       />
     </b-field>
 
+    <b-field
+      label="Beer style"
+    >
+      <div class="block">
+        <b-checkbox
+          type="is-light"
+          v-model="beerStyleSelection"
+          native-value="light"
+          @input="option => onBeerStyleSelected(option)"
+        >
+          Light
+        </b-checkbox>
+        <b-checkbox
+          type="is-light"
+          v-model="beerStyleSelection"
+          native-value="dark"
+          @input="option => onBeerStyleSelected(option)"
+        >
+          Dark
+        </b-checkbox>
+        <b-checkbox
+          type="is-light"
+          v-model="beerStyleSelection"
+          native-value="sour"
+          @input="option => onBeerStyleSelected(option)"
+        >
+          Sour
+        </b-checkbox>
+        <b-checkbox
+          type="is-light"
+          v-model="beerStyleSelection"
+          native-value="other"
+          @input="option => onBeerStyleSelected(option)"
+        >
+          Other
+        </b-checkbox>
+      </div>
+    </b-field>
+
     <b-field label="Rating range">
       <b-slider
         :min="3.5"
@@ -60,7 +99,8 @@ export default {
       searchStr: "",
       venueStr: "",
       venueList: [],
-      minRating: 4
+      minRating: 4,
+      beerStyleSelection: ["light", "dark", "sour", "other"]
     };
   },
   mounted() {
@@ -103,6 +143,9 @@ export default {
     },
     onVenueStringChanged(searchStr) {
       this.$emit("change-filter-venue-string", searchStr);
+    },
+    onBeerStyleSelected(beerStyleArray) {
+      this.$emit("change-filter-beer-style", beerStyleArray);
     },
     onRatingRangeChanged(minRating) {
       this.$emit("change-filter-rating-range", minRating);
