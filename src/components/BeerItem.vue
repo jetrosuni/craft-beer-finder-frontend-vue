@@ -160,7 +160,6 @@ export default {
   width: 24px;
 }
 .cbf-rating {
-  float: left;
   margin-top: 0.2rem;
   text-align: center;
 }
@@ -168,13 +167,14 @@ export default {
   padding: 0;
 }
 .cbf-second-col {
-  padding: 0.1rem 0 0 1rem;
+  padding: 0.25rem 0 0 2.25rem;
 }
 .cbf-beer-name {
   padding: 0;
   margin: 0;
 }
 .cbf-bar-item-area {
+  padding: 0;
   color: #757575; /* grey 600 */
 }
 .cbf-margin-slim {
