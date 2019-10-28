@@ -24,6 +24,25 @@
         @select="option => onVenueStringChanged(option)"
       />
     </b-field>
+
+    <b-field label="Rating range">
+      <b-slider
+        :min="3.5"
+        :max="4.5"
+        :step="0.25"
+        :value="minRating"
+        ticks
+        type="is-light"
+        @input="value => onRatingRangeChanged(value)"
+      >
+        <template v-for="(val, index) in [3.5, 3.75, 4, 4.25, 4.5]">
+          <b-slider-tick
+            :value="val"
+            :key="`tick-${val}-${index}`"
+          >{{ val }}</b-slider-tick>
+        </template>
+      </b-slider>
+    </b-field>
   </div>
 </template>
 
@@ -40,7 +59,8 @@ export default {
     return {
       searchStr: "",
       venueStr: "",
-      venueList: []
+      venueList: [],
+      minRating: 4
     };
   },
   mounted() {
@@ -77,13 +97,16 @@ export default {
   },
   methods: {
     onSearchStringChanged(searchStr) {
-      if (searchStr === '' || searchStr.length > 2) {
+      if (searchStr === "" || searchStr.length > 2) {
         this.$emit("change-filter-search-string", searchStr);
       }
     },
     onVenueStringChanged(searchStr) {
       this.$emit("change-filter-venue-string", searchStr);
     },
+    onRatingRangeChanged(minRating) {
+      this.$emit("change-filter-rating-range", minRating);
+    }
   }
 };
 </script>

@@ -12,6 +12,7 @@
         :data="beerList"
         @change-filter-search-string="onFilterSearchStringChanged"
         @change-filter-venue-string="onFilterVenueStringChanged"
+        @change-filter-rating-range="onFilterRatingRangeChanged"
       />
     </div>
 
@@ -23,9 +24,9 @@
 
     <BeerList
       v-if="beerListHasItems"
-      :data="filteredVenues"
+      :data="filteredBeerList"
     />
-    <div v-if="!waitingForResponse && filteredVenues && !filteredVenues.length">
+    <div v-if="!waitingForResponse && filteredBeerList && !filteredBeerList.length">
       No results found with the selected filters.
     </div>
   </div>
@@ -52,6 +53,7 @@ export default {
       waitingForResponse: false,
       searchBeerString: "",
       searchVenueString: "",
+      ratingMinValue: 4
     };
   },
   mounted() {
@@ -61,7 +63,7 @@ export default {
     titleText: function() {
       return process.env.VUE_APP_CRAFT_BEER_FINDER_TITLE;
     },
-    filteredBeers: function() {
+    filteredBeerNames: function() {
       return this.beerList.filter(beer => {
         return this.searchBeerString && this.searchBeerString.length > 2
           ? beer.beer_name
@@ -71,7 +73,7 @@ export default {
       });
     },
     filteredVenues: function() {
-      return this.filteredBeers.filter(beer => {
+      return this.filteredBeerNames.filter(beer => {
         return this.searchVenueString && this.searchVenueString.length > 2
           ? beer.bars
               .toLowerCase()
@@ -79,6 +81,13 @@ export default {
           : true;
       });
     },
+    filteredBeerList: function() {
+      return this.filteredVenues.filter(beer => {
+        return beer.beer_rating >= this.ratingMinValue
+          ? true
+          : false;
+      });
+    }
   },
   methods: {
     beerListHasItems() {
@@ -107,6 +116,9 @@ export default {
     },
     onFilterVenueStringChanged(searchStr) {
       this.searchVenueString = searchStr;
+    },
+    onFilterRatingRangeChanged(minRating) {
+      this.ratingMinValue = minRating;
     }
   }
 };
