@@ -17,7 +17,7 @@
 
     <div v-if="waitingForResponse">
       <div class="cbf-loading">
-        <Loading />
+        <BeerLoading />
       </div>
     </div>
 
@@ -36,14 +36,14 @@ import axios from "axios";
 
 import BeerFilters from "@/components/BeerFilters.vue";
 import BeerList from "@/components/BeerList.vue";
-import Loading from "@/components/Loading.vue";
+import BeerLoading from "@/components/BeerLoading.vue";
 
 export default {
   name: "MainPage",
   components: {
     BeerFilters,
     BeerList,
-    Loading
+    BeerLoading
   },
   data() {
     return {
