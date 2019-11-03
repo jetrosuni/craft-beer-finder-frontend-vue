@@ -133,6 +133,7 @@ export default {
           "Stout - Pastry",
           "Stout - Russian Imperial",
           "Stout - White",
+          "Traditional Ale",
           "Winter Ale"
         ],
         sour: [
