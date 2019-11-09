@@ -166,6 +166,7 @@ export default {
     };
   },
   mounted() {
+    this.$ga.page(process.env.VUE_APP_CRAFT_BEER_FINDER_PUBLIC_PATH);
     this.requestData();
   },
   computed: {

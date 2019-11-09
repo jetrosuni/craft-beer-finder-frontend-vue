@@ -13,6 +13,7 @@
     "buefy": "^0.8.6",
     "core-js": "^3.3.2",
     "vue": "^2.6.10",
+    "vue-analytics": "^5.17.2",
     "vue-flag-icon": "^1.0.6"
   },
   "devDependencies": {
