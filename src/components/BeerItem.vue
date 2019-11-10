@@ -1,7 +1,56 @@
 <template>
   <div class="columns cbf-margin-slim">
-    <div class="column is-one-fifth cbf-first-col">
-      <!-- inner 1st column -->
+    <!-- mobile -->
+    <div class="column is-full is-hidden-tablet">
+      <div class="columns cbf-first-col is-multiline is-mobile">
+        <div class="column is-two-thirds cbf-first-mobile-col">
+          <div class="columns is-gapless is-multiline is-mobile">
+            <div class="column is-one-quarter">
+              <div class="cbf-rating">
+                <strong>{{item.beer_rating}}</strong>
+                <div class="is-size-7">
+                  {{item.beer_rating_count}}
+                </div>
+              </div>
+            </div>
+            <div class="column is-one-quarter">
+              <b-tooltip
+                :label="item.beer_style"
+                type="is-white"
+                position="is-top"
+              >
+                <div class="cbf-pint">
+                  <img
+                    :src="tulipGlassSvg(item.beer_style)"
+                    class="cbf-tulip"
+                  />
+                </div>
+              </b-tooltip>
+            </div>
+            <div class="column is-one-quarter">
+              <div class="cbf-flag">
+                <b-tooltip
+                  :label="item.beer_country"
+                  type="is-white"
+                  position="is-left"
+                >
+                  <flag
+                    :iso="item.beer_country"
+                    :squared="false"
+                  />
+                </b-tooltip>
+              </div>
+            </div>
+            <div class="column is-two-quarters" />
+          </div>
+        </div>
+        <div class="column is-one-third" />
+      </div>
+    </div>
+    <!-- /mobile -->
+
+    <!-- 768px or wider -->
+    <div class="column is-one-fifth cbf-first-col is-hidden-mobile">
       <div class="columns is-gapless">
         <div class="column is-two-fifths">
           <div class="cbf-flag">
@@ -40,8 +89,9 @@
           </div>
         </div>
       </div>
-      <!-- /end -->
     </div>
+    <!-- /768px -->
+
     <div class="column is-four-fifths cbf-second-col">
       <div class="columns cbf-beer-name">
         <div class="column is-full cbf-remove-padding">
@@ -148,6 +198,9 @@ export default {
   padding: 0;
   text-align: center;
 }
+.cbf-first-mobile-col {
+  padding-left: 2.25rem
+}
 .cbf-flag {
   float: right;
   font-size: 36px;
@@ -167,7 +220,7 @@ export default {
   padding: 0;
 }
 .cbf-second-col {
-  padding: 0.25rem 0 0 2.25rem;
+  padding: 0.25rem 0 2rem 2.25rem;
 }
 .cbf-beer-name {
   padding: 0;
