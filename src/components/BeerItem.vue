@@ -3,10 +3,10 @@
     <!-- mobile -->
     <div class="column is-full is-hidden-tablet">
       <div class="columns cbf-first-col is-multiline is-mobile">
-        <div class="column is-two-thirds cbf-first-mobile-col">
+        <div class="column is-four-fifths cbf-first-mobile-col">
           <div class="columns is-gapless is-multiline is-mobile">
             <div class="column is-one-quarter">
-              <div class="cbf-rating">
+              <div class="cbf-rating-mobile">
                 <strong>{{item.beer_rating}}</strong>
                 <div class="is-size-7">
                   {{item.beer_rating_count}}
@@ -41,10 +41,10 @@
                 </b-tooltip>
               </div>
             </div>
-            <div class="column is-two-quarters" />
+            <div class="column is-one-quarter" />
           </div>
         </div>
-        <div class="column is-one-third" />
+        <div class="column is-one-fifths" />
       </div>
     </div>
     <!-- /mobile -->
@@ -216,6 +216,10 @@ export default {
   margin-top: 0.2rem;
   text-align: center;
 }
+.cbf-rating-mobile {
+  margin-top: 0.2rem;
+  text-align: left;
+}
 .cbf-remove-padding {
   padding: 0;
 }
@@ -225,6 +229,7 @@ export default {
 .cbf-beer-name {
   padding: 0;
   margin: 0;
+  overflow-wrap: break-word;
 }
 .cbf-bar-item-area {
   padding: 0;
