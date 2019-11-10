@@ -99,15 +99,19 @@
         </div>
       </div>
       <div class="columns is-multiline is-gapless cbf-bar-item-area is-size-7">
-        <div
-          class="column is-one-fifth cbf-bar-item"
-          v-for="(bar, barKey) in barsArray(item)"
-          :key="barKey"
-        >
-          {{bar}}
-          ({{ +daysAgoArray(item)[barKey] === 0 ? 'today' :
-          (+daysAgoArray(item)[barKey] === 1 ? '1 day ago' :
-          daysAgoArray(item)[barKey] + ' days ago')}})
+        <!-- mobile items -->
+        <template v-for="(bar, barKey) in barsArray(item)">
+          <div
+            :key="barKey"
+            class="is-hidden-tablet column is-full cbf-bar-item"
+          >
+            {{bar}}
+            ({{daysAgoString(item, barKey)}})
+          </div>
+        </template>
+        <!-- desktop item -->
+        <div class="is-hidden-mobile">
+          {{barsList(item)}}
         </div>
       </div>
     </div>
@@ -124,11 +128,30 @@ export default {
     }
   },
   methods: {
+    barsList(item) {
+      const barsArray = this.barsArray(item);
+      let barsList = "";
+      let i = 0;
+      barsArray.map(bar => {
+        barsList += bar + " (" + this.daysAgoString(item, i) + ") — ";
+        i++;
+      });
+
+      return barsList.substring(0, barsList.length - 3);
+    },
     barsArray(item) {
       return item.bars.split(",");
     },
     daysAgoArray(item) {
       return item.days_ago_bars.split(",");
+    },
+    daysAgoString(item, barKey) {
+      const daysAgoArray = this.daysAgoArray(item);
+      return +daysAgoArray[barKey] === 0
+        ? "today"
+        : +daysAgoArray[barKey] === 1
+        ? "1 day ago"
+        : daysAgoArray[barKey] + " days ago";
     },
     tulipGlassSvg(style) {
       if (
