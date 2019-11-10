@@ -57,7 +57,7 @@
             <b-tooltip
               :label="item.beer_country"
               type="is-white"
-              position="is-left"
+              position="is-top"
             >
               <flag
                 :iso="item.beer_country"
@@ -70,7 +70,7 @@
           <b-tooltip
             :label="item.beer_style"
             type="is-white"
-            position="is-left"
+            position="is-right"
           >
             <div class="cbf-pint">
               <img
