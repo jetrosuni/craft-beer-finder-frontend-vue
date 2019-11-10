@@ -31,6 +31,10 @@
     <div v-if="!waitingForResponse && filteredBeerList && !filteredBeerList.length">
       No results found with the selected filters.
     </div>
+
+    <div v-if="!waitingForResponse && filteredBeerList && filteredBeerList.length" class="untappd-disclaimer is-size-7">
+      Data provided by Untappd
+    </div>
   </div>
 </template>
 
@@ -270,6 +274,10 @@ export default {
 }
 .cbf-loading {
   margin-top: 4rem;
+}
+.untappd-disclaimer {
+  margin: 4rem 0 1rem 0;
+  font-weight: bold;
 }
 
 /* small devices */
