@@ -1,31 +1,6 @@
 <template>
   <div class="cbf-filters">
     <b-field
-      label="Find a beer"
-      type="is-dark"
-    >
-      <b-input
-        v-model="searchStr"
-        @input="option => onSearchStringChanged(option)"
-      />
-    </b-field>
-
-    <b-field
-      label="Filter by venue"
-      type="is-dark"
-    >
-      <b-autocomplete
-        v-model="venueStr"
-        placeholder=""
-        :keep-first="false"
-        :open-on-focus="false"
-        :data="venueNames"
-        field="venue_name"
-        @select="option => onVenueStringChanged(option)"
-      />
-    </b-field>
-
-    <b-field
       label="Beer style"
     >
       <div class="block">
@@ -81,6 +56,33 @@
           >{{ val }}</b-slider-tick>
         </template>
       </b-slider>
+    </b-field>
+
+    <div class="cbf-separator" />
+
+    <b-field
+      label="Filter by venue"
+      type="is-dark"
+    >
+      <b-autocomplete
+        v-model="venueStr"
+        placeholder=""
+        :keep-first="false"
+        :open-on-focus="false"
+        :data="venueNames"
+        field="venue_name"
+        @select="option => onVenueStringChanged(option)"
+      />
+    </b-field>
+
+    <b-field
+      label="Find a beer"
+      type="is-dark"
+    >
+      <b-input
+        v-model="searchStr"
+        @input="option => onSearchStringChanged(option)"
+      />
     </b-field>
   </div>
 </template>
@@ -157,5 +159,8 @@ export default {
 <style scoped>
 .cbf-filters {
   text-align: left;
+}
+.cbf-separator {
+  padding-top: 1rem;
 }
 </style>
