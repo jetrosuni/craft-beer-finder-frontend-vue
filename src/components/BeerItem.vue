@@ -119,6 +119,8 @@
 </template>
 
 <script>
+import beerColors from "../data/beerColors";
+
 export default {
   name: "BeerItem",
   props: {
@@ -154,62 +156,11 @@ export default {
         : daysAgoArray[barKey] + " days ago";
     },
     tulipGlassSvg(style) {
-      if (
-        style.includes("Barleywine") ||
-        style.includes("Bock") ||
-        style.includes("Brown") ||
-        style.includes("Dark") ||
-        style.includes("Dubbel") ||
-        style.includes("Kellerbier") ||
-        style.includes("Old Ale") ||
-        style.includes("Porter") ||
-        style.includes("Quadrupel") ||
-        style.includes("Rauchbier") ||
-        style.includes("Red") ||
-        style.includes("Schwarzbier") ||
-        style.includes("Stout")
-      ) {
-        return require("@/assets/img/tulip-glass-dark.svg");
-      } else if (
-        style.includes("Cider") ||
-        style.includes("Fruit") ||
-        style.includes("Ginger") ||
-        style.includes("Lambic") ||
-        style.includes("Mead") ||
-        style.includes("Non-Alcoholic") ||
-        style.includes("Pumpkin") ||
-        style.includes("Radler") ||
-        style.includes("Sour") ||
-        style.includes("Spiced") ||
-        style.includes("Freeze-distilled") ||
-        style.includes("Wild")
-      ) {
+      if (beerColors.other.some(bc => bc.test(style.toLowerCase()))) {
         return require("@/assets/img/tulip-glass.svg");
-      } else if (
-        style.includes("Blonde") ||
-        style.includes("IPA") ||
-        style.includes("Pale") ||
-        style.includes("Golden") ||
-        style.includes("Märzen") ||
-        style.includes("Tripel") ||
-        style.toLowerCase().includes("weizen") ||
-        style.includes("Witbier") ||
-        style.includes("Farmhouse") ||
-        style.includes("Pils") ||
-        style.includes("Lager") ||
-        style.includes("Malt Liquor") ||
-        style.includes("Kölsch") ||
-        style.includes("California Common") ||
-        style.includes("Festbier") ||
-        style.includes("Specialty Grain") ||
-        style.includes("Strong Ale") ||
-        style.includes("English Bitter") ||
-        style.includes("Gluten-Free") ||
-        style.includes("Wheat") ||
-        style.includes("Grisette") ||
-        style.includes("Saison") ||
-        style.includes("Extra Special / Strong Bitter")
-      ) {
+      } else if (beerColors.dark.some(bc => bc.test(style.toLowerCase()))) {
+        return require("@/assets/img/tulip-glass-dark.svg");
+      } else if (beerColors.light.some(bc => bc.test(style.toLowerCase()))) {
         return require("@/assets/img/tulip-glass-light.svg");
       }
       return require("@/assets/img/tulip-glass.svg");
