@@ -32,7 +32,7 @@
                 <b-tooltip
                   :label="item.beer_country"
                   type="is-white"
-                  position="is-left"
+                  position="is-top"
                 >
                   <flag
                     :iso="item.beer_country"
