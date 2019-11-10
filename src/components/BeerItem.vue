@@ -105,7 +105,9 @@
           :key="barKey"
         >
           {{bar}}
-          ({{ +daysAgoArray(item)[barKey] === 0 ? 'today' : daysAgoArray(item)[barKey] + ' days ago'}})
+          ({{ +daysAgoArray(item)[barKey] === 0 ? 'today' :
+          (+daysAgoArray(item)[barKey] === 1 ? '1 day ago' :
+          daysAgoArray(item)[barKey] + ' days ago')}})
         </div>
       </div>
     </div>
@@ -199,7 +201,7 @@ export default {
   text-align: center;
 }
 .cbf-first-mobile-col {
-  padding-left: 2.25rem
+  padding-left: 2.25rem;
 }
 .cbf-flag {
   float: right;
