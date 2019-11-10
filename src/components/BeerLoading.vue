@@ -18,8 +18,84 @@
 </template>
 
 <style lang="scss">
-.cbf-loading {
-  margin: 10rem 0;
+@media only screen and (max-width: 768px) {
+  $glass-pos-top-mobile: 6rem;
+  #glass {
+    top: $glass-pos-top-mobile;
+  }
+  #handle {
+    top: calc(#{$glass-pos-top-mobile} + 16px);
+  }
+  #top_foam_1 {
+    top: calc(#{$glass-pos-top-mobile} - 11px);
+  }
+  #top_foam_2 {
+    top: calc(#{$glass-pos-top-mobile} - 17px);
+  }
+  #top_foam_3 {
+    top: calc(#{$glass-pos-top-mobile} - 17px);
+  }
+  #top_foam_4 {
+    top: calc(#{$glass-pos-top-mobile} - 13px);
+  }
+  #top_foam_5 {
+    top: calc(#{$glass-pos-top-mobile} - 11px);
+  }
+  #foam_pop_bubbles {
+    top: calc(#{$glass-pos-top-mobile} - 2px);
+  }
+  #foam_tiny_bubbles {
+    top: calc(#{$glass-pos-top-mobile} + 42px);
+  }
+  #foam_tiny_bubbles_top {
+    top: calc(#{$glass-pos-top-mobile} + 22px);
+  }
+  #foam_tiny_bubbles_3 {
+    top: calc(#{$glass-pos-top-mobile} + 40px);
+  }
+  #foam_tiny_bubbles_4 {
+    top: calc(#{$glass-pos-top-mobile} + 35px);
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  $glass-pos-top: 11rem;
+  #glass {
+    top: $glass-pos-top;
+  }
+  #handle {
+    top: calc(#{$glass-pos-top} + 16px);
+  }
+  #top_foam_1 {
+    top: calc(#{$glass-pos-top} - 11px);
+  }
+  #top_foam_2 {
+    top: calc(#{$glass-pos-top} - 17px);
+  }
+  #top_foam_3 {
+    top: calc(#{$glass-pos-top} - 17px);
+  }
+  #top_foam_4 {
+    top: calc(#{$glass-pos-top} - 13px);
+  }
+  #top_foam_5 {
+    top: calc(#{$glass-pos-top} - 11px);
+  }
+  #foam_pop_bubbles {
+    top: calc(#{$glass-pos-top} - 2px);
+  }
+  #foam_tiny_bubbles {
+    top: calc(#{$glass-pos-top} + 42px);
+  }
+  #foam_tiny_bubbles_top {
+    top: calc(#{$glass-pos-top} + 22px);
+  }
+  #foam_tiny_bubbles_3 {
+    top: calc(#{$glass-pos-top} + 40px);
+  }
+  #foam_tiny_bubbles_4 {
+    top: calc(#{$glass-pos-top} + 35px);
+  }
 }
 
 #glass {
@@ -30,7 +106,6 @@
   border-top: none;
   border-radius: 0 0 $glass-thickness $glass-thickness;
   position: absolute;
-  top: $glass-pos-top;
   left: calc(50% - #{$glass-width} / 2);
   overflow: hidden;
 }
@@ -41,7 +116,6 @@
   background: transparent;
   border: solid 5px #37474f; /* blueGrey 800 */
   position: absolute;
-  top: calc(#{$glass-pos-top} + 16px);
   left: calc(50% - #{$glass-width} / 2 + #{$glass-width});
   border-radius: 0 $glass-thickness $glass-thickness 0;
   border-left: none;
@@ -96,7 +170,6 @@
 
 #top_foam_1 {
   position: absolute;
-  top: calc(#{$glass-pos-top} - 11px);
   left: calc(50% - #{$glass-width} / 2 - 5px);
   z-index: 4;
 
@@ -143,7 +216,6 @@
 
 #top_foam_2 {
   position: absolute;
-  top: calc(#{$glass-pos-top} - 17px);
   left: calc(50% - #{$glass-width} / 2 + 12px);
   z-index: 4;
 
@@ -188,7 +260,6 @@
 
 #top_foam_3 {
   position: absolute;
-  top: calc(#{$glass-pos-top} - 17px);
   left: calc(50% - #{$glass-width} / 2 + 28px);
   z-index: 4;
 
@@ -235,7 +306,6 @@
 
 #top_foam_4 {
   position: absolute;
-  top: calc(#{$glass-pos-top} - 13px);
   left: calc(50% - #{$glass-width} / 2 + 38px);
   z-index: 4;
 
@@ -282,7 +352,6 @@
 
 #top_foam_5 {
   position: absolute;
-  top: calc(#{$glass-pos-top} - 11px);
   left: calc(50% - #{$glass-width} / 2 + 54px);
   z-index: 4;
   -webkit-animation-name: foam;
@@ -308,7 +377,6 @@
 
 #foam_pop_bubbles {
   position: absolute;
-  top: calc(#{$glass-pos-top} - 2px);
   left: calc(50% - #{$glass-width} / 2 + 12px);
   z-index: 4;
 
@@ -343,7 +411,6 @@
 
 #foam_tiny_bubbles {
   position: absolute;
-  top: calc(#{$glass-pos-top} + 42px);
   left: calc(50% - #{$glass-width} / 2 + 18px);
   z-index: 4;
   opacity: 0.9;
@@ -375,7 +442,6 @@
 
 #foam_tiny_bubbles_top {
   position: absolute;
-  top: calc(#{$glass-pos-top} + 22px);
   left: calc(50% - #{$glass-width} / 2 + 20px);
   z-index: 4;
   opacity: 0.9;
@@ -411,7 +477,6 @@
 
 #foam_tiny_bubbles_3 {
   position: absolute;
-  top: calc(#{$glass-pos-top} + 40px);
   left: calc(50% - #{$glass-width} / 2 + 32px);
   z-index: 4;
   opacity: 0.9;
@@ -443,7 +508,6 @@
 
 #foam_tiny_bubbles_4 {
   position: absolute;
-  top: calc(#{$glass-pos-top} + 35px);
   left: calc(50% - #{$glass-width} / 2 + 38px);
   z-index: 4;
   opacity: 0.9;

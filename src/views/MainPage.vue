@@ -1,6 +1,7 @@
 <template>
-  <div class="section">
-    <h1 class="title is-1">{{titleText}}</h1>
+  <div class="section cbf-main-section">
+    <h1 class="title is-1 is-hidden-mobile">{{titleText}}</h1>
+    <h1 class="title is-4 is-hidden-tablet">{{titleText}}</h1>
 
     <div
       v-if="errorMessage"
@@ -269,5 +270,12 @@ export default {
 }
 .cbf-loading {
   margin-top: 4rem;
+}
+
+/* small devices */
+@media (max-width: 768px) {
+  .cbf-main-section {
+    padding-top: 0;
+  }
 }
 </style>
