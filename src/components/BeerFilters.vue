@@ -1,8 +1,6 @@
 <template>
   <div class="cbf-filters">
-    <b-field
-      label="Beer style"
-    >
+    <b-field label="Beer style">
       <div class="block">
         <b-checkbox
           type="is-light"
@@ -61,30 +59,35 @@
 
     <div class="cbf-separator" />
 
-    <b-field
-      label="Filter by venue"
-      type="is-dark"
-    >
-      <b-autocomplete
-        v-model="venueStr"
-        placeholder=""
-        :keep-first="false"
-        :open-on-focus="false"
-        :data="venueNames"
-        field="venue_name"
-        @select="option => onVenueStringChanged(option)"
-      />
-    </b-field>
-
-    <b-field
-      label="Find a beer"
-      type="is-dark"
-    >
-      <b-input
-        v-model="searchStr"
-        @input="option => onSearchStringChanged(option)"
-      />
-    </b-field>
+    <div class="columns">
+      <div class="column is-half">
+        <b-field
+          label="Find a beer"
+          type="is-dark"
+        >
+          <b-input
+            v-model="searchStr"
+            @input="option => onSearchStringChanged(option)"
+          />
+        </b-field>
+      </div>
+      <div class="column is-half">
+        <b-field
+          label="Filter by venue"
+          type="is-dark"
+        >
+          <b-autocomplete
+            v-model="venueStr"
+            placeholder=""
+            :keep-first="false"
+            :open-on-focus="false"
+            :data="venueNames"
+            field="venue_name"
+            @select="option => onVenueStringChanged(option)"
+          />
+        </b-field>
+      </div>
+    </div>
   </div>
 </template>
 
