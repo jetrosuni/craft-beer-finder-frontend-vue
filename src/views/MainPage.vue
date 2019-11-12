@@ -194,7 +194,7 @@ export default {
   background-color: white;
   border-bottom: 5px solid #f5f5f5;
   z-index: 1000;
-  padding: 1rem;
+  padding: 1.5rem 1rem 1rem 1rem;
 }
 .cbf-is-warning {
   color: red;
@@ -210,6 +210,9 @@ export default {
 @media only screen and (min-width: 769px) {
   .cbf-main-section {
     padding-top: 3rem;
+  }
+  .cbf-sticky {
+    padding: 1rem;
   }
 }
 </style>
