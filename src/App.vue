@@ -1,7 +1,13 @@
 <template>
   <div id="app">
-    <div class="cbf-main container">
-      <MainPage />
+    <div class="container">
+      <div class="columns">
+        <div class="column is-hidden-touch is-one-fifth-desktop" />
+        <div class="column is-full-touch is-three-fifths-desktop">
+          <MainPage />
+        </div>
+        <div class="column is-hidden-touch is-one-fifth-desktop" />
+      </div>
     </div>
   </div>
 </template>
@@ -27,7 +33,9 @@ export default {
   margin-top: 60px;
 }
 
-.cbf-main {
-  padding: 0 2rem;
+@media (min-width: 769px) {
+  #app {
+    margin-top: 0;
+  }
 }
 </style>
