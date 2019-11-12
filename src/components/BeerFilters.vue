@@ -41,7 +41,7 @@
 
     <b-field label="Rating range">
       <b-slider
-        :min="3.5"
+        :min="3.75"
         :max="4.5"
         :step="0.25"
         :value="minRating"
@@ -49,7 +49,7 @@
         type="is-light"
         @input="value => onRatingRangeChanged(value)"
       >
-        <template v-for="(val, index) in [3.5, 3.75, 4, 4.25, 4.5]">
+        <template v-for="(val, index) in [3.75, 4, 4.25, 4.5]">
           <b-slider-tick
             :value="val"
             :key="`tick-${val}-${index}`"
