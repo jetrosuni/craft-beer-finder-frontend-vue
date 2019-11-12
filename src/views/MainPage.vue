@@ -8,7 +8,7 @@
       class="cbf-is-warning"
     >{{errorMessage}}</div>
 
-    <div v-if="!waitingForResponse">
+    <div v-if="!isLoading">
       <BeerFilters
         :data="beerList"
         @change-filter-search-string="onFilterSearchStringChanged"
@@ -18,7 +18,7 @@
       />
     </div>
 
-    <div v-if="waitingForResponse">
+    <div v-if="isLoading">
       <div class="cbf-loading">
         <BeerLoading />
       </div>
@@ -28,12 +28,12 @@
       v-if="beerListHasItems"
       :data="filteredBeerList"
     />
-    <div v-if="!waitingForResponse && filteredBeerList && !filteredBeerList.length">
+    <div v-if="!isLoading && filteredBeerList && !filteredBeerList.length">
       No results found with the selected filters.
     </div>
 
     <div
-      v-if="!waitingForResponse && filteredBeerList && filteredBeerList.length"
+      v-if="!isLoading && filteredBeerList && filteredBeerList.length"
       class="untappd-disclaimer is-size-7"
     >
       Data provided by Untappd
@@ -59,9 +59,11 @@ export default {
   },
   data() {
     return {
+      refreshTimer: null,
       errorMessage: "",
       beerList: [],
       waitingForResponse: false,
+      isLoading: false,
       searchBeerString: "",
       searchVenueString: "",
       ratingMinValue: 4,
@@ -70,7 +72,15 @@ export default {
   },
   mounted() {
     this.$ga.page(process.env.VUE_APP_CRAFT_BEER_FINDER_PUBLIC_PATH);
-    this.requestData();
+  },
+  created() {
+    this.requestData(false);
+    this.refreshTimer = setInterval(() => {
+      this.requestData(true);
+    }, 1200000);
+  },
+  beforeDestroy() {
+    clearInterval(this.refreshTimer);
   },
   computed: {
     titleText: function() {
@@ -134,17 +144,24 @@ export default {
         !this.waitingForResponse && this.beerList && this.beerList.length > 0
       );
     },
-    requestData() {
-      this.waitingForResponse = true;
+    requestData(isSilent = false) {
+      if (this.waitingForResponse) {
+        return;
+      }
+      if (!isSilent) {
+        this.isLoading = true;
+      }
       axios
         .get(process.env.VUE_APP_CRAFT_BEER_FINDER_API_URL)
         .then(response => {
           this.resolveRequest(response);
           this.waitingForResponse = false;
+          this.isLoading = false;
         })
         .catch(err => {
           this.errorMessage = err;
           this.waitingForResponse = false;
+          this.isLoading = false;
         });
     },
     resolveRequest(response) {
