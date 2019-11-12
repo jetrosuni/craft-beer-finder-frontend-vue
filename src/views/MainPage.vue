@@ -1,7 +1,6 @@
 <template>
   <div class="section cbf-main-section">
-    <h1 class="title is-1 is-hidden-mobile">{{titleText}}</h1>
-    <h1 class="title is-4 is-hidden-tablet">{{titleText}}</h1>
+    <h1 class="title is-size-1-widescreen is-size-2-desktop is-size-3-touch is-size-4-mobile">{{titleText}}</h1>
 
     <div
       v-if="errorMessage"
