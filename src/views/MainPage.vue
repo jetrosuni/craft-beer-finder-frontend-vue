@@ -2,12 +2,18 @@
   <div class="section cbf-main-section">
     <h1 class="title is-size-1-widescreen is-size-2-desktop is-size-3-touch is-size-4-mobile">{{titleText}}</h1>
 
+    <div v-if="isLoading">
+      <div class="cbf-loading">
+        <BeerLoading />
+      </div>
+    </div>
+
     <div
       v-if="errorMessage"
       class="cbf-is-warning"
     >{{errorMessage}}</div>
 
-    <div v-if="!isLoading">
+    <div class="cbf-sticky" v-if="!isLoading">
       <BeerFilters
         :data="beerList"
         @change-filter-search-string="onFilterSearchStringChanged"
@@ -17,16 +23,11 @@
       />
     </div>
 
-    <div v-if="isLoading">
-      <div class="cbf-loading">
-        <BeerLoading />
-      </div>
-    </div>
-
     <BeerList
       v-if="beerListHasItems"
       :data="filteredBeerList"
     />
+
     <div v-if="!isLoading && filteredBeerList && !filteredBeerList.length">
       No results found with the selected filters.
     </div>
@@ -183,6 +184,15 @@ export default {
 </script>
 
 <style scoped>
+.cbf-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  border-bottom: 5px solid #f5f5f5;
+  z-index: 1000;
+  padding: 1rem;
+}
 .cbf-is-warning {
   color: red;
 }
@@ -194,8 +204,7 @@ export default {
   font-weight: bold;
 }
 
-/* small devices */
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .cbf-main-section {
     padding-top: 0;
   }

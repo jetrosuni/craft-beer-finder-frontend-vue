@@ -33,7 +33,7 @@ export default {
   margin-top: 60px;
 }
 
-@media (min-width: 769px) {
+@media only screen and (min-width: 769px) {
   #app {
     margin-top: 0;
   }
