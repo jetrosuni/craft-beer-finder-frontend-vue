@@ -1,43 +1,50 @@
 <template>
   <div class="cbf-filters">
-    <b-field label="Beer style">
-      <div class="block">
-        <b-checkbox
-          type="is-light"
-          v-model="beerStyleSelection"
-          native-value="light"
-          @input="option => onBeerStyleSelected(option)"
-        >
-          Light
-        </b-checkbox>
-        <b-checkbox
-          type="is-light"
-          v-model="beerStyleSelection"
-          native-value="dark"
-          @input="option => onBeerStyleSelected(option)"
-        >
-          Dark
-        </b-checkbox>
-        <b-checkbox
-          type="is-light"
-          v-model="beerStyleSelection"
-          native-value="sour"
-          @input="option => onBeerStyleSelected(option)"
-        >
-          Sour
-        </b-checkbox>
-        <b-checkbox
-          type="is-light"
-          v-model="beerStyleSelection"
-          native-value="other"
-          @input="option => onBeerStyleSelected(option)"
-        >
-          Other
-        </b-checkbox>
-      </div>
-    </b-field>
 
-    <b-field label="Rating range">
+    <div class="level is-mobile">
+      <div class="level-left">
+        <div class="level-item cbf-style-label">Beer style</div>
+        <div class="block level-item">
+          <b-checkbox
+            type="is-light"
+            v-model="beerStyleSelection"
+            native-value="light"
+            @input="option => onBeerStyleSelected(option)"
+          >
+            Light
+          </b-checkbox>
+          <b-checkbox
+            type="is-light"
+            v-model="beerStyleSelection"
+            native-value="dark"
+            @input="option => onBeerStyleSelected(option)"
+          >
+            Dark
+          </b-checkbox>
+          <b-checkbox
+            type="is-light"
+            v-model="beerStyleSelection"
+            native-value="sour"
+            @input="option => onBeerStyleSelected(option)"
+          >
+            Sour
+          </b-checkbox>
+          <b-checkbox
+            type="is-light"
+            v-model="beerStyleSelection"
+            native-value="other"
+            @input="option => onBeerStyleSelected(option)"
+          >
+            Other
+          </b-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="level is-mobile">
+      <div class="cbf-rating-label">
+        Rating scale
+      </div>
       <b-slider
         class="cbf-slider"
         :min="3.75"
@@ -55,37 +62,28 @@
           >{{ val }}</b-slider-tick>
         </template>
       </b-slider>
-    </b-field>
-
-    <div class="cbf-separator" />
+    </div>
 
     <div class="columns">
       <div class="column is-half">
-        <b-field
-          label="Find a beer"
-          type="is-dark"
-        >
-          <b-input
-            v-model="searchStr"
-            @input="option => onSearchStringChanged(option)"
-          />
-        </b-field>
+        <b-input
+          v-model="searchStr"
+          type="is-light"
+          placeholder="Find a beer"
+          @input="option => onSearchStringChanged(option)"
+        />
       </div>
       <div class="column is-half">
-        <b-field
-          label="Filter by venue"
-          type="is-dark"
-        >
-          <b-autocomplete
-            v-model="venueStr"
-            placeholder=""
-            :keep-first="false"
-            :open-on-focus="false"
-            :data="venueNames"
-            field="venue_name"
-            @select="option => onVenueStringChanged(option)"
-          />
-        </b-field>
+        <b-autocomplete
+          v-model="venueStr"
+          type="is-light"
+          placeholder="Filter by venue"
+          :keep-first="false"
+          :open-on-focus="false"
+          :data="venueNames"
+          field="venue_name"
+          @select="option => onVenueStringChanged(option)"
+        />
       </div>
     </div>
   </div>
@@ -164,10 +162,15 @@ export default {
 .cbf-filters {
   text-align: left;
 }
+.cbf-style-label {
+  color: #c2c2c2;
+}
+.cbf-rating-label {
+  color: #c2c2c2;
+  min-width: 6rem;
+  width: 6rem;
+}
 .cbf-slider {
   padding: 0 1rem;
-}
-.cbf-separator {
-  padding-top: 1rem;
 }
 </style>
