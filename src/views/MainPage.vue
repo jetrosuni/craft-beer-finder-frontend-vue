@@ -184,6 +184,9 @@ export default {
 </script>
 
 <style scoped>
+.cbf-main-section {
+  padding: 0;
+}
 .cbf-sticky {
   position: -webkit-sticky;
   position: sticky;
@@ -204,9 +207,9 @@ export default {
   font-weight: bold;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 769px) {
   .cbf-main-section {
-    padding-top: 0;
+    padding-top: 3rem;
   }
 }
 </style>
