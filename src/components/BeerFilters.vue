@@ -41,6 +41,7 @@
 
     <b-field label="Rating range">
       <b-slider
+        class="cbf-slider"
         :min="3.75"
         :max="4.5"
         :step="0.25"
@@ -159,6 +160,9 @@ export default {
 <style scoped>
 .cbf-filters {
   text-align: left;
+}
+.cbf-slider {
+  padding: 0 1rem;
 }
 .cbf-separator {
   padding-top: 1rem;
