@@ -1,6 +1,6 @@
 <template>
   <div class="section cbf-main-section">
-    <h1 class="title is-size-1-widescreen is-size-2-desktop is-size-3-touch is-size-4-mobile">{{titleText}}</h1>
+    <h1 class="title is-size-1-widescreen is-size-2-desktop is-size-3-touch-only is-size-4-tablet-only is-size-4-mobile">{{titleText}}</h1>
 
     <div v-if="isLoading">
       <div class="cbf-loading">
