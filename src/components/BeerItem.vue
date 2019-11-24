@@ -28,7 +28,7 @@
               </b-tooltip>
             </div>
             <div class="column is-one-quarter">
-              <div class="cbf-flag">
+              <div class="cbf-flag-area">
                 <b-tooltip
                   :label="item.beer_country"
                   type="is-white"
@@ -37,6 +37,7 @@
                   <flag
                     :iso="item.beer_country"
                     :squared="false"
+                    class="cbf-flag"
                   />
                 </b-tooltip>
               </div>
@@ -53,7 +54,7 @@
     <div class="column is-one-fifth cbf-first-col is-hidden-mobile">
       <div class="columns is-gapless">
         <div class="column is-two-fifths">
-          <div class="cbf-flag">
+          <div class="cbf-flag-area">
             <b-tooltip
               :label="item.beer_country"
               type="is-white"
@@ -62,6 +63,7 @@
               <flag
                 :iso="item.beer_country"
                 :squared="false"
+                class="cbf-flag"
               />
             </b-tooltip>
           </div>
@@ -177,10 +179,14 @@ export default {
 .cbf-first-mobile-col {
   padding-left: 2.25rem;
 }
-.cbf-flag {
+.cbf-flag-area {
   float: right;
   font-size: 36px;
   margin-right: 0;
+}
+.cbf-flag {
+  line-height: 0.99em;
+  border: 1px solid #e0e0e0; /* grey 300 */
 }
 .cbf-pint {
   margin-top: 0.3rem;
