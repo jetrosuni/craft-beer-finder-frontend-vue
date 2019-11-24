@@ -4,26 +4,6 @@
     <div class="column is-full is-hidden-tablet">
       <div class="level is-mobile">
         <div class="level-left">
-          <div class="level-item has-text-centered cbf-rating-area-mobile">
-            <p class="heading">
-              <strong>{{item.beer_rating}}</strong><br>
-              {{item.beer_rating_count}}
-            </p>
-          </div>
-          <div class="level-item cbf-pint-area-mobile">
-            <b-tooltip
-              :label="item.beer_style"
-              type="is-white"
-              position="is-top"
-            >
-              <div class="cbf-pint">
-                <img
-                  :src="tulipGlassSvg(item.beer_style)"
-                  class="cbf-tulip-mobile"
-                />
-              </div>
-            </b-tooltip>
-          </div>
           <div class="level-item cbf-flag-area-mobile">
             <b-tooltip
               :label="item.beer_country"
@@ -36,6 +16,26 @@
               />
             </b-tooltip>
           </div>
+        </div>
+        <div class="level-item cbf-pint-area-mobile">
+          <b-tooltip
+            :label="item.beer_style"
+            type="is-white"
+            position="is-top"
+          >
+            <div class="cbf-pint">
+              <img
+                :src="tulipGlassSvg(item.beer_style)"
+                class="cbf-tulip-mobile"
+              />
+            </div>
+          </b-tooltip>
+        </div>
+        <div class="level-item has-text-centered cbf-rating-area-mobile">
+          <p class="heading">
+            <strong>{{item.beer_rating}}</strong><br>
+            {{item.beer_rating_count}}
+          </p>
         </div>
         <div class="cbf-beer-name-area-mobile">
           <p>
@@ -167,21 +167,21 @@ export default {
   font-size: 36px;
   margin-right: 0;
 }
-.cbf-rating-area-mobile {
-  min-width: 2.5rem;
-  width: 2.5rem;
-}
-.cbf-pint-area-mobile {
-  min-width: 1rem;
-  width: 1rem;
-}
 .cbf-flag-area-mobile {
-  min-width: 1rem;
-  width: 1rem;
+  min-width: 2rem;
+  width: 2rem;
   font-size: 17px;
 }
+.cbf-pint-area-mobile {
+  min-width: 2rem;
+  width: 2rem;
+}
+.cbf-rating-area-mobile {
+  min-width: 2rem;
+  width: 2rem;
+}
 .cbf-beer-name-area-mobile {
-  margin-left: 1.5rem;
+  margin-left: 0.5rem;
   width: 100%;
   font-size: 0.8rem;
 }
