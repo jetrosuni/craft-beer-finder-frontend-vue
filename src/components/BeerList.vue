@@ -34,12 +34,13 @@ export default {
 <style scoped>
 .beer-list {
   text-align: left;
-  margin: 4rem 0;
+  margin: 1rem 0;
   padding: 0 1rem;
 }
 
 @media only screen and (min-width: 769px) {
   .beer-list {
+    margin: 4rem 0;
     padding: 0 2rem;
   }
 }

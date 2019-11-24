@@ -2,50 +2,49 @@
   <div class="columns cbf-margin-slim">
     <!-- mobile -->
     <div class="column is-full is-hidden-tablet">
-      <div class="columns cbf-first-col is-multiline is-mobile">
-        <div class="column is-four-fifths cbf-first-mobile-col">
-          <div class="columns is-gapless is-multiline is-mobile">
-            <div class="column is-one-quarter">
-              <div class="cbf-rating-mobile">
-                <strong>{{item.beer_rating}}</strong>
-                <div class="is-size-7">
-                  {{item.beer_rating_count}}
-                </div>
+      <div class="level is-mobile">
+        <div class="level-left">
+          <div class="level-item has-text-centered cbf-rating-area-mobile">
+            <p class="heading">
+              <strong>{{item.beer_rating}}</strong><br>
+              {{item.beer_rating_count}}
+            </p>
+          </div>
+          <div class="level-item cbf-pint-area-mobile">
+            <b-tooltip
+              :label="item.beer_style"
+              type="is-white"
+              position="is-top"
+            >
+              <div class="cbf-pint">
+                <img
+                  :src="tulipGlassSvg(item.beer_style)"
+                  class="cbf-tulip-mobile"
+                />
               </div>
-            </div>
-            <div class="column is-one-quarter">
-              <b-tooltip
-                :label="item.beer_style"
-                type="is-white"
-                position="is-top"
-              >
-                <div class="cbf-pint">
-                  <img
-                    :src="tulipGlassSvg(item.beer_style)"
-                    class="cbf-tulip"
-                  />
-                </div>
-              </b-tooltip>
-            </div>
-            <div class="column is-one-quarter">
-              <div class="cbf-flag-area">
-                <b-tooltip
-                  :label="item.beer_country"
-                  type="is-white"
-                  position="is-top"
-                >
-                  <flag
-                    :iso="item.beer_country"
-                    :squared="false"
-                    class="cbf-flag"
-                  />
-                </b-tooltip>
-              </div>
-            </div>
-            <div class="column is-one-quarter" />
+            </b-tooltip>
+          </div>
+          <div class="level-item cbf-flag-area-mobile">
+            <b-tooltip
+              :label="item.beer_country"
+              type="is-white"
+              position="is-top"
+            >
+              <flag
+                :iso="item.beer_country"
+                :squared="false"
+              />
+            </b-tooltip>
           </div>
         </div>
-        <div class="column is-one-fifths" />
+        <div class="cbf-beer-name-area-mobile">
+          <p>
+            {{item.beer_name}}<br>
+            <span class="cbf-bar-list-mobile">
+              {{barsList(item)}}
+            </span>
+          </p>
+        </div>
       </div>
     </div>
     <!-- /mobile -->
@@ -94,27 +93,14 @@
     </div>
     <!-- /768px -->
 
-    <div class="column is-four-fifths cbf-second-col">
+    <div class="column is-four-fifths cbf-second-col is-hidden-mobile">
       <div class="columns cbf-beer-name">
         <div class="column is-full cbf-remove-padding">
           {{item.beer_name}}
         </div>
       </div>
       <div class="columns is-multiline is-gapless cbf-bar-item-area is-size-7">
-        <!-- mobile items -->
-        <template v-for="(bar, barKey) in barsArray(item)">
-          <div
-            :key="barKey"
-            class="is-hidden-tablet column is-full cbf-bar-item"
-          >
-            {{bar}}
-            ({{daysAgoString(item, barKey)}})
-          </div>
-        </template>
-        <!-- desktop item -->
-        <div class="is-hidden-mobile">
-          {{barsList(item)}}
-        </div>
+        {{barsList(item)}}
       </div>
     </div>
   </div>
@@ -176,13 +162,32 @@ export default {
   padding: 0;
   text-align: center;
 }
-.cbf-first-mobile-col {
-  padding-left: 2.25rem;
-}
 .cbf-flag-area {
   float: right;
   font-size: 36px;
   margin-right: 0;
+}
+.cbf-rating-area-mobile {
+  min-width: 2.5rem;
+  width: 2.5rem;
+}
+.cbf-pint-area-mobile {
+  min-width: 1rem;
+  width: 1rem;
+}
+.cbf-flag-area-mobile {
+  min-width: 1rem;
+  width: 1rem;
+  font-size: 17px;
+}
+.cbf-beer-name-area-mobile {
+  margin-left: 1.5rem;
+  width: 100%;
+  font-size: 0.8rem;
+}
+.cbf-bar-list-mobile {
+  color: #757575; /* grey 600 */
+  font-size: 0.7rem;
 }
 .cbf-flag {
   line-height: 0.99em;
@@ -193,6 +198,9 @@ export default {
 }
 .cbf-tulip {
   width: 24px;
+}
+.cbf-tulip-mobile {
+  width: 12px;
 }
 .cbf-rating {
   margin-top: 0.2rem;
@@ -218,6 +226,12 @@ export default {
   color: #757575; /* grey 600 */
 }
 .cbf-margin-slim {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+@media only screen and (min-width: 769px) {
+  .cbf-margin-slim {
+    margin-bottom: 2rem;
+  }
 }
 </style>

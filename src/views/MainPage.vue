@@ -1,6 +1,6 @@
 <template>
   <div class="section cbf-main-section">
-    <h1 class="title is-size-1-widescreen is-size-2-desktop is-size-3-touch-only is-size-4-tablet-only is-size-4-mobile">{{titleText}}</h1>
+    <h1 class="cbf-title title is-size-1-widescreen is-size-2-desktop is-size-3-touch-only is-size-4-tablet-only is-size-4-mobile">{{titleText}}</h1>
 
     <div v-if="isLoading">
       <div class="cbf-loading">
@@ -202,6 +202,9 @@ export default {
 </script>
 
 <style scoped>
+.cbf-title {
+  margin-bottom: 0;
+}
 .cbf-main-section {
   padding: 0;
 }
@@ -228,6 +231,9 @@ export default {
 @media only screen and (min-width: 769px) {
   .cbf-main-section {
     padding-top: 3rem;
+  }
+  .cbf-title {
+    margin-bottom: 1.5rem;
   }
   .cbf-sticky {
     padding: 1rem;
