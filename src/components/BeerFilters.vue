@@ -1,7 +1,7 @@
 <template>
   <div class="cbf-filters">
 
-    <div :class="[ isIgnored ? 'is-ignored level is-mobile' : 'level is-mobile']">
+    <div :class="[ isBeerSearch ? 'is-ignored level is-mobile' : 'level is-mobile']">
       <div class="level-left">
         <div class="level-item cbf-style-label">Beer style</div>
         <div class="block level-item">
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div :class="[ isIgnored ? 'is-ignored level is-mobile' : 'level is-mobile']">
+    <div :class="[ isBeerSearch || isVenueSearch ? 'is-ignored level is-mobile' : 'level is-mobile']">
       <div class="cbf-rating-label">
         Rating scale
       </div>
@@ -73,7 +73,7 @@
           @input="option => onSearchStringChanged(option)"
         />
       </div>
-      <div :class="[ isVenueIgnored ? 'is-ignored column is-half' : 'column is-half' ]">
+      <div :class="[ isBeerSearch ? 'is-ignored column is-half' : 'column is-half' ]">
         <b-autocomplete
           v-model="venueStr"
           type="is-light"
@@ -97,11 +97,11 @@ export default {
       type: Array,
       required: true
     },
-    isIgnored: {
+    isBeerSearch: {
       type: Boolean,
       required: true
     },
-    isVenueIgnored: {
+    isVenueSearch: {
       type: Boolean,
       required: true
     }

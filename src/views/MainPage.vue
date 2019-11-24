@@ -16,8 +16,8 @@
     <div class="cbf-sticky" v-if="!isLoading">
       <BeerFilters
         :data="beerList"
-        :is-ignored="isVenueSearch || isBeerNameSearch"
-        :is-venue-ignored="isBeerNameSearch"
+        :is-beer-search="isBeerNameSearch"
+        :is-venue-search="isVenueSearch"
         @change-filter-search-string="onFilterSearchStringChanged"
         @change-filter-venue-string="onFilterVenueStringChanged"
         @change-filter-beer-style="onFilterBeerStyleChanged"
