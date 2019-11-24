@@ -1,7 +1,7 @@
 <template>
   <div class="cbf-filters">
 
-    <div class="level is-mobile">
+    <div :class="[ isIgnored ? 'is-ignored level is-mobile' : 'level is-mobile']">
       <div class="level-left">
         <div class="level-item cbf-style-label">Beer style</div>
         <div class="block level-item">
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div class="level is-mobile">
+    <div :class="[ isIgnored ? 'is-ignored level is-mobile' : 'level is-mobile']">
       <div class="cbf-rating-label">
         Rating scale
       </div>
@@ -73,7 +73,7 @@
           @input="option => onSearchStringChanged(option)"
         />
       </div>
-      <div class="column is-half">
+      <div :class="[ isVenueIgnored ? 'is-ignored column is-half' : 'column is-half' ]">
         <b-autocomplete
           v-model="venueStr"
           type="is-light"
@@ -95,6 +95,14 @@ export default {
   props: {
     data: {
       type: Array,
+      required: true
+    },
+    isIgnored: {
+      type: Boolean,
+      required: true
+    },
+    isVenueIgnored: {
+      type: Boolean,
       required: true
     }
   },
@@ -141,12 +149,10 @@ export default {
   },
   methods: {
     onSearchStringChanged(searchStr) {
-      if (searchStr === "" || searchStr.length > 2) {
-        this.$emit("change-filter-search-string", searchStr);
-      }
+      this.$emit("change-filter-search-string", searchStr && searchStr.length > 2 ? searchStr : null);
     },
     onVenueStringChanged(searchStr) {
-      this.$emit("change-filter-venue-string", searchStr);
+      this.$emit("change-filter-venue-string", searchStr && searchStr.length > 2 ? searchStr : null);
     },
     onBeerStyleSelected(beerStyleArray) {
       this.$emit("change-filter-beer-style", beerStyleArray);
@@ -172,5 +178,9 @@ export default {
 }
 .cbf-slider {
   padding: 0 1rem;
+}
+.is-ignored {
+  text-decoration: line-through;
+  opacity: 0.25;
 }
 </style>

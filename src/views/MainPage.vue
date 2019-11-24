@@ -16,6 +16,8 @@
     <div class="cbf-sticky" v-if="!isLoading">
       <BeerFilters
         :data="beerList"
+        :is-ignored="isVenueSearch || isBeerNameSearch"
+        :is-venue-ignored="isBeerNameSearch"
         @change-filter-search-string="onFilterSearchStringChanged"
         @change-filter-venue-string="onFilterVenueStringChanged"
         @change-filter-beer-style="onFilterBeerStyleChanged"
@@ -88,7 +90,7 @@ export default {
     },
     filteredBeerNames: function() {
       return this.beerList.filter(beer => {
-        return this.searchBeerString && this.searchBeerString.length > 2
+        return this.isBeerNameSearch
           ? beer.beer_name
               .toLowerCase()
               .includes(this.searchBeerString.toLowerCase())
@@ -97,7 +99,7 @@ export default {
     },
     filteredVenues: function() {
       return this.filteredBeerNames.filter(beer => {
-        return this.searchVenueString && this.searchVenueString.length > 2
+        return this.isVenueSearch
           ? beer.bars
               .toLowerCase()
               .includes(this.searchVenueString.toLowerCase())
@@ -133,9 +135,25 @@ export default {
       });
     },
     filteredBeerList: function() {
+      // NOTE: if beer name search is active, do not care about the other filters
+      if (this.isBeerNameSearch) {
+        return this.filteredBeerNames;
+      }
+
+      // NOTE: if venue search is active, do not care about the ratings
+      if (this.isVenueSearch) {
+        return this.filteredOtherBeers;
+      }
+
       return this.filteredOtherBeers.filter(beer => {
         return beer.beer_rating >= this.ratingMinValue ? true : false;
       });
+    },
+    isBeerNameSearch: function() {
+      return this.searchBeerString && this.searchBeerString.length > 2 ? true : false;
+    },
+    isVenueSearch: function() {
+      return this.searchVenueString && this.searchVenueString.length > 2 ? true: false;
     }
   },
   methods: {
@@ -168,10 +186,10 @@ export default {
       this.beerList = response.data;
     },
     onFilterSearchStringChanged(searchStr) {
-      this.searchBeerString = searchStr;
+      this.searchBeerString = searchStr ? searchStr : "";
     },
     onFilterVenueStringChanged(searchStr) {
-      this.searchVenueString = searchStr;
+      this.searchVenueString = searchStr ? searchStr : "";
     },
     onFilterBeerStyleChanged(beerStyleArray) {
       this.beerStyleSelection = beerStyleArray;
