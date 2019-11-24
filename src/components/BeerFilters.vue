@@ -11,7 +11,7 @@
             native-value="light"
             @input="option => onBeerStyleSelected(option)"
           >
-            Light
+            Pale
           </b-checkbox>
           <b-checkbox
             type="is-light"
