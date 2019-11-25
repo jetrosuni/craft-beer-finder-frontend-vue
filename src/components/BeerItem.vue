@@ -41,7 +41,7 @@
           <p>
             {{item.beer_name}}<br>
             <span class="cbf-bar-list-mobile">
-              {{barsList(item)}}
+              <span v-html="barsList(item)"></span>
             </span>
           </p>
         </div>
@@ -100,7 +100,7 @@
         </div>
       </div>
       <div class="columns is-multiline is-gapless cbf-bar-item-area is-size-7">
-        {{barsList(item)}}
+        <span v-html="barsList(item)"></span>
       </div>
     </div>
   </div>
@@ -138,10 +138,12 @@ export default {
     daysAgoString(item, barKey) {
       const daysAgoArray = this.daysAgoArray(item);
       return +daysAgoArray[barKey] === 0
-        ? "today"
+        ? '<span class="cbf-is-today">today</span>'
         : +daysAgoArray[barKey] === 1
-        ? "1 day ago"
-        : daysAgoArray[barKey] + " days ago";
+        ? '<span class="cbf-is-yesterday">1 day ago</span>'
+        : +daysAgoArray[barKey] > 1 && +daysAgoArray[barKey] < 4
+        ? '<span class="cbf-is-some-days-ago">' + daysAgoArray[barKey] + " days ago</span>"
+        : '<span class="cbf-is-many-days-ago">' + daysAgoArray[barKey] + " days ago</span>";
     },
     tulipGlassSvg(style) {
       if (beerColors.other.some(bc => bc.test(style.toLowerCase()))) {
@@ -156,6 +158,21 @@ export default {
   }
 };
 </script>
+
+<style>
+.cbf-is-today {
+  color: #43a047 /* green 600 */
+}
+.cbf-is-yesterday {
+  color: #4caf50 /* green 500 */
+}
+.cbf-is-some-days-ago {
+  color: #ff9800 /* orange */
+}
+.cbf-is-many-days-ago {
+  color: #f44336 /* red */
+}
+</style>
 
 <style scoped>
 .cbf-first-col {
