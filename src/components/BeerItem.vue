@@ -115,6 +115,10 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    dayLimit: {
+      type: Number,
+      required: true
     }
   },
   methods: {
@@ -123,7 +127,10 @@ export default {
       let barsList = "";
       let i = 0;
       barsArray.map(bar => {
-        barsList += bar + " (" + this.daysAgoString(item, i) + ") — ";
+        const daysAgo = this.daysAgoValue(item, i);
+        if (daysAgo <= this.dayLimit) {
+          barsList += bar + " (" + this.daysAgoString(item, i) + ") — ";
+        }
         i++;
       });
 
@@ -134,6 +141,10 @@ export default {
     },
     daysAgoArray(item) {
       return item.days_ago_bars.split(",");
+    },
+    daysAgoValue(item, barKey) {
+      const daysAgoArray = this.daysAgoArray(item);
+      return +daysAgoArray[barKey];
     },
     daysAgoString(item, barKey) {
       const daysAgoArray = this.daysAgoArray(item);

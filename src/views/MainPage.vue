@@ -18,9 +18,11 @@
         :data="beerList"
         :is-beer-search="isBeerNameSearch"
         :is-venue-search="isVenueSearch"
+        :filter-values="filterValues"
         @change-filter-search-string="onFilterSearchStringChanged"
         @change-filter-venue-string="onFilterVenueStringChanged"
         @change-filter-beer-style="onFilterBeerStyleChanged"
+        @change-filter-day-range="onFilterDayRangeChanged"
         @change-filter-rating-range="onFilterRatingRangeChanged"
       />
     </div>
@@ -28,6 +30,7 @@
     <BeerList
       v-if="beerListHasItems"
       :data="filteredBeerList"
+      :day-limit="isBeerNameSearch || isVenueSearch ? 7 : filterValues.dayLimit"
     />
 
     <div v-if="!isLoading && filteredBeerList && !filteredBeerList.length">
@@ -66,10 +69,13 @@ export default {
       beerList: [],
       waitingForResponse: false,
       isLoading: false,
-      searchBeerString: "",
-      searchVenueString: "",
-      ratingMinValue: 4,
-      beerStyleSelection: ["light", "dark", "sour", "other"]
+      filterValues: {
+        searchBeerString: "",
+        searchVenueString: "",
+        dayLimit: 1,
+        ratingMin: 4,
+        beerStyleSelection: ["light", "dark", "sour", "other"],
+      }
     };
   },
   mounted() {
@@ -93,7 +99,7 @@ export default {
         return this.isBeerNameSearch
           ? beer.beer_name
               .toLowerCase()
-              .includes(this.searchBeerString.toLowerCase())
+              .includes(this.filterValues.searchBeerString.toLowerCase())
           : true;
       });
     },
@@ -102,36 +108,41 @@ export default {
         return this.isVenueSearch
           ? beer.bars
               .toLowerCase()
-              .includes(this.searchVenueString.toLowerCase())
+              .includes(this.filterValues.searchVenueString.toLowerCase())
           : true;
       });
     },
     filteredLightBeers: function() {
       return this.filteredVenues.filter(beer => {
-        return !this.beerStyleSelection.includes("light")
+        return !this.filterValues.beerStyleSelection.includes("light")
           ? !beerStyles.light.some(style => style === beer.beer_style)
           : true;
       });
     },
     filteredDarkBeers: function() {
       return this.filteredLightBeers.filter(beer => {
-        return !this.beerStyleSelection.includes("dark")
+        return !this.filterValues.beerStyleSelection.includes("dark")
           ? !beerStyles.dark.some(style => style === beer.beer_style)
           : true;
       });
     },
     filteredSourBeers: function() {
       return this.filteredDarkBeers.filter(beer => {
-        return !this.beerStyleSelection.includes("sour")
+        return !this.filterValues.beerStyleSelection.includes("sour")
           ? !beerStyles.sour.some(style => style === beer.beer_style)
           : true;
       });
     },
     filteredOtherBeers: function() {
       return this.filteredSourBeers.filter(beer => {
-        return !this.beerStyleSelection.includes("other")
+        return !this.filterValues.beerStyleSelection.includes("other")
           ? !beerStyles.other.some(style => style === beer.beer_style)
           : true;
+      });
+    },
+    filteredDayLimit: function() {
+      return this.filteredOtherBeers.filter(beer => {
+        return beer.days_ago_bars.split(",").some((value) => +value <= this.filterValues.dayLimit) ? true : false;
       });
     },
     filteredBeerList: function() {
@@ -140,20 +151,20 @@ export default {
         return this.filteredBeerNames;
       }
 
-      // NOTE: if venue search is active, do not care about the ratings
+      // NOTE: if venue search is active, do not care about the ratings or day limit
       if (this.isVenueSearch) {
         return this.filteredOtherBeers;
       }
 
-      return this.filteredOtherBeers.filter(beer => {
-        return beer.beer_rating >= this.ratingMinValue ? true : false;
+      return this.filteredDayLimit.filter(beer => {
+        return beer.beer_rating >= this.filterValues.ratingMin ? true : false;
       });
     },
     isBeerNameSearch: function() {
-      return this.searchBeerString && this.searchBeerString.length > 2 ? true : false;
+      return this.filterValues.searchBeerString && this.filterValues.searchBeerString.length > 2 ? true : false;
     },
     isVenueSearch: function() {
-      return this.searchVenueString && this.searchVenueString.length > 2 ? true: false;
+      return this.filterValues.searchVenueString && this.filterValues.searchVenueString.length > 2 ? true: false;
     }
   },
   methods: {
@@ -186,16 +197,19 @@ export default {
       this.beerList = response.data;
     },
     onFilterSearchStringChanged(searchStr) {
-      this.searchBeerString = searchStr ? searchStr : "";
+      this.filterValues.searchBeerString = searchStr ? searchStr : "";
     },
     onFilterVenueStringChanged(searchStr) {
-      this.searchVenueString = searchStr ? searchStr : "";
+      this.filterValues.searchVenueString = searchStr ? searchStr : "";
     },
     onFilterBeerStyleChanged(beerStyleArray) {
-      this.beerStyleSelection = beerStyleArray;
+      this.filterValues.beerStyleSelection = beerStyleArray;
+    },
+    onFilterDayRangeChanged(dayLimit) {
+      this.filterValues.dayLimit = dayLimit;
     },
     onFilterRatingRangeChanged(minRating) {
-      this.ratingMinValue = minRating;
+      this.filterValues.ratingMin = minRating;
     }
   }
 };

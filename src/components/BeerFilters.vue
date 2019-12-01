@@ -7,7 +7,7 @@
         <div class="block level-item">
           <b-checkbox
             type="is-light"
-            v-model="beerStyleSelection"
+            v-model="filterValues.beerStyleSelection"
             native-value="light"
             @input="option => onBeerStyleSelected(option)"
           >
@@ -15,7 +15,7 @@
           </b-checkbox>
           <b-checkbox
             type="is-light"
-            v-model="beerStyleSelection"
+            v-model="filterValues.beerStyleSelection"
             native-value="dark"
             @input="option => onBeerStyleSelected(option)"
           >
@@ -23,7 +23,7 @@
           </b-checkbox>
           <b-checkbox
             type="is-light"
-            v-model="beerStyleSelection"
+            v-model="filterValues.beerStyleSelection"
             native-value="sour"
             @input="option => onBeerStyleSelected(option)"
           >
@@ -31,7 +31,7 @@
           </b-checkbox>
           <b-checkbox
             type="is-light"
-            v-model="beerStyleSelection"
+            v-model="filterValues.beerStyleSelection"
             native-value="other"
             @input="option => onBeerStyleSelected(option)"
           >
@@ -39,6 +39,29 @@
           </b-checkbox>
         </div>
       </div>
+    </div>
+
+    <div :class="[ isBeerSearch || isVenueSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']">
+      <div class="cbf-day-label">
+        Day limit
+      </div>
+      <b-slider
+        class="cbf-slider"
+        :min="0"
+        :max="7"
+        :step="1"
+        :value="filterValues.dayLimit"
+        ticks
+        type="is-light"
+        @input="value => onDayRangeChanged(value)"
+      >
+        <template v-for="(val, index) in [0, 1, 2, 3, 4, 5, 6, 7]">
+          <b-slider-tick
+            :value="val"
+            :key="`day-tick-${val}-${index}`"
+          >{{ val }}</b-slider-tick>
+        </template>
+      </b-slider>
     </div>
 
     <div :class="[ isBeerSearch || isVenueSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']">
@@ -50,7 +73,7 @@
         :min="3.75"
         :max="4.5"
         :step="0.25"
-        :value="minRating"
+        :value="filterValues.minRating"
         ticks
         type="is-light"
         @input="value => onRatingRangeChanged(value)"
@@ -58,7 +81,7 @@
         <template v-for="(val, index) in [3.75, 4, 4.25, 4.5]">
           <b-slider-tick
             :value="val"
-            :key="`tick-${val}-${index}`"
+            :key="`rating-tick-${val}-${index}`"
           >{{ val }}</b-slider-tick>
         </template>
       </b-slider>
@@ -69,7 +92,7 @@
         <b-field type="is-light">
           <b-input
             :size="inputFieldSize"
-            v-model="searchStr"
+            v-model="filterValues.searchBeerString"
             type="is-light"
             placeholder="Find a beer"
             @input="option => onSearchStringChanged(option)"
@@ -80,7 +103,7 @@
         <b-field type="is-light">
           <b-autocomplete
             :size="inputFieldSize"
-            v-model="venueStr"
+            v-model="filterValues.searchVenueString"
             type="is-light"
             placeholder="Filter by venue"
             :keep-first="false"
@@ -110,15 +133,15 @@ export default {
     isVenueSearch: {
       type: Boolean,
       required: true
+    },
+    filterValues: {
+      type: Object,
+      required: true
     }
   },
   data() {
     return {
-      searchStr: "",
-      venueStr: "",
       venueList: [],
-      minRating: 4,
-      beerStyleSelection: ["light", "dark", "sour", "other"],
       windowInnerWidth: window.innerWidth
     };
   },
@@ -155,7 +178,7 @@ export default {
           venue
             .toString()
             .toLowerCase()
-            .indexOf(this.venueStr.toLowerCase()) >= 0
+            .indexOf(this.filterValues.searchVenueString.toLowerCase()) >= 0
         ) {
           results.push(venue);
         }
@@ -176,6 +199,9 @@ export default {
     onBeerStyleSelected(beerStyleArray) {
       this.$emit("change-filter-beer-style", beerStyleArray);
     },
+    onDayRangeChanged(dayLimit) {
+      this.$emit("change-filter-day-range", dayLimit);
+    },
     onRatingRangeChanged(minRating) {
       this.$emit("change-filter-rating-range", minRating);
     }
@@ -191,7 +217,7 @@ export default {
 .cbf-style-label {
   color: #c2c2c2;
 }
-.cbf-rating-label {
+.cbf-day-label, .cbf-rating-label {
   color: #c2c2c2;
   min-width: 6rem;
   width: 6rem;

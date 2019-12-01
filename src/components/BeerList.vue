@@ -8,7 +8,7 @@
         v-for="beerItem in data"
         :key="beerItem.beer_id"
       >
-        <BeerItem :item="beerItem" />
+        <BeerItem :item="beerItem" :day-limit="dayLimit" />
       </div>
     </transition-group>
   </div>
@@ -25,6 +25,10 @@ export default {
   props: {
     data: {
       type: Array,
+      required: true
+    },
+    dayLimit: {
+      type: Number,
       required: true
     }
   }
