@@ -108,10 +108,10 @@
 </template>
 
 <script>
-import _ from "lodash";
+import _ from 'lodash'
 
 export default {
-  name: "BeerFilters",
+  name: 'BeerFilters',
   props: {
     data: {
       type: Array,
@@ -134,36 +134,36 @@ export default {
     return {
       venueList: [],
       windowInnerWidth: window.innerWidth
-    };
+    }
   },
   created() {
-    window.addEventListener("resize", this.handleResize);
-    this.changeDayRange = _.debounce(this.changeDayRange, 300);
-    this.changeRating = _.debounce(this.changeRating, 300);
+    window.addEventListener('resize', this.handleResize)
+    this.changeDayRange = _.debounce(this.changeDayRange, 300)
+    this.changeRating = _.debounce(this.changeRating, 300)
   },
   destroyed() {
-    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener('resize', this.handleResize)
   },
   mounted() {
     this.venueList = this.data.reduce((results, beer) => {
-      if (beer.bars.includes(",")) {
-        const bars = beer.bars.split(",");
+      if (beer.bars.includes(',')) {
+        const bars = beer.bars.split(',')
         bars.forEach(bar => {
           if (!results.includes(bar)) {
-            results.push(bar);
+            results.push(bar)
           }
-        });
+        })
       } else {
         if (!results.includes(beer.bars)) {
-          results.push(beer.bars);
+          results.push(beer.bars)
         }
       }
-      return results;
-    }, []);
+      return results
+    }, [])
   },
   computed: {
     inputFieldSize: function() {
-      return this.windowInnerWidth < 769 ? "is-small" : "is-normal";
+      return this.windowInnerWidth < 769 ? 'is-small' : 'is-normal'
     },
     venueNames: function() {
       return this.venueList.reduce((results, venue) => {
@@ -173,45 +173,45 @@ export default {
             .toLowerCase()
             .indexOf(this.filterValues.searchVenueString.toLowerCase()) >= 0
         ) {
-          results.push(venue);
+          results.push(venue)
         }
-        return results;
-      }, []);
+        return results
+      }, [])
     }
   },
   methods: {
     handleResize() {
-      this.windowInnerWidth = window.innerWidth;
+      this.windowInnerWidth = window.innerWidth
     },
     onSearchStringChanged(searchStr) {
       this.$emit(
-        "change-filter-search-string",
+        'change-filter-search-string',
         searchStr && searchStr.length > 2 ? searchStr : null
-      );
+      )
     },
     onVenueStringChanged(searchStr) {
       this.$emit(
-        "change-filter-venue-string",
+        'change-filter-venue-string',
         searchStr && searchStr.length > 2 ? searchStr : null
-      );
+      )
     },
     onBeerStyleSelected(beerStyleArray) {
-      this.$emit("change-filter-beer-style", beerStyleArray);
+      this.$emit('change-filter-beer-style', beerStyleArray)
     },
     onDayRangeChanged(dayLimit) {
-      this.changeDayRange(dayLimit);
+      this.changeDayRange(dayLimit)
     },
     onRatingRangeChanged(minRating) {
-      this.changeRating(minRating);
+      this.changeRating(minRating)
     },
     changeDayRange(dayLimit) {
-      this.$emit("change-filter-day-range", dayLimit);
+      this.$emit('change-filter-day-range', dayLimit)
     },
     changeRating(minRating) {
-      this.$emit("change-filter-rating-range", minRating);
+      this.$emit('change-filter-rating-range', minRating)
     }
   }
-};
+}
 </script>
 
 <style scoped>

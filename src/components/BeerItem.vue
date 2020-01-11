@@ -5,41 +5,29 @@
       <div class="level is-mobile">
         <div class="level-left">
           <div class="level-item cbf-flag-area-mobile">
-            <b-tooltip
-              :label="item.beer_country"
-              type="is-white"
-              position="is-top"
-            >
-              <flag
-                :iso="item.beer_country"
-                :squared="false"
-              />
+            <b-tooltip :label="item.beer_country" type="is-white" position="is-top">
+              <flag :iso="item.beer_country" :squared="false" />
             </b-tooltip>
           </div>
         </div>
         <div class="level-item cbf-pint-area-mobile">
-          <b-tooltip
-            :label="item.beer_style"
-            type="is-white"
-            position="is-top"
-          >
+          <b-tooltip :label="item.beer_style" type="is-white" position="is-top">
             <div class="cbf-pint">
-              <img
-                :src="tulipGlassSvg(item.beer_style)"
-                class="cbf-tulip-mobile"
-              />
+              <img :src="tulipGlassSvg(item.beer_style)" class="cbf-tulip-mobile" />
             </div>
           </b-tooltip>
         </div>
         <div class="level-item has-text-centered cbf-rating-area-mobile">
           <p class="heading">
-            <strong>{{item.beer_rating}}</strong><br>
+            <strong>{{item.beer_rating}}</strong>
+            <br />
             {{item.beer_rating_count}}
           </p>
         </div>
         <div class="cbf-beer-name-area-mobile">
           <p>
-            {{item.beer_name}}<br>
+            {{item.beer_name}}
+            <br />
             <span class="cbf-bar-list-mobile">
               <span v-html="barsList(item)"></span>
             </span>
@@ -54,39 +42,22 @@
       <div class="columns is-gapless">
         <div class="column is-two-fifths">
           <div class="cbf-flag-area">
-            <b-tooltip
-              :label="item.beer_country"
-              type="is-white"
-              position="is-top"
-            >
-              <flag
-                :iso="item.beer_country"
-                :squared="false"
-                class="cbf-flag"
-              />
+            <b-tooltip :label="item.beer_country" type="is-white" position="is-top">
+              <flag :iso="item.beer_country" :squared="false" class="cbf-flag" />
             </b-tooltip>
           </div>
         </div>
         <div class="column is-two-fifths">
-          <b-tooltip
-            :label="item.beer_style"
-            type="is-white"
-            position="is-right"
-          >
+          <b-tooltip :label="item.beer_style" type="is-white" position="is-right">
             <div class="cbf-pint">
-              <img
-                :src="tulipGlassSvg(item.beer_style)"
-                class="cbf-tulip"
-              />
+              <img :src="tulipGlassSvg(item.beer_style)" class="cbf-tulip" />
             </div>
           </b-tooltip>
         </div>
         <div class="column is-one-fifth">
           <div class="cbf-rating">
             <strong>{{item.beer_rating}}</strong>
-            <div class="is-size-7">
-              {{item.beer_rating_count}}
-            </div>
+            <div class="is-size-7">{{item.beer_rating_count}}</div>
           </div>
         </div>
       </div>
@@ -95,9 +66,7 @@
 
     <div class="column is-four-fifths cbf-second-col is-hidden-mobile">
       <div class="columns cbf-beer-name">
-        <div class="column is-full cbf-remove-padding">
-          {{item.beer_name}}
-        </div>
+        <div class="column is-full cbf-remove-padding">{{item.beer_name}}</div>
       </div>
       <div class="columns is-multiline is-gapless cbf-bar-item-area is-size-7">
         <span v-html="barsList(item)"></span>
@@ -107,10 +76,10 @@
 </template>
 
 <script>
-import beerColors from "../data/beerColors";
+import beerColors from '../data/beerColors'
 
 export default {
-  name: "BeerItem",
+  name: 'BeerItem',
   props: {
     item: {
       type: Object,
@@ -123,65 +92,69 @@ export default {
   },
   methods: {
     barsList(item) {
-      const barsArray = this.barsArray(item);
-      let barsList = "";
-      let i = 0;
+      const barsArray = this.barsArray(item)
+      let barsList = ''
+      let i = 0
       barsArray.map(bar => {
-        const daysAgo = this.daysAgoValue(item, i);
+        const daysAgo = this.daysAgoValue(item, i)
         if (daysAgo <= this.dayLimit) {
-          barsList += bar + " (" + this.daysAgoString(item, i) + ") — ";
+          barsList += bar + ' (' + this.daysAgoString(item, i) + ') — '
         }
-        i++;
-      });
+        i++
+      })
 
-      return barsList.substring(0, barsList.length - 3);
+      return barsList.substring(0, barsList.length - 3)
     },
     barsArray(item) {
-      return item.bars.split(",");
+      return item.bars.split(',')
     },
     daysAgoArray(item) {
-      return item.days_ago_bars.split(",");
+      return item.days_ago_bars.split(',')
     },
     daysAgoValue(item, barKey) {
-      const daysAgoArray = this.daysAgoArray(item);
-      return +daysAgoArray[barKey];
+      const daysAgoArray = this.daysAgoArray(item)
+      return +daysAgoArray[barKey]
     },
     daysAgoString(item, barKey) {
-      const daysAgoArray = this.daysAgoArray(item);
+      const daysAgoArray = this.daysAgoArray(item)
       return +daysAgoArray[barKey] === 0
         ? '<span class="cbf-is-today">today</span>'
         : +daysAgoArray[barKey] === 1
         ? '<span class="cbf-is-yesterday">1 day ago</span>'
         : +daysAgoArray[barKey] > 1 && +daysAgoArray[barKey] < 4
-        ? '<span class="cbf-is-some-days-ago">' + daysAgoArray[barKey] + " days ago</span>"
-        : '<span class="cbf-is-many-days-ago">' + daysAgoArray[barKey] + " days ago</span>";
+        ? '<span class="cbf-is-some-days-ago">' +
+          daysAgoArray[barKey] +
+          ' days ago</span>'
+        : '<span class="cbf-is-many-days-ago">' +
+          daysAgoArray[barKey] +
+          ' days ago</span>'
     },
     tulipGlassSvg(style) {
       if (beerColors.other.some(bc => bc.test(style.toLowerCase()))) {
-        return require("@/assets/img/tulip-glass.svg");
+        return require('@/assets/img/tulip-glass.svg')
       } else if (beerColors.dark.some(bc => bc.test(style.toLowerCase()))) {
-        return require("@/assets/img/tulip-glass-dark.svg");
+        return require('@/assets/img/tulip-glass-dark.svg')
       } else if (beerColors.light.some(bc => bc.test(style.toLowerCase()))) {
-        return require("@/assets/img/tulip-glass-light.svg");
+        return require('@/assets/img/tulip-glass-light.svg')
       }
-      return require("@/assets/img/tulip-glass.svg");
+      return require('@/assets/img/tulip-glass.svg')
     }
   }
-};
+}
 </script>
 
 <style>
 .cbf-is-today {
-  color: #43a047 /* green 600 */
+  color: #43a047; /* green 600 */
 }
 .cbf-is-yesterday {
-  color: #4caf50 /* green 500 */
+  color: #4caf50; /* green 500 */
 }
 .cbf-is-some-days-ago {
-  color: #ff9800 /* orange */
+  color: #ff9800; /* orange */
 }
 .cbf-is-many-days-ago {
-  color: #f44336 /* red */
+  color: #f44336; /* red */
 }
 </style>
 

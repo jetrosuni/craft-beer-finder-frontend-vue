@@ -1,13 +1,7 @@
 <template>
   <div class="beer-list">
-    <transition-group
-      tag="div"
-      name="beer-list"
-    >
-      <div
-        v-for="beerItem in data"
-        :key="beerItem.beer_id"
-      >
+    <transition-group tag="div" name="beer-list">
+      <div v-for="beerItem in data" :key="beerItem.beer_id">
         <BeerItem :item="beerItem" :day-limit="dayLimit" />
       </div>
     </transition-group>
@@ -15,10 +9,10 @@
 </template>
 
 <script>
-import BeerItem from "@/components/BeerItem.vue";
+import BeerItem from '@/components/BeerItem.vue'
 
 export default {
-  name: "BeerList",
+  name: 'BeerList',
   components: {
     BeerItem
   },
@@ -32,7 +26,7 @@ export default {
       required: true
     }
   }
-};
+}
 </script>
 
 <style scoped>
