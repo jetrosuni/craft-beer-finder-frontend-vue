@@ -12,6 +12,7 @@
     "axios": "^0.19.0",
     "buefy": "^0.8.8",
     "core-js": "^3.3.2",
+    "lodash": "^4.17.15",
     "vue": "^2.6.10",
     "vue-analytics": "^5.18.0",
     "vue-flag-icon": "^1.0.6"

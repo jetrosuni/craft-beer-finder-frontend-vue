@@ -1,7 +1,8 @@
 <template>
   <div class="cbf-filters">
-
-    <div :class="[ isBeerSearch ? 'cbf-is-ignored cbf-beer-style-area level is-mobile' : 'cbf-beer-style-area level is-mobile']">
+    <div
+      :class="[ isBeerSearch ? 'cbf-is-ignored cbf-beer-style-area level is-mobile' : 'cbf-beer-style-area level is-mobile']"
+    >
       <div class="level-left">
         <div class="level-item cbf-style-label">Beer style</div>
         <div class="block level-item">
@@ -10,41 +11,33 @@
             v-model="filterValues.beerStyleSelection"
             native-value="light"
             @input="option => onBeerStyleSelected(option)"
-          >
-            Pale
-          </b-checkbox>
+          >Pale</b-checkbox>
           <b-checkbox
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="dark"
             @input="option => onBeerStyleSelected(option)"
-          >
-            Dark
-          </b-checkbox>
+          >Dark</b-checkbox>
           <b-checkbox
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="sour"
             @input="option => onBeerStyleSelected(option)"
-          >
-            Sour
-          </b-checkbox>
+          >Sour</b-checkbox>
           <b-checkbox
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="other"
             @input="option => onBeerStyleSelected(option)"
-          >
-            Other
-          </b-checkbox>
+          >Other</b-checkbox>
         </div>
       </div>
     </div>
 
-    <div :class="[ isBeerSearch || isVenueSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']">
-      <div class="cbf-day-label">
-        Day limit
-      </div>
+    <div
+      :class="[ isBeerSearch || isVenueSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']"
+    >
+      <div class="cbf-day-label">Day limit</div>
       <b-slider
         class="cbf-slider"
         :min="0"
@@ -56,18 +49,15 @@
         @input="value => onDayRangeChanged(value)"
       >
         <template v-for="(val, index) in [0, 1, 2, 3, 4, 5, 6, 7]">
-          <b-slider-tick
-            :value="val"
-            :key="`day-tick-${val}-${index}`"
-          >{{ val }}</b-slider-tick>
+          <b-slider-tick :value="val" :key="`day-tick-${val}-${index}`">{{ val }}</b-slider-tick>
         </template>
       </b-slider>
     </div>
 
-    <div :class="[ isBeerSearch || isVenueSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']">
-      <div class="cbf-rating-label">
-        Rating scale
-      </div>
+    <div
+      :class="[ isBeerSearch || isVenueSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']"
+    >
+      <div class="cbf-rating-label">Rating scale</div>
       <b-slider
         class="cbf-slider"
         :min="3.75"
@@ -79,10 +69,7 @@
         @input="value => onRatingRangeChanged(value)"
       >
         <template v-for="(val, index) in [3.75, 4, 4.25, 4.5]">
-          <b-slider-tick
-            :value="val"
-            :key="`rating-tick-${val}-${index}`"
-          >{{ val }}</b-slider-tick>
+          <b-slider-tick :value="val" :key="`rating-tick-${val}-${index}`">{{ val }}</b-slider-tick>
         </template>
       </b-slider>
     </div>
@@ -99,7 +86,9 @@
           />
         </b-field>
       </div>
-      <div :class="[ isBeerSearch ? 'cbf-is-ignored column is-half cbf-input-area' : 'column is-half cbf-input-area' ]">
+      <div
+        :class="[ isBeerSearch ? 'cbf-is-ignored column is-half cbf-input-area' : 'column is-half cbf-input-area' ]"
+      >
         <b-field type="is-light">
           <b-autocomplete
             :size="inputFieldSize"
@@ -119,6 +108,8 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
   name: "BeerFilters",
   props: {
@@ -146,10 +137,12 @@ export default {
     };
   },
   created() {
-    window.addEventListener('resize', this.handleResize)
+    window.addEventListener("resize", this.handleResize);
+    this.changeDayRange = _.debounce(this.changeDayRange, 300);
+    this.changeRating = _.debounce(this.changeRating, 300);
   },
   destroyed() {
-    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener("resize", this.handleResize);
   },
   mounted() {
     this.venueList = this.data.reduce((results, beer) => {
@@ -170,7 +163,7 @@ export default {
   },
   computed: {
     inputFieldSize: function() {
-      return this.windowInnerWidth < 769 ? 'is-small' : 'is-normal'
+      return this.windowInnerWidth < 769 ? "is-small" : "is-normal";
     },
     venueNames: function() {
       return this.venueList.reduce((results, venue) => {
@@ -191,18 +184,30 @@ export default {
       this.windowInnerWidth = window.innerWidth;
     },
     onSearchStringChanged(searchStr) {
-      this.$emit("change-filter-search-string", searchStr && searchStr.length > 2 ? searchStr : null);
+      this.$emit(
+        "change-filter-search-string",
+        searchStr && searchStr.length > 2 ? searchStr : null
+      );
     },
     onVenueStringChanged(searchStr) {
-      this.$emit("change-filter-venue-string", searchStr && searchStr.length > 2 ? searchStr : null);
+      this.$emit(
+        "change-filter-venue-string",
+        searchStr && searchStr.length > 2 ? searchStr : null
+      );
     },
     onBeerStyleSelected(beerStyleArray) {
       this.$emit("change-filter-beer-style", beerStyleArray);
     },
     onDayRangeChanged(dayLimit) {
-      this.$emit("change-filter-day-range", dayLimit);
+      this.changeDayRange(dayLimit);
     },
     onRatingRangeChanged(minRating) {
+      this.changeRating(minRating);
+    },
+    changeDayRange(dayLimit) {
+      this.$emit("change-filter-day-range", dayLimit);
+    },
+    changeRating(minRating) {
       this.$emit("change-filter-rating-range", minRating);
     }
   }
@@ -217,7 +222,8 @@ export default {
 .cbf-style-label {
   color: #c2c2c2;
 }
-.cbf-day-label, .cbf-rating-label {
+.cbf-day-label,
+.cbf-rating-label {
   color: #c2c2c2;
   min-width: 6rem;
   width: 6rem;
