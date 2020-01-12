@@ -4,7 +4,7 @@
       class="cbf-title title is-size-1-widescreen is-size-2-desktop is-size-3-touch-only is-size-4-tablet-only is-size-4-mobile"
     >{{titleText}}</h1>
 
-    <div v-if="isLoading">
+    <div v-if="isDisplayLoadingIcon && isLoading">
       <div class="cbf-loading">
         <BeerLoading />
       </div>
@@ -33,12 +33,17 @@
     />
 
     <div
+      v-if="!isDisplayLoadingIcon && !isFullListLoaded"
+      class="cbf-more-beers-loading"
+    >fetching more beers ... please wait ...</div>
+
+    <div
       v-if="!isLoading && filteredBeerList && !filteredBeerList.length"
     >No results found with the selected filters.</div>
 
     <div
       v-if="!isLoading && filteredBeerList && filteredBeerList.length"
-      class="untappd-disclaimer is-size-7"
+      class="cbf-untappd-disclaimer is-size-7"
     >Data provided by Untappd</div>
   </div>
 </template>
@@ -65,6 +70,7 @@ export default {
       errorMessage: '',
       beerList: [],
       waitingForResponse: false,
+      isDisplayLoadingIcon: true,
       isLoading: false,
       isFullListLoaded: false,
       filterValues: {
@@ -80,6 +86,7 @@ export default {
     this.$ga.page(process.env.VUE_APP_CRAFT_BEER_FINDER_PUBLIC_PATH)
   },
   created() {
+    this.isDisplayLoadingIcon = true
     this.isFullListLoaded = false
     this.requestData(true, false)
     this.refreshTimer = setInterval(() => {
@@ -197,6 +204,8 @@ export default {
         .then(response => {
           if (!initialDataOnly) {
             this.isFullListLoaded = true
+          } else {
+            this.isDisplayLoadingIcon = false
           }
           this.resolveRequest(response)
           this.waitingForResponse = false
@@ -212,7 +221,11 @@ export default {
       this.beerList = response.data
 
       if (!this.isFullListLoaded) {
-        this.requestData(false, true)
+        // NOTE: Wait a moment before executing to make sure the DOM gets refreshed
+        const that = this
+        setTimeout(function() {
+          that.requestData(false, true)
+        }, 2500)
       }
     },
     onFilterSearchStringChanged(searchStr) {
@@ -256,7 +269,11 @@ export default {
 .cbf-loading {
   margin-top: 4rem;
 }
-.untappd-disclaimer {
+.cbf-more-beers-loading {
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+.cbf-untappd-disclaimer {
   margin: 4rem 0 1rem 0;
   font-weight: bold;
 }
