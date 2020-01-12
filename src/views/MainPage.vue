@@ -82,13 +82,13 @@ export default {
       }
     }
   },
-  mounted() {
-    this.$ga.page(process.env.VUE_APP_CRAFT_BEER_FINDER_PUBLIC_PATH)
-  },
   created() {
     this.isDisplayLoadingIcon = true
     this.isFullListLoaded = false
     this.requestData(true, false)
+  },
+  mounted() {
+    this.$ga.page(process.env.VUE_APP_CRAFT_BEER_FINDER_PUBLIC_PATH)
     this.refreshTimer = setInterval(() => {
       this.requestData(false, true)
     }, 1200000)
