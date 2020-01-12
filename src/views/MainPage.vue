@@ -66,6 +66,7 @@ export default {
       beerList: [],
       waitingForResponse: false,
       isLoading: false,
+      isFullListLoaded: false,
       filterValues: {
         searchBeerString: '',
         searchVenueString: '',
@@ -79,9 +80,10 @@ export default {
     this.$ga.page(process.env.VUE_APP_CRAFT_BEER_FINDER_PUBLIC_PATH)
   },
   created() {
-    this.requestData(false)
+    this.isFullListLoaded = false
+    this.requestData(true, false)
     this.refreshTimer = setInterval(() => {
-      this.requestData(true)
+      this.requestData(false, true)
     }, 1200000)
   },
   beforeDestroy() {
@@ -180,7 +182,7 @@ export default {
         !this.waitingForResponse && this.beerList && this.beerList.length > 0
       )
     },
-    requestData(isSilent = false) {
+    requestData(initialDataOnly = false, isSilent = false) {
       if (this.waitingForResponse) {
         return
       }
@@ -188,8 +190,14 @@ export default {
         this.isLoading = true
       }
       axios
-        .get(process.env.VUE_APP_CRAFT_BEER_FINDER_API_URL)
+        .get(
+          process.env.VUE_APP_CRAFT_BEER_FINDER_API_URL +
+            (initialDataOnly ? 'top/' : 'beers/')
+        )
         .then(response => {
+          if (!initialDataOnly) {
+            this.isFullListLoaded = true
+          }
           this.resolveRequest(response)
           this.waitingForResponse = false
           this.isLoading = false
@@ -202,6 +210,10 @@ export default {
     },
     resolveRequest(response) {
       this.beerList = response.data
+
+      if (!this.isFullListLoaded) {
+        this.requestData(false, true)
+      }
     },
     onFilterSearchStringChanged(searchStr) {
       this.filterValues.searchBeerString = searchStr ? searchStr : ''
