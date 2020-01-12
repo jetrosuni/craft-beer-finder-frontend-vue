@@ -11,10 +11,12 @@ module.exports = {
   },
   pwa: {
     name: 'Craft Beer Finder',
-    themeColor: '#000000',
-    msTileColor: '#000000',
+    themeColor: '#ffffff',
+    msTileColor: '#ffffff',
     display: 'standalone',
     appleMobileWebAppCapable: 'no',
-    appleMobileWebAppStatusBarStyle: 'black'
+    manifestOptions: {
+      background_color: "#ffffff"
+    }
   }
 }
