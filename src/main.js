@@ -4,6 +4,7 @@ import 'buefy/dist/buefy.css'
 import FlagIcon from 'vue-flag-icon'
 import VueAnalytics from 'vue-analytics'
 import App from './App.vue'
+import './registerServiceWorker'
 
 Vue.use(Buefy)
 Vue.use(FlagIcon)
