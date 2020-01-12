@@ -9,26 +9,26 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "buefy": "^0.8.8",
+    "axios": "^0.19.1",
+    "buefy": "^0.8.9",
     "core-js": "^3.3.2",
     "lodash": "^4.17.15",
     "register-service-worker": "^1.6.2",
-    "vue": "^2.6.10",
-    "vue-analytics": "^5.18.0",
+    "vue": "^2.6.11",
+    "vue-analytics": "^5.22.1",
     "vue-flag-icon": "^1.0.6"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.1.1",
-    "@vue/cli-plugin-eslint": "^4.1.1",
+    "@vue/cli-plugin-babel": "^4.1.2",
+    "@vue/cli-plugin-eslint": "^4.1.2",
     "@vue/cli-plugin-pwa": "^4.1.2",
-    "@vue/cli-service": "^4.1.1",
+    "@vue/cli-service": "^4.1.2",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "sass": "^1.23.7",
-    "sass-loader": "^8.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "sass": "^1.24.4",
+    "sass-loader": "^8.0.1",
+    "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
     "root": true,
