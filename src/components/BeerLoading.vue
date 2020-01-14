@@ -1,5 +1,5 @@
 <template>
-  <div class="cbf-loading">
+  <div :class="[size === 'small' ? 'cbf-loading cbf-is-small' : 'cbf-loading']">
     <div id="glass">
       <div id="beer"></div>
     </div>
@@ -17,7 +17,23 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'BeerLoading',
+  props: {
+    size: {
+      type: String,
+      required: false
+    }
+  }
+}
+</script>
+
 <style lang="scss">
+.cbf-is-small {
+  transform: scale(0.5);
+}
+
 @media only screen and (max-width: 768px) {
   $glass-pos-top-mobile: 6rem;
   #glass {

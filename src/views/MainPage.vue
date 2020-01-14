@@ -32,10 +32,12 @@
       :day-limit="isBeerNameSearch || isVenueSearch ? 7 : filterValues.dayLimit"
     />
 
-    <div
-      v-if="!isDisplayLoadingIcon && !isFullListLoaded"
-      class="cbf-more-beers-loading"
-    >fetching more beers ... please wait ...</div>
+    <div v-if="!isDisplayLoadingIcon && !isFullListLoaded" class="cbf-more-beers-loading">
+      <p>fetching more beers ... please wait ...</p>
+      <div class="cbf-more-beers-loading-pint">
+        <BeerLoading size="small" />
+      </div>
+    </div>
 
     <div
       v-if="!isLoading && filteredBeerList && !filteredBeerList.length"
@@ -270,7 +272,14 @@ export default {
   margin-top: 4rem;
 }
 .cbf-more-beers-loading {
-  margin-bottom: 2rem;
+  font-style: italic;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+}
+.cbf-more-beers-loading-pint {
+  position: absolute;
+  bottom: 12rem;
+  left: 50%;
   font-style: italic;
 }
 .cbf-untappd-disclaimer {
@@ -287,6 +296,16 @@ export default {
   }
   .cbf-sticky {
     padding: 1rem;
+  }
+  .cbf-more-beers-loading {
+    font-style: italic;
+    padding-bottom: 4rem;
+  }
+  .cbf-more-beers-loading-pint {
+    position: absolute;
+    bottom: 14.5rem;
+    left: 50%;
+    font-style: italic;
   }
 }
 </style>
