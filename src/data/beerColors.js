@@ -1,5 +1,6 @@
 const beerColors = {
   other: [
+    /brett/,
     /cider/,
     /flanders/,
     /freeze-distilled/,
@@ -12,6 +13,7 @@ const beerColors = {
   ],
   dark: [
     /barleywine/,
+    /black/,
     /bock - doppelbock/,
     /bock - hell/,
     /bock - single/,
@@ -30,6 +32,8 @@ const beerColors = {
     /red ale/,
     /rye beer/,
     /schwarzbier/,
+    /scottish/,
+    /smoked/,
     /spiced/,
     /stout/,
     /wee heavy/,
@@ -54,6 +58,7 @@ const beerColors = {
     /ipa/,
     /kölsch/,
     /lager/,
+    /lichtenhainer/,
     /malt liquor/,
     /mild ale/,
     /märzen/,
