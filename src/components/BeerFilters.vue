@@ -34,9 +34,7 @@
       </div>
     </div>
 
-    <div
-      :class="[ isBeerSearch || isVenueSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']"
-    >
+    <div :class="[ isBeerSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']">
       <div class="cbf-day-label">Day limit</div>
       <b-slider
         class="cbf-slider"

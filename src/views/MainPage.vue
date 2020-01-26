@@ -163,11 +163,6 @@ export default {
         return this.filteredBeerNames
       }
 
-      // NOTE: if venue search is active, do not care about the ratings or day limit
-      if (this.isVenueSearch) {
-        return this.filteredOtherBeers
-      }
-
       return this.filteredDayLimit.filter(beer => {
         return beer.beer_rating >= this.filterValues.ratingMin ? true : false
       })
