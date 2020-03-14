@@ -121,6 +121,7 @@ const beerStyles = {
     "Red Ale - Other",
     "Rye Beer",
     "Scotch Ale / Wee Heavy",
+    "Scottish Ale",
     "Scottish Export Ale",
     "Schwarzbier",
     "Smoked Beer",
