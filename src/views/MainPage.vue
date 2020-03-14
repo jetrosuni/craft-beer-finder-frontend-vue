@@ -17,7 +17,8 @@
         :data="beerList"
         :is-beer-search="isBeerNameSearch"
         :is-venue-search="isVenueSearch"
-        :filter-values="filterValues"
+        :init-filter-values="filterValues"
+        :venues="venues"
         @change-filter-search-string="onFilterSearchStringChanged"
         @change-filter-venue-string="onFilterVenueStringChanged"
         @change-filter-beer-style="onFilterBeerStyleChanged"
@@ -70,6 +71,7 @@ export default {
       refreshTimer: null,
       errorMessage: '',
       beerList: [],
+      venues: [],
       waitingForResponse: false,
       isDisplayLoadingIcon: true,
       isLoading: false,
@@ -86,6 +88,7 @@ export default {
   created() {
     this.isDisplayLoadingIcon = true
     this.isFullListLoaded = false
+    this.requestVenues()
     this.requestData(true, false)
   },
   mounted() {
@@ -184,6 +187,15 @@ export default {
       return (
         !this.waitingForResponse && this.beerList && this.beerList.length > 0
       )
+    },
+    requestVenues() {
+      BackendService.getVenues()
+        .then(res => {
+          this.venues = res
+        })
+        .catch(err => {
+          this.errorMessage = err
+        })
     },
     requestData(initialDataOnly = false, isSilent = false) {
       if (this.waitingForResponse) {

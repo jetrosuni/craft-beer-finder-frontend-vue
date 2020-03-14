@@ -90,7 +90,7 @@
         <b-field type="is-light">
           <b-autocomplete
             :size="inputFieldSize"
-            v-model="filterValues.searchVenueString"
+            v-model="searchVenueString"
             type="is-light"
             placeholder="Filter by venue"
             :keep-first="false"
@@ -98,6 +98,7 @@
             :data="venueNames"
             field="venue_name"
             @select="option => onVenueStringChanged(option)"
+            @input="option => inspectVenueStringChange(option)"
           />
         </b-field>
       </div>
@@ -123,14 +124,19 @@ export default {
       type: Boolean,
       required: true
     },
-    filterValues: {
+    initFilterValues: {
       type: Object,
+      required: true
+    },
+    venues: {
+      type: Array,
       required: true
     }
   },
   data() {
     return {
       venueList: [],
+      searchVenueString: '',
       windowInnerWidth: window.innerWidth
     }
   },
@@ -160,21 +166,29 @@ export default {
     }, [])
   },
   computed: {
+    filterValues: function() {
+      return _.cloneDeep(this.initFilterValues)
+    },
     inputFieldSize: function() {
       return this.windowInnerWidth < 769 ? 'is-small' : 'is-normal'
     },
     venueNames: function() {
-      return this.venueList.reduce((results, venue) => {
-        if (
-          venue
-            .toString()
-            .toLowerCase()
-            .indexOf(this.filterValues.searchVenueString.toLowerCase()) >= 0
-        ) {
-          results.push(venue)
-        }
-        return results
-      }, [])
+      if (this.venues && this.venues.length > 0) {
+        const matches = Object.values(this.venues).filter(v => {
+          return (
+            v.name
+              .toString()
+              .toLowerCase()
+              .indexOf(
+                this.searchVenueString
+                  ? this.searchVenueString.toLowerCase()
+                  : ''
+              ) >= 0
+          )
+        })
+        return Object.values(matches).map(m => m.name)
+      }
+      return []
     }
   },
   methods: {
@@ -188,6 +202,7 @@ export default {
       )
     },
     onVenueStringChanged(searchStr) {
+      this.searchVenueString = searchStr
       this.$emit(
         'change-filter-venue-string',
         searchStr && searchStr.length > 2 ? searchStr : null
@@ -201,6 +216,12 @@ export default {
     },
     onRatingRangeChanged(minRating) {
       this.changeRating(minRating)
+    },
+    inspectVenueStringChange(searchStr) {
+      this.searchVenueString = searchStr
+      if (!searchStr || (searchStr && searchStr.length === 0)) {
+        this.$emit('change-filter-venue-string', null)
+      }
     },
     changeDayRange(dayLimit) {
       this.$emit('change-filter-day-range', dayLimit)

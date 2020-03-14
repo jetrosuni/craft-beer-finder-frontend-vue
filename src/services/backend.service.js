@@ -12,6 +12,12 @@ const BackendService = {
       .then(res => {
         return res.data
       })
+  },
+  getVenues: async function () {
+    return await ApiService.get('venues/')
+      .then(res => {
+        return res.data
+      })
   }
 }
 
