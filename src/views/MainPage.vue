@@ -51,11 +51,10 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 import BeerFilters from '@/components/BeerFilters.vue'
 import BeerList from '@/components/BeerList.vue'
 import BeerLoading from '@/components/BeerLoading.vue'
+import BackendService from '@/services/backend.service'
 
 import beerStyles from '../data/beerStyles'
 
@@ -193,29 +192,36 @@ export default {
       if (!isSilent) {
         this.isLoading = true
       }
-      axios
-        .get(
-          process.env.VUE_APP_CRAFT_BEER_FINDER_API_URL +
-            (initialDataOnly ? 'top/' : 'beers/')
-        )
-        .then(response => {
-          if (!initialDataOnly) {
-            this.isFullListLoaded = true
-          } else {
+      if (initialDataOnly) {
+        BackendService.getTopBeers()
+          .then(res => {
+            this.resolveRequest(res)
+            this.waitingForResponse = false
+            this.isLoading = false
             this.isDisplayLoadingIcon = false
-          }
-          this.resolveRequest(response)
-          this.waitingForResponse = false
-          this.isLoading = false
-        })
-        .catch(err => {
-          this.errorMessage = err
-          this.waitingForResponse = false
-          this.isLoading = false
-        })
+          })
+          .catch(err => {
+            this.errorMessage = err
+            this.waitingForResponse = false
+            this.isLoading = false
+          })
+      } else {
+        BackendService.getAllBeers()
+          .then(res => {
+            this.resolveRequest(res)
+            this.waitingForResponse = false
+            this.isLoading = false
+            this.isFullListLoaded = true
+          })
+          .catch(err => {
+            this.errorMessage = err
+            this.waitingForResponse = false
+            this.isLoading = false
+          })
+      }
     },
     resolveRequest(response) {
-      this.beerList = response.data
+      this.beerList = response
 
       if (!this.isFullListLoaded) {
         // NOTE: Wait a moment before executing to make sure the DOM gets refreshed
