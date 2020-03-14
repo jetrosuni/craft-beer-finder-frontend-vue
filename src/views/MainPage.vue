@@ -28,13 +28,16 @@
     </div>
 
     <BeerList
-      v-if="beerListHasItems"
+      v-if="beerListHasItems()"
       :data="filteredBeerList"
       :day-limit="isBeerNameSearch || isVenueSearch ? 7 : filterValues.dayLimit"
     />
 
-    <div v-if="!isDisplayLoadingIcon && !isFullListLoaded" class="cbf-more-beers-loading">
-      <p>fetching more beers ... please wait ...</p>
+    <div
+      v-if="!isDisplayLoadingIcon && !isFullListLoaded"
+      :class="[ !isDisplayLoadingIcon && !isFullListLoaded && !beerListHasItems() ? 'cbf-more-beers-loading-no-results' : 'cbf-more-beers-loading' ]"
+    >
+      <p>Serving more beer ... please wait ...</p>
       <div class="cbf-more-beers-loading-pint">
         <BeerLoading size="small" />
       </div>
@@ -42,6 +45,7 @@
 
     <div
       v-if="!isLoading && filteredBeerList && !filteredBeerList.length"
+      class="cbf-no-results-area"
     >No results found with the selected filters.</div>
 
     <div
@@ -185,7 +189,9 @@ export default {
   methods: {
     beerListHasItems() {
       return (
-        !this.waitingForResponse && this.beerList && this.beerList.length > 0
+        !this.waitingForResponse &&
+        this.filteredBeerList &&
+        this.filteredBeerList.length > 0
       )
     },
     requestVenues() {
@@ -289,11 +295,19 @@ export default {
   padding-top: 3rem;
   padding-bottom: 4rem;
 }
+.cbf-more-beers-loading-no-results {
+  font-style: italic;
+  padding-top: 3rem;
+  padding-bottom: 6rem;
+}
 .cbf-more-beers-loading-pint {
   position: absolute;
   bottom: 12rem;
   left: 50%;
   font-style: italic;
+}
+.cbf-no-results-area {
+  padding-top: 3rem;
 }
 .cbf-untappd-disclaimer {
   margin: 4rem 0 1rem 0;
