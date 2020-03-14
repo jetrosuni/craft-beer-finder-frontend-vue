@@ -1,5 +1,6 @@
 const beerStyles = {
   light: [
+    "Australian Sparkling Ale",
     "Belgian Blonde",
     "Belgian Strong Golden Ale",
     "Belgian Tripel",
@@ -20,6 +21,7 @@ const beerStyles = {
     "Golden Ale",
     "Graff",
     "Grisette",
+    "Grätzer / Grodziskie",
     "Hefeweizen",
     "Hefeweizen Light / Leicht",
     "Honey Beer",
