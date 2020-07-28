@@ -12,8 +12,8 @@
     "axios": "^0.19.2",
     "buefy": "^0.8.20",
     "core-js": "^3.6.5",
-    "lodash": "^4.17.19",
     "register-service-worker": "^1.7.1",
+    "tiny-debounce": "^0.1.1",
     "vue": "^2.6.11",
     "vue-analytics": "^5.22.1",
     "vue-flag-icon": "^1.0.6"

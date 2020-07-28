@@ -107,43 +107,43 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import debounce from 'tiny-debounce'
 
 export default {
   name: 'BeerFilters',
   props: {
     data: {
       type: Array,
-      required: true
+      required: true,
     },
     isBeerSearch: {
       type: Boolean,
-      required: true
+      required: true,
     },
     isVenueSearch: {
       type: Boolean,
-      required: true
+      required: true,
     },
     initFilterValues: {
       type: Object,
-      required: true
+      required: true,
     },
     venues: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       venueList: [],
       searchVenueString: '',
-      windowInnerWidth: window.innerWidth
+      windowInnerWidth: window.innerWidth,
     }
   },
   created() {
     window.addEventListener('resize', this.handleResize)
-    this.changeDayRange = _.debounce(this.changeDayRange, 300)
-    this.changeRating = _.debounce(this.changeRating, 300)
+    this.changeDayRange = debounce(this.changeDayRange, 300)
+    this.changeRating = debounce(this.changeRating, 300)
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize)
@@ -152,7 +152,7 @@ export default {
     this.venueList = this.data.reduce((results, beer) => {
       if (beer.bars.includes(',')) {
         const bars = beer.bars.split(',')
-        bars.forEach(bar => {
+        bars.forEach((bar) => {
           if (!results.includes(bar)) {
             results.push(bar)
           }
@@ -166,15 +166,15 @@ export default {
     }, [])
   },
   computed: {
-    filterValues: function() {
-      return _.cloneDeep(this.initFilterValues)
+    filterValues: function () {
+      return JSON.parse(JSON.stringify(this.initFilterValues))
     },
-    inputFieldSize: function() {
+    inputFieldSize: function () {
       return this.windowInnerWidth < 769 ? 'is-small' : 'is-normal'
     },
-    venueNames: function() {
+    venueNames: function () {
       if (this.venues && this.venues.length > 0) {
-        const matches = Object.values(this.venues).filter(v => {
+        const matches = Object.values(this.venues).filter((v) => {
           return (
             v.name
               .toString()
@@ -186,10 +186,10 @@ export default {
               ) >= 0
           )
         })
-        return Object.values(matches).map(m => m.name)
+        return Object.values(matches).map((m) => m.name)
       }
       return []
-    }
+    },
   },
   methods: {
     handleResize() {
@@ -228,8 +228,8 @@ export default {
     },
     changeRating(minRating) {
       this.$emit('change-filter-rating-range', minRating)
-    }
-  }
+    },
+  },
 }
 </script>
 
