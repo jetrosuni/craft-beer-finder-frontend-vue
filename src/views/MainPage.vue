@@ -68,7 +68,7 @@ export default {
   components: {
     BeerFilters,
     BeerList,
-    BeerLoading
+    BeerLoading,
   },
   data() {
     return {
@@ -85,8 +85,8 @@ export default {
         searchVenueString: '',
         dayLimit: 1,
         ratingMin: 4,
-        beerStyleSelection: ['light', 'dark', 'sour', 'other']
-      }
+        beerStyleSelection: ['light', 'dark', 'sour', 'other'],
+      },
     }
   },
   created() {
@@ -105,11 +105,11 @@ export default {
     clearInterval(this.refreshTimer)
   },
   computed: {
-    titleText: function() {
+    titleText: function () {
       return process.env.VUE_APP_CRAFT_BEER_FINDER_TITLE
     },
-    filteredBeerNames: function() {
-      return this.beerList.filter(beer => {
+    filteredBeerNames: function () {
+      return this.beerList.filter((beer) => {
         return this.isBeerNameSearch
           ? beer.beer_name
               .toLowerCase()
@@ -117,8 +117,8 @@ export default {
           : true
       })
     },
-    filteredVenues: function() {
-      return this.filteredBeerNames.filter(beer => {
+    filteredVenues: function () {
+      return this.filteredBeerNames.filter((beer) => {
         return this.isVenueSearch
           ? beer.bars
               .toLowerCase()
@@ -126,65 +126,65 @@ export default {
           : true
       })
     },
-    filteredLightBeers: function() {
-      return this.filteredVenues.filter(beer => {
+    filteredLightBeers: function () {
+      return this.filteredVenues.filter((beer) => {
         return !this.filterValues.beerStyleSelection.includes('light')
-          ? !beerStyles.light.some(style => style === beer.beer_style)
+          ? !beerStyles.light.some((style) => style === beer.beer_style)
           : true
       })
     },
-    filteredDarkBeers: function() {
-      return this.filteredLightBeers.filter(beer => {
+    filteredDarkBeers: function () {
+      return this.filteredLightBeers.filter((beer) => {
         return !this.filterValues.beerStyleSelection.includes('dark')
-          ? !beerStyles.dark.some(style => style === beer.beer_style)
+          ? !beerStyles.dark.some((style) => style === beer.beer_style)
           : true
       })
     },
-    filteredSourBeers: function() {
-      return this.filteredDarkBeers.filter(beer => {
+    filteredSourBeers: function () {
+      return this.filteredDarkBeers.filter((beer) => {
         return !this.filterValues.beerStyleSelection.includes('sour')
-          ? !beerStyles.sour.some(style => style === beer.beer_style)
+          ? !beerStyles.sour.some((style) => style === beer.beer_style)
           : true
       })
     },
-    filteredOtherBeers: function() {
-      return this.filteredSourBeers.filter(beer => {
+    filteredOtherBeers: function () {
+      return this.filteredSourBeers.filter((beer) => {
         return !this.filterValues.beerStyleSelection.includes('other')
-          ? !beerStyles.other.some(style => style === beer.beer_style)
+          ? !beerStyles.other.some((style) => style === beer.beer_style)
           : true
       })
     },
-    filteredDayLimit: function() {
-      return this.filteredOtherBeers.filter(beer => {
+    filteredDayLimit: function () {
+      return this.filteredOtherBeers.filter((beer) => {
         return beer.days_ago_bars
           .split(',')
-          .some(value => +value <= this.filterValues.dayLimit)
+          .some((value) => +value <= this.filterValues.dayLimit)
           ? true
           : false
       })
     },
-    filteredBeerList: function() {
+    filteredBeerList: function () {
       // NOTE: if beer name search is active, do not care about the other filters
       if (this.isBeerNameSearch) {
         return this.filteredBeerNames
       }
 
-      return this.filteredDayLimit.filter(beer => {
+      return this.filteredDayLimit.filter((beer) => {
         return beer.beer_rating >= this.filterValues.ratingMin ? true : false
       })
     },
-    isBeerNameSearch: function() {
+    isBeerNameSearch: function () {
       return this.filterValues.searchBeerString &&
         this.filterValues.searchBeerString.length > 2
         ? true
         : false
     },
-    isVenueSearch: function() {
+    isVenueSearch: function () {
       return this.filterValues.searchVenueString &&
         this.filterValues.searchVenueString.length > 2
         ? true
         : false
-    }
+    },
   },
   methods: {
     beerListHasItems() {
@@ -196,10 +196,10 @@ export default {
     },
     requestVenues() {
       BackendService.getVenues()
-        .then(res => {
+        .then((res) => {
           this.venues = res
         })
-        .catch(err => {
+        .catch((err) => {
           this.errorMessage = err
         })
     },
@@ -212,26 +212,26 @@ export default {
       }
       if (initialDataOnly) {
         BackendService.getTopBeers()
-          .then(res => {
+          .then((res) => {
             this.resolveRequest(res)
             this.waitingForResponse = false
             this.isLoading = false
             this.isDisplayLoadingIcon = false
           })
-          .catch(err => {
+          .catch((err) => {
             this.errorMessage = err
             this.waitingForResponse = false
             this.isLoading = false
           })
       } else {
         BackendService.getAllBeers()
-          .then(res => {
+          .then((res) => {
             this.resolveRequest(res)
             this.waitingForResponse = false
             this.isLoading = false
             this.isFullListLoaded = true
           })
-          .catch(err => {
+          .catch((err) => {
             this.errorMessage = err
             this.waitingForResponse = false
             this.isLoading = false
@@ -244,7 +244,7 @@ export default {
       if (!this.isFullListLoaded) {
         // NOTE: Wait a moment before executing to make sure the DOM gets refreshed
         const that = this
-        setTimeout(function() {
+        setTimeout(function () {
           that.requestData(false, true)
         }, 2500)
       }
@@ -263,8 +263,8 @@ export default {
     },
     onFilterRatingRangeChanged(minRating) {
       this.filterValues.ratingMin = minRating
-    }
-  }
+    },
+  },
 }
 </script>
 

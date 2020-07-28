@@ -78,6 +78,7 @@ const beerStyles = {
     "Table Beer",
     "Wheat Beer - American Pale Wheat",
     "Wheat Beer - Other",
+    "Wheat Beer - Witbier",
     "Witbier"
   ],
   dark: [
@@ -134,6 +135,7 @@ const beerStyles = {
     "Stout - Imperial / Double",
     "Stout - Imperial / Double Milk",
     "Stout - Imperial / Double Oatmeal",
+    "Stout - Imperial / Double Pastry",
     "Stout - Irish Dry",
     "Stout - Milk / Sweet",
     "Stout - Oatmeal",
@@ -160,6 +162,8 @@ const beerStyles = {
     "Sour - Flanders Oud Bruin",
     "Sour - Flanders Red Ale",
     "Sour - Fruited",
+    "Sour - Fruited Berliner Weisse",
+    "Sour - Fruited Gose",
     "Sour - Gose",
     "Sour - Gose - Fruited",
     "Sour - Other"
@@ -177,6 +181,7 @@ const beerStyles = {
     "Cider - Traditional",
     "Freeze-distilled Beer",
     "Mead - Braggot",
+    "Mead - Cyser",
     "Mead - Melomel",
     "Mead - Other",
     "Mead - Pyment",
