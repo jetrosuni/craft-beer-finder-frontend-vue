@@ -23,8 +23,27 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Backend
+
+* The backend is not currently OSS
+* Here's an example of the API response structure:
+```
+[
+  {
+    "beer_id":"3860521",
+    "beer_name":"Brewery - Name of the beer",
+    "beer_country":"GB",
+    "beer_rating":"4.57",
+    "beer_rating_count":"199",
+    "beer_style":"Stout - Imperial \/ Double Coffee",
+    "bars":"Bar 1,Bar 2",
+    "days_ago_bars":"1,2"
+  },
+  {
+    ...
+  }
+]
+```
 
 ## Credits
 
