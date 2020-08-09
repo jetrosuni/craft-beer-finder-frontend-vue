@@ -83,19 +83,19 @@ export default {
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     dayLimit: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     barsList(item) {
       const barsArray = this.barsArray(item)
       let barsList = ''
       let i = 0
-      barsArray.map(bar => {
+      barsArray.map((bar) => {
         const daysAgo = this.daysAgoValue(item, i)
         if (daysAgo <= this.dayLimit) {
           barsList += bar + ' (' + this.daysAgoString(item, i) + ') — '
@@ -130,16 +130,16 @@ export default {
           ' days ago</span>'
     },
     tulipGlassSvg(style) {
-      if (beerColors.other.some(bc => bc.test(style.toLowerCase()))) {
+      if (beerColors.other.some((bc) => bc.test(style.toLowerCase()))) {
         return require('@/assets/img/tulip-glass.svg')
-      } else if (beerColors.dark.some(bc => bc.test(style.toLowerCase()))) {
+      } else if (beerColors.dark.some((bc) => bc.test(style.toLowerCase()))) {
         return require('@/assets/img/tulip-glass-dark.svg')
-      } else if (beerColors.light.some(bc => bc.test(style.toLowerCase()))) {
+      } else if (beerColors.light.some((bc) => bc.test(style.toLowerCase()))) {
         return require('@/assets/img/tulip-glass-light.svg')
       }
       return require('@/assets/img/tulip-glass.svg')
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -172,19 +172,29 @@ export default {
   min-width: 2rem;
   width: 2rem;
   font-size: 17px;
+  margin-bottom: 0.1rem;
 }
 .cbf-pint-area-mobile {
   min-width: 2rem;
   width: 2rem;
+  margin-left: 0.5rem !important;
+  margin-right: 0 !important;
+}
+.cbf-pint-area-mobile .cbf-pint {
+  margin-bottom: 0.1rem;
 }
 .cbf-rating-area-mobile {
-  min-width: 2rem;
-  width: 2rem;
+  min-width: 2.5rem;
+  width: 2.5rem;
+  padding-top: 0.5rem;
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
 }
 .cbf-beer-name-area-mobile {
   margin-left: 0.5rem;
   width: 100%;
   font-size: 0.8rem;
+  padding-top: 0.125rem;
 }
 .cbf-bar-list-mobile {
   color: #757575; /* grey 600 */
