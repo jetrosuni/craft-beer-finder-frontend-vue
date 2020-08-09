@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Checkbox, Slider } from 'buefy'
+import { Autocomplete, Checkbox, Field, Input, Slider, Tooltip } from 'buefy'
 import 'buefy/dist/buefy.css'
 import FlagIcon from 'vue-flag-icon'
 import VueAnalytics from 'vue-analytics'
@@ -7,9 +7,13 @@ import App from './App.vue'
 import ApiService from './services/api.service'
 import './registerServiceWorker'
 
+Vue.use(Autocomplete)
 Vue.use(Checkbox)
+Vue.use(Field)
 Vue.use(FlagIcon)
+Vue.use(Input)
 Vue.use(Slider)
+Vue.use(Tooltip)
 Vue.use(VueAnalytics, {
   id: process.env.VUE_APP_CRAFT_BEER_FINDER_GA_ID,
   debug: {
