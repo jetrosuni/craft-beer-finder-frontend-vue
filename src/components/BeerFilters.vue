@@ -7,24 +7,28 @@
         <div class="level-item cbf-style-label">Beer style</div>
         <div class="block level-item">
           <b-checkbox
+            :disabled="isBeerSearch"
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="light"
             @input="option => onBeerStyleSelected(option)"
           >Pale</b-checkbox>
           <b-checkbox
+            :disabled="isBeerSearch"
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="dark"
             @input="option => onBeerStyleSelected(option)"
           >Dark</b-checkbox>
           <b-checkbox
+            :disabled="isBeerSearch"
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="sour"
             @input="option => onBeerStyleSelected(option)"
           >Sour</b-checkbox>
           <b-checkbox
+            :disabled="isBeerSearch"
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="other"
@@ -38,6 +42,7 @@
       <div class="cbf-day-label">Day limit</div>
       <b-slider
         class="cbf-slider"
+        :disabled="isBeerSearch"
         :min="0"
         :max="7"
         :step="1"
@@ -58,6 +63,7 @@
       <div class="cbf-rating-label">Rating scale</div>
       <b-slider
         class="cbf-slider"
+        :disabled="isBeerSearch || isVenueSearch"
         :min="3.75"
         :max="4.5"
         :step="0.25"

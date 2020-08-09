@@ -170,7 +170,11 @@ export default {
       }
 
       return this.filteredDayLimit.filter((beer) => {
-        return beer.beer_rating >= this.filterValues.ratingMin ? true : false
+        return this.isVenueSearch
+          ? true
+          : beer.beer_rating >= this.filterValues.ratingMin
+          ? true
+          : false
       })
     },
     isBeerNameSearch: function () {
