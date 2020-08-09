@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Buefy from 'buefy'
+import { Checkbox, Slider } from 'buefy'
 import 'buefy/dist/buefy.css'
 import FlagIcon from 'vue-flag-icon'
 import VueAnalytics from 'vue-analytics'
@@ -7,8 +7,9 @@ import App from './App.vue'
 import ApiService from './services/api.service'
 import './registerServiceWorker'
 
-Vue.use(Buefy)
+Vue.use(Checkbox)
 Vue.use(FlagIcon)
+Vue.use(Slider)
 Vue.use(VueAnalytics, {
   id: process.env.VUE_APP_CRAFT_BEER_FINDER_GA_ID,
   debug: {

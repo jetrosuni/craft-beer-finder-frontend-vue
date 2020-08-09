@@ -1,3 +1,6 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
+
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? '/helsinki-craft-beer-finder/'
@@ -18,5 +21,10 @@ module.exports = {
     manifestOptions: {
       background_color: "#ffffff"
     }
+  },
+  configureWebpack: {
+    plugins: [new BundleAnalyzerPlugin({
+      analyzerPort: 4444
+    })]
   }
 }
