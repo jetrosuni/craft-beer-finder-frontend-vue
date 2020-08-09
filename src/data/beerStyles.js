@@ -154,6 +154,7 @@ const beerStyles = {
     "American Wild Ale",
     "Brett Beer",
     "Fruit Beer",
+    "Grape Ale - Italian",
     "IPA - Sour",
     "Lambic - Framboise",
     "Lambic - Fruit",
@@ -168,7 +169,8 @@ const beerStyles = {
     "Sour - Fruited Gose",
     "Sour - Gose",
     "Sour - Gose - Fruited",
-    "Sour - Other"
+    "Sour - Other",
+    "Wild Ale - Other"
   ],
   other: [
     "Chilli / Chile Beer",
