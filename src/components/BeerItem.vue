@@ -201,11 +201,11 @@ export default {
   font-size: 0.7rem;
 }
 .cbf-flag {
-  line-height: 0.99em;
+  line-height: 0.98em;
   border: 1px solid #444;
 }
 .cbf-flag-mobile {
-  line-height: 0.94em !important;
+  line-height: 0.94em;
   border: 1px solid #444;
 }
 .cbf-pint {
