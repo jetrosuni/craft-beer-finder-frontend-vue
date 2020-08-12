@@ -95,6 +95,7 @@
       >
         <b-field type="is-light">
           <b-autocomplete
+            :disabled="isBeerSearch"
             :size="inputFieldSize"
             v-model="searchVenueString"
             type="is-light"
