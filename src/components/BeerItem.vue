@@ -6,7 +6,7 @@
         <div class="level-left">
           <div class="level-item cbf-flag-area-mobile">
             <b-tooltip :label="item.beer_country" type="is-white" position="is-top">
-              <flag :iso="item.beer_country" :squared="false" />
+              <flag :iso="item.beer_country" :squared="false" class="cbf-flag-mobile" />
             </b-tooltip>
           </div>
         </div>
@@ -202,7 +202,11 @@ export default {
 }
 .cbf-flag {
   line-height: 0.99em;
-  border: 1px solid #e0e0e0; /* grey 300 */
+  border: 1px solid #444;
+}
+.cbf-flag-mobile {
+  line-height: 0.94em !important;
+  border: 1px solid #444;
 }
 .cbf-pint {
   margin-top: 0.3rem;
