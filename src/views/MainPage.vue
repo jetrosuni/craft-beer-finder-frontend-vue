@@ -83,7 +83,7 @@ export default {
       filterValues: {
         searchBeerString: '',
         searchVenueString: '',
-        dayLimit: 1,
+        dayLimit: 2,
         ratingMin: 4,
         beerStyleSelection: ['light', 'dark', 'sour', 'other'],
       },
