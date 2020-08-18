@@ -107,7 +107,7 @@ export default {
       let i = 0
       barsArray.map((bar) => {
         const daysAgo = this.daysAgoValue(item, i)
-        if (daysAgo <= this.dayLimit) {
+        if (daysAgo <= -this.dayLimit + 7) {
           barsList += bar + ' (' + this.daysAgoString(item, i) + ') — '
         }
         i++

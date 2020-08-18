@@ -44,8 +44,9 @@
         class="cbf-slider"
         :rounded="true"
         :disabled="isBeerSearch"
-        :min="7"
-        :max="0"
+        :tooltip="false"
+        :min="0"
+        :max="7"
         :step="1"
         :value="filterValues.dayLimit"
         ticks
@@ -53,7 +54,7 @@
         @input="value => onDayRangeChanged(value)"
       >
         <template v-for="(val, index) in [7, 6, 5, 4, 3, 2, 1, 0]">
-          <b-slider-tick :value="val" :key="`day-tick-${val}-${index}`">{{ val }}</b-slider-tick>
+          <b-slider-tick :value="index" :key="`day-tick-${val}-${index}`">{{ val }}</b-slider-tick>
         </template>
       </b-slider>
     </div>
@@ -66,10 +67,11 @@
         class="cbf-slider"
         :rounded="true"
         :disabled="isBeerSearch || isVenueSearch"
+        :tooltip="false"
         :min="3.5"
         :max="4.5"
         :step="0.25"
-        :value="filterValues.minRating"
+        :value="filterValues.ratingMin"
         ticks
         type="is-white"
         @input="value => onRatingRangeChanged(value)"

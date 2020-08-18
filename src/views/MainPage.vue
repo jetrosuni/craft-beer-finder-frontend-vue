@@ -83,8 +83,8 @@ export default {
       filterValues: {
         searchBeerString: '',
         searchVenueString: '',
-        dayLimit: 2,
-        ratingMin: 4,
+        dayLimit: 5,
+        ratingMin: 3.75,
         beerStyleSelection: ['light', 'dark', 'sour', 'other'],
       },
     }
@@ -155,10 +155,11 @@ export default {
       })
     },
     filteredDayLimit: function () {
+      const invertedDays = -this.filterValues.dayLimit + 7
       return this.filteredOtherBeers.filter((beer) => {
         return beer.days_ago_bars
           .split(',')
-          .some((value) => +value <= this.filterValues.dayLimit)
+          .some((value) => +value <= invertedDays)
           ? true
           : false
       })
