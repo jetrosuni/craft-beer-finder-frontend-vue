@@ -30,7 +30,7 @@
     <BeerList
       v-if="beerListHasItems()"
       :data="filteredBeerList"
-      :day-limit="isBeerNameSearch || isVenueSearch ? 7 : filterValues.dayLimit"
+      :day-limit="isBeerNameSearch || isVenueSearch ? 0 : filterValues.dayLimit"
     />
 
     <div
