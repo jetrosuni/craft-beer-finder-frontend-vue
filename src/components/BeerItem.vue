@@ -6,7 +6,12 @@
         <div class="level-left">
           <div class="level-item cbf-flag-area-mobile">
             <b-tooltip :label="item.beer_country" type="is-white" position="is-top">
-              <flag :iso="item.beer_country" :squared="false" class="cbf-flag-mobile" />
+              <div class="cbf-flag-border-mobile">
+                <div
+                  :style="{ backgroundImage: 'url(' + flagSvg(item.beer_country) + ')' }"
+                  class="cbf-flag"
+                />
+              </div>
             </b-tooltip>
           </div>
         </div>
@@ -43,7 +48,12 @@
         <div class="column is-two-fifths">
           <div class="cbf-flag-area">
             <b-tooltip :label="item.beer_country" type="is-white" position="is-top">
-              <flag :iso="item.beer_country" :squared="false" class="cbf-flag" />
+              <div class="cbf-flag-border">
+                <div
+                  :style="{ backgroundImage: 'url(' + flagSvg(item.beer_country) + ')' }"
+                  class="cbf-flag"
+                />
+              </div>
             </b-tooltip>
           </div>
         </div>
@@ -139,6 +149,9 @@ export default {
       }
       return require('@/assets/img/tulip-glass.svg')
     },
+    flagSvg(countryCode) {
+      return require('@/assets/img/flags/' + countryCode.toLowerCase() + '.svg')
+    },
   },
 }
 </script>
@@ -200,13 +213,25 @@ export default {
   color: #757575; /* grey 600 */
   font-size: 0.7rem;
 }
-.cbf-flag {
-  line-height: 0.98em;
+.cbf-flag-border-mobile {
+  margin-top: 0.1rem;
   border: 1px solid #444;
+  height: 15px;
+  width: 22px;
+  padding: 0;
 }
-.cbf-flag-mobile {
-  line-height: 0.94em;
+.cbf-flag-border {
+  margin-top: 0.6rem;
   border: 1px solid #444;
+  height: 32px;
+  width: 48px;
+  padding: 0;
+}
+.cbf-flag {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
 }
 .cbf-pint {
   margin-top: 0.3rem;

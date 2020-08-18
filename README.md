@@ -7,6 +7,7 @@ npm install
 
 * Rename the `.env.example` file to `.env`
 * Change the `VUE_APP_CRAFT_BEER_FINDER_API_URL` value in the `.env` file to match the real backend URL
+* Copy a full set of country coded svg flags to `/src/assets/img/flags/` (e.g. from here: https://github.com/hjnilsson/country-flags)
 
 ### Compiles and hot-reloads for development
 ```
