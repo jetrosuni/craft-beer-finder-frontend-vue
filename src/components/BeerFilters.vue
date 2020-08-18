@@ -61,12 +61,12 @@
     <div
       :class="[ isBeerSearch || isVenueSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']"
     >
-      <div class="cbf-rating-label">Rating scale</div>
+      <div class="cbf-rating-label">Rating</div>
       <b-slider
         class="cbf-slider"
         :rounded="true"
         :disabled="isBeerSearch || isVenueSearch"
-        :min="3.75"
+        :min="3.5"
         :max="4.5"
         :step="0.25"
         :value="filterValues.minRating"
@@ -74,7 +74,7 @@
         type="is-white"
         @input="value => onRatingRangeChanged(value)"
       >
-        <template v-for="(val, index) in [3.75, 4, 4.25, 4.5]">
+        <template v-for="(val, index) in [3.5, 3.75, 4, 4.25, 4.5]">
           <b-slider-tick :value="val" :key="`rating-tick-${val}-${index}`">{{ val }}</b-slider-tick>
         </template>
       </b-slider>
