@@ -148,6 +148,7 @@ const beerStyles = {
     "Stout - Russian Imperial",
     "Stout - White",
     "Traditional Ale",
+    "Wheat Beer - Wheat Wine",
     "Winter Ale",
     "Winter Warmer",
   ],
@@ -185,6 +186,7 @@ const beerStyles = {
     "Cider - Sweet",
     "Cider - Traditional",
     "Freeze-distilled Beer",
+    "Freeze-Distilled Beer",
     "Hard Seltzer",
     "Mead - Braggot",
     "Mead - Cyser",
@@ -192,6 +194,7 @@ const beerStyles = {
     "Mead - Other",
     "Mead - Pyment",
     "Non-Alcoholic Beer",
+    "Other",
     "Rye Wine"
   ]
 }
