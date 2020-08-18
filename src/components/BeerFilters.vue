@@ -42,6 +42,7 @@
       <div class="cbf-day-label">Day limit</div>
       <b-slider
         class="cbf-slider"
+        :rounded="true"
         :disabled="isBeerSearch"
         :min="0"
         :max="7"
@@ -63,6 +64,7 @@
       <div class="cbf-rating-label">Rating scale</div>
       <b-slider
         class="cbf-slider"
+        :rounded="true"
         :disabled="isBeerSearch || isVenueSearch"
         :min="3.75"
         :max="4.5"
