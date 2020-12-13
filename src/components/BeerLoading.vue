@@ -1,19 +1,23 @@
-<template>
-  <div :class="[size === 'small' ? 'cbf-loading cbf-is-small' : 'cbf-loading']">
+<template functional>
+  <div
+    :class="[
+      props.size === 'small' ? 'cbf-loading cbf-is-small' : 'cbf-loading',
+    ]"
+  >
     <div id="glass">
-      <div id="beer"></div>
+      <div id="beer" />
     </div>
-    <div id="handle"></div>
-    <div id="top_foam_1"></div>
-    <div id="top_foam_2"></div>
-    <div id="top_foam_3"></div>
-    <div id="top_foam_4"></div>
-    <div id="top_foam_5"></div>
-    <div id="foam_pop_bubbles"></div>
-    <div id="foam_tiny_bubbles"></div>
-    <div id="foam_tiny_bubbles_top"></div>
-    <div id="foam_tiny_bubbles_3"></div>
-    <div id="foam_tiny_bubbles_4"></div>
+    <div id="handle" />
+    <div id="top_foam_1" />
+    <div id="top_foam_2" />
+    <div id="top_foam_3" />
+    <div id="top_foam_4" />
+    <div id="top_foam_5" />
+    <div id="foam_pop_bubbles" />
+    <div id="foam_tiny_bubbles" />
+    <div id="foam_tiny_bubbles_top" />
+    <div id="foam_tiny_bubbles_3" />
+    <div id="foam_tiny_bubbles_4" />
   </div>
 </template>
 
@@ -23,9 +27,9 @@ export default {
   props: {
     size: {
       type: String,
-      required: false
-    }
-  }
+      required: false,
+    },
+  },
 }
 </script>
 
