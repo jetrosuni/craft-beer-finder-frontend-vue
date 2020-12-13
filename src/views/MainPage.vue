@@ -2,7 +2,9 @@
   <div class="section cbf-main-section">
     <h1
       class="cbf-title title is-size-1-widescreen is-size-2-desktop is-size-3-touch-only is-size-4-tablet-only is-size-4-mobile"
-    >{{titleText}}</h1>
+    >
+      {{ titleText }}
+    </h1>
 
     <div v-if="isDisplayLoadingIcon && isLoading">
       <div class="cbf-loading">
@@ -10,7 +12,7 @@
       </div>
     </div>
 
-    <div v-if="errorMessage" class="cbf-is-warning">{{errorMessage}}</div>
+    <div v-if="errorMessage" class="cbf-is-warning">{{ errorMessage }}</div>
 
     <div class="cbf-sticky" v-if="!isLoading">
       <BeerFilters
@@ -35,7 +37,11 @@
 
     <div
       v-if="!isDisplayLoadingIcon && !isFullListLoaded"
-      :class="[ !isDisplayLoadingIcon && !isFullListLoaded && !beerListHasItems() ? 'cbf-more-beers-loading-no-results' : 'cbf-more-beers-loading' ]"
+      :class="[
+        !isDisplayLoadingIcon && !isFullListLoaded && !beerListHasItems()
+          ? 'cbf-more-beers-loading-no-results'
+          : 'cbf-more-beers-loading',
+      ]"
     >
       <p>Serving more beer ... please wait ...</p>
       <div class="cbf-more-beers-loading-pint">
@@ -46,12 +52,16 @@
     <div
       v-if="!isLoading && filteredBeerList && !filteredBeerList.length"
       class="cbf-no-results-area"
-    >No results found with the selected filters.</div>
+    >
+      No results found with the selected filters.
+    </div>
 
     <div
       v-if="!isLoading && filteredBeerList && filteredBeerList.length"
       class="cbf-untappd-disclaimer is-size-7"
-    >Data provided by Untappd</div>
+    >
+      Data provided by Untappd
+    </div>
   </div>
 </template>
 
@@ -109,60 +119,58 @@ export default {
       return process.env.VUE_APP_CRAFT_BEER_FINDER_TITLE
     },
     filteredBeerNames: function () {
-      return this.beerList.filter((beer) => {
-        return this.isBeerNameSearch
+      return this.beerList.filter((beer) =>
+        this.isBeerNameSearch
           ? beer.beer_name
               .toLowerCase()
               .includes(this.filterValues.searchBeerString.toLowerCase())
           : true
-      })
+      )
     },
     filteredVenues: function () {
-      return this.filteredBeerNames.filter((beer) => {
-        return this.isVenueSearch
+      return this.filteredBeerNames.filter((beer) =>
+        this.isVenueSearch
           ? beer.bars
               .toLowerCase()
               .includes(this.filterValues.searchVenueString.toLowerCase())
           : true
-      })
+      )
     },
     filteredLightBeers: function () {
-      return this.filteredVenues.filter((beer) => {
-        return !this.filterValues.beerStyleSelection.includes('light')
+      return this.filteredVenues.filter((beer) =>
+        !this.filterValues.beerStyleSelection.includes('light')
           ? !beerStyles.light.some((style) => style === beer.beer_style)
           : true
-      })
+      )
     },
     filteredDarkBeers: function () {
-      return this.filteredLightBeers.filter((beer) => {
-        return !this.filterValues.beerStyleSelection.includes('dark')
+      return this.filteredLightBeers.filter((beer) =>
+        !this.filterValues.beerStyleSelection.includes('dark')
           ? !beerStyles.dark.some((style) => style === beer.beer_style)
           : true
-      })
+      )
     },
     filteredSourBeers: function () {
-      return this.filteredDarkBeers.filter((beer) => {
-        return !this.filterValues.beerStyleSelection.includes('sour')
+      return this.filteredDarkBeers.filter((beer) =>
+        !this.filterValues.beerStyleSelection.includes('sour')
           ? !beerStyles.sour.some((style) => style === beer.beer_style)
           : true
-      })
+      )
     },
     filteredOtherBeers: function () {
-      return this.filteredSourBeers.filter((beer) => {
-        return !this.filterValues.beerStyleSelection.includes('other')
+      return this.filteredSourBeers.filter((beer) =>
+        !this.filterValues.beerStyleSelection.includes('other')
           ? !beerStyles.other.some((style) => style === beer.beer_style)
           : true
-      })
+      )
     },
     filteredDayLimit: function () {
       const invertedDays = -this.filterValues.dayLimit + 7
-      return this.filteredOtherBeers.filter((beer) => {
-        return beer.days_ago_bars
-          .split(',')
-          .some((value) => +value <= invertedDays)
+      return this.filteredOtherBeers.filter((beer) =>
+        beer.days_ago_bars.split(',').some((value) => +value <= invertedDays)
           ? true
           : false
-      })
+      )
     },
     filteredBeerList: function () {
       // NOTE: if beer name search is active, do not care about the other filters
@@ -170,13 +178,13 @@ export default {
         return this.filteredBeerNames
       }
 
-      return this.filteredDayLimit.filter((beer) => {
-        return this.isVenueSearch
+      return this.filteredDayLimit.filter((beer) =>
+        this.isVenueSearch
           ? true
           : beer.beer_rating >= this.filterValues.ratingMin
           ? true
           : false
-      })
+      )
     },
     isBeerNameSearch: function () {
       return this.filterValues.searchBeerString &&
