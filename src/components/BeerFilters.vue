@@ -1,7 +1,11 @@
 <template>
   <div class="cbf-filters">
     <div
-      :class="[ isBeerSearch ? 'cbf-is-ignored cbf-beer-style-area level is-mobile' : 'cbf-beer-style-area level is-mobile']"
+      :class="[
+        isBeerSearch
+          ? 'cbf-is-ignored cbf-beer-style-area level is-mobile'
+          : 'cbf-beer-style-area level is-mobile',
+      ]"
     >
       <div class="level-left">
         <div class="level-item cbf-style-label">Beer style</div>
@@ -11,34 +15,42 @@
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="light"
-            @input="option => onBeerStyleSelected(option)"
-          >Pale</b-checkbox>
+            @input="(option) => onBeerStyleSelected(option)"
+            >Pale</b-checkbox
+          >
           <b-checkbox
             :disabled="isBeerSearch"
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="dark"
-            @input="option => onBeerStyleSelected(option)"
-          >Dark</b-checkbox>
+            @input="(option) => onBeerStyleSelected(option)"
+            >Dark</b-checkbox
+          >
           <b-checkbox
             :disabled="isBeerSearch"
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="sour"
-            @input="option => onBeerStyleSelected(option)"
-          >Sour</b-checkbox>
+            @input="(option) => onBeerStyleSelected(option)"
+            >Sour</b-checkbox
+          >
           <b-checkbox
             :disabled="isBeerSearch"
             type="is-light"
             v-model="filterValues.beerStyleSelection"
             native-value="other"
-            @input="option => onBeerStyleSelected(option)"
-          >Other</b-checkbox>
+            @input="(option) => onBeerStyleSelected(option)"
+            >Other</b-checkbox
+          >
         </div>
       </div>
     </div>
 
-    <div :class="[ isBeerSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']">
+    <div
+      :class="[
+        isBeerSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile',
+      ]"
+    >
       <div class="cbf-day-label">Day limit</div>
       <b-slider
         class="cbf-slider"
@@ -51,16 +63,22 @@
         :value="filterValues.dayLimit"
         ticks
         type="is-white"
-        @input="value => onDayRangeChanged(value)"
+        @input="(value) => onDayRangeChanged(value)"
       >
         <template v-for="(val, index) in [7, 6, 5, 4, 3, 2, 1, 0]">
-          <b-slider-tick :value="index" :key="`day-tick-${val}-${index}`">{{ val }}</b-slider-tick>
+          <b-slider-tick :value="index" :key="`day-tick-${val}-${index}`">{{
+            val
+          }}</b-slider-tick>
         </template>
       </b-slider>
     </div>
 
     <div
-      :class="[ isBeerSearch || isVenueSearch ? 'cbf-is-ignored level is-mobile' : 'level is-mobile']"
+      :class="[
+        isBeerSearch || isVenueSearch
+          ? 'cbf-is-ignored level is-mobile'
+          : 'level is-mobile',
+      ]"
     >
       <div class="cbf-rating-label">Rating</div>
       <b-slider
@@ -74,10 +92,12 @@
         :value="filterValues.ratingMin"
         ticks
         type="is-white"
-        @input="value => onRatingRangeChanged(value)"
+        @input="(value) => onRatingRangeChanged(value)"
       >
         <template v-for="(val, index) in [3.5, 3.75, 4, 4.25, 4.5]">
-          <b-slider-tick :value="val" :key="`rating-tick-${val}-${index}`">{{ val }}</b-slider-tick>
+          <b-slider-tick :value="val" :key="`rating-tick-${val}-${index}`">{{
+            val
+          }}</b-slider-tick>
         </template>
       </b-slider>
     </div>
@@ -90,12 +110,16 @@
             v-model="filterValues.searchBeerString"
             type="is-light"
             placeholder="Find a beer"
-            @input="option => onSearchStringChanged(option)"
+            @input="(option) => onSearchStringChanged(option)"
           />
         </b-field>
       </div>
       <div
-        :class="[ isBeerSearch ? 'cbf-is-ignored column is-half cbf-input-area' : 'column is-half cbf-input-area' ]"
+        :class="[
+          isBeerSearch
+            ? 'cbf-is-ignored column is-half cbf-input-area'
+            : 'column is-half cbf-input-area',
+        ]"
       >
         <b-field type="is-light">
           <b-autocomplete
@@ -108,9 +132,12 @@
             :open-on-focus="false"
             :data="venueNames"
             field="venue_name"
-            @select="option => onVenueStringChanged(option)"
-            @input="option => inspectVenueStringChange(option)"
-          />
+            clearable
+            @select="(option) => onVenueStringChanged(option)"
+            @input="(option) => inspectVenueStringChange(option)"
+          >
+            <template slot="empty">No venue found</template>
+          </b-autocomplete>
         </b-field>
       </div>
     </div>
@@ -184,9 +211,13 @@ export default {
       return this.windowInnerWidth < 769 ? 'is-small' : 'is-normal'
     },
     venueNames: function () {
-      if (this.venues && this.venues.length > 0) {
-        const matches = Object.values(this.venues).filter((v) => {
-          return (
+      if (
+        this.venues &&
+        this.venues.length > 0 &&
+        this.searchVenueString.length > 0
+      ) {
+        const matches = Object.values(this.venues).filter(
+          (v) =>
             v.name
               .toString()
               .toLowerCase()
@@ -195,8 +226,7 @@ export default {
                   ? this.searchVenueString.toLowerCase()
                   : ''
               ) >= 0
-          )
-        })
+        )
         return Object.values(matches).map((m) => m.name)
       }
       return []
