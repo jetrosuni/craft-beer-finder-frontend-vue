@@ -13,11 +13,12 @@
     <div id="top-foam-3" />
     <div id="top-foam-4" />
     <div id="top-foam-5" />
+
     <div id="foam-pop-bubbles" />
-    <div id="foam-tiny-bubbles" />
+    <div id="foam-tiny-bubbles-mid" />
     <div id="foam-tiny-bubbles-top" />
-    <div id="foam-tiny-bubbles-3" />
-    <div id="foam-tiny-bubbles-4" />
+    <div id="foam-tiny-bubbles-low" />
+    <div id="foam-tiny-bubbles-fast" />
   </div>
 </template>
 
@@ -64,16 +65,16 @@ export default {
   #foam-pop-bubbles {
     top: calc(#{$glass-pos-top-mobile} - 2px);
   }
-  #foam-tiny-bubbles {
-    top: calc(#{$glass-pos-top-mobile} + 42px);
+  #foam-tiny-bubbles-mid {
+    top: calc(#{$glass-pos-top-mobile} + 62px);
   }
   #foam-tiny-bubbles-top {
-    top: calc(#{$glass-pos-top-mobile} + 22px);
+    top: calc(#{$glass-pos-top-mobile} + 32px);
   }
-  #foam-tiny-bubbles-3 {
-    top: calc(#{$glass-pos-top-mobile} + 40px);
+  #foam-tiny-bubbles-low {
+    top: calc(#{$glass-pos-top-mobile} + 65px);
   }
-  #foam-tiny-bubbles-4 {
+  #foam-tiny-bubbles-fast {
     top: calc(#{$glass-pos-top-mobile} + 35px);
   }
 }
@@ -104,16 +105,16 @@ export default {
   #foam-pop-bubbles {
     top: calc(#{$glass-pos-top} - 2px);
   }
-  #foam-tiny-bubbles {
-    top: calc(#{$glass-pos-top} + 42px);
+  #foam-tiny-bubbles-mid {
+    top: calc(#{$glass-pos-top} + 62px);
   }
   #foam-tiny-bubbles-top {
-    top: calc(#{$glass-pos-top} + 22px);
+    top: calc(#{$glass-pos-top} + 32px);
   }
-  #foam-tiny-bubbles-3 {
-    top: calc(#{$glass-pos-top} + 40px);
+  #foam-tiny-bubbles-low {
+    top: calc(#{$glass-pos-top} + 65px);
   }
-  #foam-tiny-bubbles-4 {
+  #foam-tiny-bubbles-fast {
     top: calc(#{$glass-pos-top} + 35px);
   }
 }
@@ -415,21 +416,21 @@ export default {
 
   &::after {
     content: '';
-    width: 7px;
-    height: 7px;
+    width: 9px;
+    height: 9px;
     background: #e0e0e0; /* grey 300 */
     border-radius: 50%;
     box-shadow: 1px 1px 1px 1px;
     color: #ffecb3; /* amber 100 */
     position: absolute;
-    top: 9px;
+    top: 0px;
     left: 35px;
     -webkit-animation: foam-bubbly 3s infinite;
     animation: foam-bubbly 3s infinite;
   }
 }
 
-#foam-tiny-bubbles {
+#foam-tiny-bubbles-mid {
   position: absolute;
   left: calc(50% - #{$glass-width} / 2 + 18px);
   z-index: 4;
@@ -442,8 +443,8 @@ export default {
     background: #fff59d; // yellow 200
     border-radius: 50%;
     position: absolute;
-    -webkit-animation: foam-inner 4s infinite;
-    animation: foam-inner 4s infinite;
+    -webkit-animation: foam-inner 3s infinite;
+    animation: foam-inner 3s infinite;
   }
 
   &::after {
@@ -453,10 +454,10 @@ export default {
     background: #fff59d; // yellow 200
     border-radius: 50%;
     position: absolute;
-    top: 15px;
+    top: 5px;
     left: 30px;
-    -webkit-animation: foam-inner 4s infinite;
-    animation: foam-inner 4s infinite;
+    -webkit-animation: foam-inner 2.8s infinite;
+    animation: foam-inner 2.8s infinite;
   }
 }
 
@@ -475,8 +476,8 @@ export default {
     color: #cfd8dc; // blueGrey 100
     border-radius: 50%;
     position: absolute;
-    -webkit-animation: foam-inner 5s infinite;
-    animation: foam-inner 5s infinite;
+    -webkit-animation: foam-inner 4s infinite;
+    animation: foam-inner 4s infinite;
   }
 
   &::after {
@@ -490,45 +491,14 @@ export default {
     position: absolute;
     top: 15px;
     left: 22px;
-    -webkit-animation: foam-inner 4s infinite;
-    animation: foam-inner 4s infinite;
+    -webkit-animation: foam-inner 3.75s infinite;
+    animation: foam-inner 3.75s infinite;
   }
 }
 
-#foam-tiny-bubbles-3 {
+#foam-tiny-bubbles-low {
   position: absolute;
   left: calc(50% - #{$glass-width} / 2 + 32px);
-  z-index: 4;
-  opacity: 0.9;
-
-  &::before {
-    content: '';
-    width: 9px;
-    height: 9px;
-    background: #fff8e1; // amber 50
-    border-radius: 50%;
-    position: absolute;
-    -webkit-animation: foam-inner 6s infinite;
-    animation: foam-inner 6s infinite;
-  }
-
-  &::after {
-    content: '';
-    width: 5px;
-    height: 5px;
-    background: #fff8e1; // amber 50
-    border-radius: 50%;
-    position: absolute;
-    top: 8px;
-    left: 12px;
-    -webkit-animation: foam-inner 5s infinite;
-    animation: foam-inner 5s infinite;
-  }
-}
-
-#foam-tiny-bubbles-4 {
-  position: absolute;
-  left: calc(50% - #{$glass-width} / 2 + 38px);
   z-index: 4;
   opacity: 0.9;
 
@@ -537,8 +507,6 @@ export default {
     width: 3px;
     height: 3px;
     background: #fff8e1; // amber 50
-    box-shadow: 0px 0px 1px 1px;
-    color: #cfd8dc; // blueGrey 100
     border-radius: 50%;
     position: absolute;
     -webkit-animation: foam-inner 3s infinite;
@@ -547,15 +515,48 @@ export default {
 
   &::after {
     content: '';
-    width: 5px;
-    height: 5px;
+    width: 2px;
+    height: 2px;
+    background: #fff8e1; // amber 50
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 12px;
+    -webkit-animation: foam-inner 2.9s infinite;
+    animation: foam-inner 2.9s infinite;
+  }
+}
+
+#foam-tiny-bubbles-fast {
+  position: absolute;
+  left: calc(50% - #{$glass-width} / 2 + 38px);
+  z-index: 4;
+  opacity: 0.9;
+
+  &::before {
+    content: '';
+    width: 2px;
+    height: 2px;
+    background: #fff8e1; // amber 50
+    box-shadow: 0px 0px 1px 1px;
+    color: #cfd8dc; // blueGrey 100
+    border-radius: 50%;
+    position: absolute;
+    -webkit-animation: foam-inner 1.9s infinite;
+    animation: foam-inner 1.9s infinite;
+  }
+
+  &::after {
+    content: '';
+    width: 3px;
+    height: 3px;
     background: #fff8e1; // amber 50
     border-radius: 50%;
     position: absolute;
     top: 28px;
     left: 2px;
-    -webkit-animation: foam-inner 5s infinite;
-    animation: foam-inner 5s infinite;
+    -webkit-animation: foam-inner 2s infinite;
+    animation: foam-inner 2s infinite;
   }
 }
 
@@ -611,10 +612,10 @@ export default {
 
 @-webkit-keyframes foam-bubbly {
   0% {
-    transform: scale(0) translateY(0px);
+    transform: scale(0.25) translateY(0px);
   }
   10% {
-    transform: scale(0) translateY(0px);
+    transform: scale(0.25) translateY(0px);
   }
   20% {
     transform: scale(1) translateY(-20px);
@@ -630,10 +631,10 @@ export default {
 
 @keyframes foam-bubbly {
   0% {
-    transform: scale(0) translateY(0px);
+    transform: scale(0.1) translateY(0px);
   }
   10% {
-    transform: scale(0) translateY(0px);
+    transform: scale(0.2) translateY(0px);
   }
   20% {
     transform: scale(1) translateY(-20px);
@@ -650,11 +651,11 @@ export default {
 @-webkit-keyframes foam-inner {
   0% {
     opacity: 0.9;
-    transform: scale(0) translateY(0px);
+    transform: scale(0.1) translateY(0px);
   }
   20% {
     opacity: 0.9;
-    transform: scale(0) translateY(0px);
+    transform: scale(0.2) translateY(0px);
   }
   40% {
     opacity: 0.9;
@@ -678,11 +679,11 @@ export default {
 @keyframes foam-inner {
   0% {
     opacity: 0.9;
-    transform: scale(0) translateY(0px);
+    transform: scale(0.1) translateY(0px);
   }
   20% {
     opacity: 0.9;
-    transform: scale(0) translateY(0px);
+    transform: scale(0.2) translateY(0px);
   }
   40% {
     opacity: 0.9;
