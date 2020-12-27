@@ -18,8 +18,8 @@ import MainPage from '@/views/MainPage.vue'
 export default {
   name: 'app',
   components: {
-    MainPage
-  }
+    MainPage,
+  },
 }
 </script>
 
@@ -30,12 +30,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 1.5rem;
+  margin: 1.5rem auto 0 auto;
+  max-width: 94vw; /* NOTE: fix horizontal scroll appearing on certain devices */
 }
 
 @media only screen and (min-width: 769px) {
   #app {
-    margin-top: 0;
+    margin-top: 0 auto;
+    max-width: 100vw;
   }
 }
 </style>
