@@ -590,7 +590,7 @@ export default {
     transform: scale(0);
   }
   10% {
-    transform: scale(0);
+    transform: scale(0.1);
   }
   20% {
     transform: scale(1);
@@ -602,7 +602,7 @@ export default {
     transform: scale(0);
   }
   10% {
-    transform: scale(0);
+    transform: scale(0.1);
   }
   20% {
     transform: scale(1);
@@ -619,11 +619,9 @@ export default {
   20% {
     transform: scale(1) translateY(-20px);
   }
-
   40% {
     opacity: 0;
   }
-
   100% {
     transform: scale(1) translateY(-80px);
     opacity: 0;
@@ -640,11 +638,9 @@ export default {
   20% {
     transform: scale(1) translateY(-20px);
   }
-
   40% {
     opacity: 0;
   }
-
   100% {
     transform: scale(1) translateY(-80px);
     opacity: 0;
@@ -673,7 +669,6 @@ export default {
   70% {
     opacity: 0;
   }
-
   100% {
     transform: scale(1) translateY(-60px);
     opacity: 0;
@@ -702,7 +697,6 @@ export default {
   70% {
     opacity: 0;
   }
-
   100% {
     transform: scale(1) translateY(-60px);
     opacity: 0;
