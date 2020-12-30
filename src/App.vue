@@ -78,7 +78,7 @@ export default {
 
 @media only screen and (min-width: 769px) {
   #app {
-    margin-top: 0 auto;
+    margin: 0 auto;
     max-width: 100vw;
   }
 }
