@@ -6,7 +6,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/helsinki-craft-beer-finder/'
+    ? '/test/'
     : '/',
   css: {
     loaderOptions: {
@@ -23,7 +23,7 @@ module.exports = {
     appleMobileWebAppCapable: 'no',
     manifestOptions: {
       background_color: "#ffffff"
-    }
+    },
   },
   /*
   configureWebpack: {
