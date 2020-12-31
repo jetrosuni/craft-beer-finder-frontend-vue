@@ -6,7 +6,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/test/'
+    ? process.env.VUE_APP_CRAFT_BEER_FINDER_PUBLIC_PATH
     : '/',
   css: {
     loaderOptions: {
