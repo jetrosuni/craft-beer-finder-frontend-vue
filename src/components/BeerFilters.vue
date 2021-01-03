@@ -213,8 +213,9 @@ export default {
     venueNames: function () {
       if (
         this.venues &&
-        this.venues.length > 0 &&
-        this.searchVenueString.length > 0
+        this.venues.length &&
+        this.searchVenueString &&
+        this.searchVenueString.length
       ) {
         const matches = Object.values(this.venues).filter(
           (v) =>

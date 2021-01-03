@@ -204,7 +204,7 @@ export default {
       return (
         !this.waitingForResponse &&
         this.filteredBeerList &&
-        this.filteredBeerList.length > 0
+        this.filteredBeerList.length
       )
     },
     requestVenues() {
