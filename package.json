@@ -15,7 +15,7 @@
     "register-service-worker": "^1.7.2",
     "tiny-debounce": "^0.1.1",
     "vue": "^2.6.12",
-    "vue-analytics": "^5.22.1"
+    "vue-gtag": "^1.10.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.9",
