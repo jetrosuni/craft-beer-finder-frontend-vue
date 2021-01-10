@@ -106,7 +106,9 @@ export default {
     this.requestData(true, false)
   },
   mounted() {
-    this.$ga.page(process.env.VUE_APP_CRAFT_BEER_FINDER_PUBLIC_PATH)
+    this.$gtag.pageview({
+      page_path: process.env.VUE_APP_CRAFT_BEER_FINDER_PUBLIC_PATH
+    })
     this.refreshTimer = setInterval(() => {
       this.requestData(false, true)
     }, 1200000)
