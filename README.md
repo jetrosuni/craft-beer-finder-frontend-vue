@@ -12,8 +12,7 @@ https://www.jetrosuni.com/helsinki-craft-beer-finder/
 npm install
 ```
 
-- Rename the `.env.example` file to `.env`
-- Change the `VITE_CRAFT_BEER_FINDER_API_URL` value in the `.env` file to match the real backend URL
+- Copy the content of `.env.example` file to `.env.local` & `.env.production.local` and make all the needed adjustments (e.g. change the `VITE_CRAFT_BEER_FINDER_API_URL` value to match the real backend URL).
 - Copy a full set of country coded svg flags to `/public/img/flags/` (e.g. from here: https://github.com/hjnilsson/country-flags)
 
 ### Development
