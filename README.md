@@ -1,48 +1,67 @@
 # craft-beer-finder-frontend-vue
 
+Craft Beer Finder PWA
+
 ## Live demo
 
 https://www.jetrosuni.com/helsinki-craft-beer-finder/
 
 ## Project setup
+
 ```
 npm install
 ```
 
-* Rename the `.env.example` file to `.env`
-* Change the `VUE_APP_CRAFT_BEER_FINDER_API_URL` value in the `.env` file to match the real backend URL
-* Copy a full set of country coded svg flags to `/src/assets/img/flags/` (e.g. from here: https://github.com/hjnilsson/country-flags)
+- Rename the `.env.example` file to `.env`
+- Change the `VITE_CRAFT_BEER_FINDER_API_URL` value in the `.env` file to match the real backend URL
+- Copy a full set of country coded svg flags to `/public/img/flags/` (e.g. from here: https://github.com/hjnilsson/country-flags)
 
-### Compiles and hot-reloads for development
+### Development
+
 ```
-npm run serve
+docker compose up
+```
+
+```
+http://localhost:9980
+```
+
+### PWA Assets
+
+To (re)generate:
+
+```
+docker exec craft-beer-finder-frontend-vue npm run generate-pwa-assets
 ```
 
 ### Compiles and minifies for production
+
 ```
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
 ### Backend
 
-* The backend is not currently OSS
-* Here's an example of the API response structure:
+- The backend is not currently OSS
+- Here's an example of the API response structure:
+
 ```
 [
   {
-    "beer_id":"3860521",
-    "beer_name":"Brewery - Name of the beer",
-    "beer_country":"GB",
-    "beer_rating":"4.57",
-    "beer_rating_count":"199",
-    "beer_style":"Stout - Imperial \/ Double Coffee",
-    "bars":"Bar 1,Bar 2",
-    "days_ago_bars":"1,2"
+    "beerId": 3860521,
+    "name": "Brewery - Name of the beer",
+    "country": "GB",
+    "style": "dark",
+    "styleName": "Stout - Imperial \/ Double Coffee",
+    "rating": 4.57,
+    "ratingCount": 199,
+    "venues": [
+      {
+        "name": "Bar 1",
+        "daysAgo": 4
+      },
+      ...
+    ]
   },
   {
     ...
@@ -52,9 +71,9 @@ npm run lint
 
 ## Credits
 
-* Loading animation heavily inspired by CodePen by clemishow, with several tweaks: https://codepen.io/clemishow/pen/ZYPPeE/
-* `tulip-glass.svg` is a modified version of: https://commons.wikimedia.org/wiki/File:Alcohol_glass_beer_tulip.svg
-  * The **original file** `Alcohol glass beer tulip.svg` is made available under the Creative Commons CC0 1.0 Universal Public Domain Dedication
+- Loading animation heavily inspired by CodePen by clemishow, with several tweaks: https://codepen.io/clemishow/pen/ZYPPeE/
+- `tulip-glass.svg` is a modified version of: https://commons.wikimedia.org/wiki/File:Alcohol_glass_beer_tulip.svg
+  - The **original file** `Alcohol glass beer tulip.svg` is made available under the Creative Commons CC0 1.0 Universal Public Domain Dedication
 
 ## License
 
