@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  service:
+    container_name: craft-beer-finder-frontend-vue
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - 9980:9980
