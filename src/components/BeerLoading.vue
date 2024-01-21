@@ -1,37 +1,31 @@
-<template functional>
-  <div
-    :class="[
-      props.size === 'small' ? 'cbf-loading cbf-is-small' : 'cbf-loading',
-    ]"
-  >
+<template>
+  <div :class="[size === 'small' ? 'cbf-loading cbf-is-small' : 'cbf-loading']">
     <div id="glass">
-      <div id="beer" />
+      <div id="beer"></div>
     </div>
-    <div id="handle" />
-    <div id="top-foam-1" />
-    <div id="top-foam-2" />
-    <div id="top-foam-3" />
-    <div id="top-foam-4" />
-    <div id="top-foam-5" />
-
-    <div id="foam-pop-bubbles" />
-    <div id="foam-tiny-bubbles-mid" />
-    <div id="foam-tiny-bubbles-top" />
-    <div id="foam-tiny-bubbles-low" />
-    <div id="foam-tiny-bubbles-fast" />
+    <div id="handle"></div>
+    <div id="top-foam-1"></div>
+    <div id="top-foam-2"></div>
+    <div id="top-foam-3"></div>
+    <div id="top-foam-4"></div>
+    <div id="top-foam-5"></div>
+    <div id="foam-pop-bubbles"></div>
+    <div id="foam-tiny-bubbles-mid"></div>
+    <div id="foam-tiny-bubbles-top"></div>
+    <div id="foam-tiny-bubbles-low"></div>
+    <div id="foam-tiny-bubbles-fast"></div>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'BeerLoading',
   props: {
-    size: {
-      type: String,
-      required: false,
-    },
+    size: String,
   },
-}
+})
 </script>
 
 <style lang="scss">

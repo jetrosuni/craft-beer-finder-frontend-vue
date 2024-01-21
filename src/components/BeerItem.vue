@@ -1,98 +1,50 @@
 <template>
-  <div class="columns cbf-margin-slim">
-    <!-- mobile -->
-    <div class="column is-full is-hidden-tablet">
-      <div class="level is-mobile">
-        <div class="level-left">
-          <div class="level-item cbf-flag-area-mobile">
-            <b-tooltip :label="item.beer_country" type="is-white" position="is-top">
-              <div class="cbf-flag-border-mobile">
-                <div
-                  :style="{ backgroundImage: 'url(' + flagSvg(item.beer_country) + ')' }"
-                  class="cbf-flag"
-                />
-              </div>
-            </b-tooltip>
-          </div>
-        </div>
-        <div class="level-item cbf-pint-area-mobile">
-          <b-tooltip :label="item.beer_style" type="is-white" position="is-top">
-            <div class="cbf-pint">
-              <img :src="tulipGlassSvg(item.beer_style)" class="cbf-tulip-mobile" />
-            </div>
-          </b-tooltip>
-        </div>
-        <div class="level-item has-text-centered cbf-rating-area-mobile">
-          <p class="heading">
-            <strong>{{item.beer_rating}}</strong>
-            <br />
-            {{item.beer_rating_count}}
-          </p>
-        </div>
-        <div class="cbf-beer-name-area-mobile">
-          <p>
-            {{item.beer_name}}
-            <br />
-            <span class="cbf-bar-list-mobile">
-              <span v-html="barsList(item)"></span>
-            </span>
-          </p>
-        </div>
+  <div class="mb-5 md:mb-3">
+    <div class="grid grid-cols-10 grid-rows-1 gap-3 sm:gap-2">
+      <div class="pt-1.5">
+        <img
+          :src="tulipGlassSvg"
+          class="float-right w-6"
+          loading="lazy"
+          width="24"
+          height="41"
+          alt="pint"
+        />
       </div>
-    </div>
-    <!-- /mobile -->
-
-    <!-- 768px or wider -->
-    <div class="column is-one-fifth cbf-first-col is-hidden-mobile">
-      <div class="columns is-gapless">
-        <div class="column is-two-fifths">
-          <div class="cbf-flag-area">
-            <b-tooltip :label="item.beer_country" type="is-white" position="is-top">
-              <div class="cbf-flag-border">
-                <div
-                  :style="{ backgroundImage: 'url(' + flagSvg(item.beer_country) + ')' }"
-                  class="cbf-flag"
-                />
-              </div>
-            </b-tooltip>
-          </div>
-        </div>
-        <div class="column is-two-fifths">
-          <b-tooltip :label="item.beer_style" type="is-white" position="is-right">
-            <div class="cbf-pint">
-              <img :src="tulipGlassSvg(item.beer_style)" class="cbf-tulip" />
-            </div>
-          </b-tooltip>
-        </div>
-        <div class="column is-one-fifth">
-          <div class="cbf-rating">
-            <strong>{{item.beer_rating}}</strong>
-            <div class="is-size-7">{{item.beer_rating_count}}</div>
-          </div>
-        </div>
+      <div class="mx-auto text-center text-xs leading-7 md:mt-1 md:text-base">
+        <strong>{{ item.rating }}</strong>
+        <div class="is-size-7">({{ item.ratingCount }})</div>
       </div>
-    </div>
-    <!-- /768px -->
-
-    <div class="column is-four-fifths cbf-second-col is-hidden-mobile">
-      <div class="columns cbf-beer-name">
-        <div class="column is-full cbf-remove-padding">{{item.beer_name}}</div>
-      </div>
-      <div class="columns is-multiline is-gapless cbf-bar-item-area is-size-7">
-        <span v-html="barsList(item)"></span>
+      <div class="col-span-8 ml-2 leading-7">
+        <p class="break-words">
+          {{ item.name }}
+        </p>
+        <div class="cbf-tiny-flag float-left mr-2">
+          <div
+            :style="{ backgroundImage: 'url(' + flagSvg + ')' }"
+            class="h-full bg-cover bg-center bg-no-repeat"
+          ></div>
+        </div>
+        <p class="my-1 text-sm uppercase leading-6">({{ item.country }}) {{ item.styleName }}</p>
+        <div class="mt-1 text-gray-500">
+          <span v-html="venuesList"></span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import beerColors from '../data/beerColors'
+<script lang="ts">
+import { type Beer, type Venue } from '../types'
 
-export default {
-  name: 'BeerItem',
+import { defineComponent, type PropType } from 'vue'
+
+import { beerColors } from '../data/beerColors'
+
+export default defineComponent({
   props: {
     item: {
-      type: Object,
+      type: Object as PropType<Beer>,
       required: true,
     },
     dayLimit: {
@@ -100,178 +52,57 @@ export default {
       required: true,
     },
   },
-  methods: {
-    barsList(item) {
-      const barsArray = this.barsArray(item)
-      let barsList = ''
-      let i = 0
-      barsArray.map((bar) => {
-        const daysAgo = this.daysAgoValue(item, i)
-        if (daysAgo <= -this.dayLimit + 7) {
-          barsList += bar + ' (' + this.daysAgoString(item, i) + ') — '
-        }
-        i++
+  computed: {
+    venuesList(): string {
+      let venueStr = ''
+
+      this.item.venues.forEach((venue: Venue) => {
+        venueStr +=
+          venue.daysAgo <= this.dayLimit
+            ? venue.name + ' (' + this.daysAgoString(venue.daysAgo) + ') — '
+            : ''
       })
 
-      return barsList.substring(0, barsList.length - 3)
+      return venueStr.slice(0, -2)
     },
-    barsArray(item) {
-      return item.bars.split(',')
+    flagSvg(): string {
+      return new URL(
+        import.meta.env.VITE_CRAFT_BEER_FINDER_PUBLIC_PATH +
+          'img/flags/' +
+          this.item.country.toLowerCase() +
+          '.svg',
+        import.meta.url,
+      ).toString()
     },
-    daysAgoArray(item) {
-      return item.days_ago_bars.split(',')
-    },
-    daysAgoValue(item, barKey) {
-      const daysAgoArray = this.daysAgoArray(item)
-      return +daysAgoArray[barKey]
-    },
-    daysAgoString(item, barKey) {
-      const daysAgoArray = this.daysAgoArray(item)
-      return +daysAgoArray[barKey] === 0
-        ? '<span class="cbf-is-today">today</span>'
-        : +daysAgoArray[barKey] === 1
-        ? '<span class="cbf-is-yesterday">1 day ago</span>'
-        : +daysAgoArray[barKey] > 1 && +daysAgoArray[barKey] < 4
-        ? '<span class="cbf-is-some-days-ago">' +
-          daysAgoArray[barKey] +
-          ' days ago</span>'
-        : '<span class="cbf-is-many-days-ago">' +
-          daysAgoArray[barKey] +
-          ' days ago</span>'
-    },
-    tulipGlassSvg(style) {
-      if (beerColors.other.some((bc) => bc.test(style.toLowerCase()))) {
-        return require('@/assets/img/tulip-glass.svg')
-      } else if (beerColors.dark.some((bc) => bc.test(style.toLowerCase()))) {
-        return require('@/assets/img/tulip-glass-dark.svg')
-      } else if (beerColors.light.some((bc) => bc.test(style.toLowerCase()))) {
-        return require('@/assets/img/tulip-glass-light.svg')
+    tulipGlassSvg(): string {
+      if (beerColors.dark.some((bc) => bc.test(this.item.styleName.toLowerCase()))) {
+        return new URL('../assets/img/tulip-glass-dark.svg', import.meta.url).toString()
+      } else if (beerColors.light.some((bc) => bc.test(this.item.styleName.toLowerCase()))) {
+        return new URL('../assets/img/tulip-glass-light.svg', import.meta.url).toString()
       }
-      return require('@/assets/img/tulip-glass.svg')
-    },
-    flagSvg(countryCode) {
-      return require('@/assets/img/flags/' + countryCode.toLowerCase() + '.svg')
+
+      return new URL('../assets/img/tulip-glass.svg', import.meta.url).toString()
     },
   },
-}
+  methods: {
+    daysAgoString(daysAgo: number): string {
+      return daysAgo === 0
+        ? '<span class="cbf-global-is-today">today</span>'
+        : daysAgo === 1
+          ? '<span class="cbf-global-is-yesterday">1 day ago</span>'
+          : daysAgo > 1 && daysAgo < 4
+            ? '<span class="cbf-global-is-some-days-ago">' + daysAgo + ' days ago</span>'
+            : '<span class="cbf-global-is-many-days-ago">' + daysAgo + ' days ago</span>'
+    },
+  },
+})
 </script>
 
-<style>
-.cbf-is-today {
-  color: #43a047; /* green 600 */
-}
-.cbf-is-yesterday {
-  color: #4caf50; /* green 500 */
-}
-.cbf-is-some-days-ago {
-  color: #ff9800; /* orange */
-}
-.cbf-is-many-days-ago {
-  color: #f44336; /* red */
-}
-</style>
-
 <style scoped>
-.cbf-first-col {
-  padding: 0;
-  text-align: center;
-}
-.cbf-flag-area {
-  float: right;
-  font-size: 36px;
-  margin-right: 0;
-}
-.cbf-flag-area-mobile {
-  min-width: 2rem;
-  width: 2rem;
-  font-size: 17px;
-  margin-bottom: 0.1rem;
-}
-.cbf-pint-area-mobile {
-  min-width: 2rem;
-  width: 2rem;
-  margin-left: 0.5rem !important;
-  margin-right: 0 !important;
-}
-.cbf-pint-area-mobile .cbf-pint {
-  margin-bottom: 0.1rem;
-}
-.cbf-rating-area-mobile {
-  min-width: 2.5rem;
-  width: 2.5rem;
-  padding-top: 0.5rem;
-  margin-left: 0.5rem !important;
-  margin-right: 0.5rem !important;
-}
-.cbf-beer-name-area-mobile {
-  margin-left: 0.5rem;
-  width: 100%;
-  font-size: 0.8rem;
-  padding-top: 0.125rem;
-}
-.cbf-bar-list-mobile {
-  color: #757575; /* grey 600 */
-  font-size: 0.7rem;
-}
-.cbf-flag-border-mobile {
-  margin-top: 0.1rem;
+.cbf-tiny-flag {
+  margin-top: 6.5px;
   border: 1px solid #444;
-  height: 15px;
+  height: 14px;
   width: 22px;
-  padding: 0;
-}
-.cbf-flag-border {
-  margin-top: 0.6rem;
-  border: 1px solid #444;
-  height: 32px;
-  width: 48px;
-  padding: 0;
-}
-.cbf-flag {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  height: 100%;
-}
-.cbf-pint {
-  margin-top: 0.3rem;
-}
-.cbf-tulip {
-  width: 24px;
-}
-.cbf-tulip-mobile {
-  width: 12px;
-}
-.cbf-rating {
-  margin-top: 0.2rem;
-  text-align: center;
-}
-.cbf-rating-mobile {
-  margin-top: 0.2rem;
-  text-align: left;
-}
-.cbf-remove-padding {
-  padding: 0;
-}
-.cbf-second-col {
-  padding: 0.25rem 0 2rem 2.25rem;
-}
-.cbf-beer-name {
-  padding: 0;
-  margin: 0;
-  overflow-wrap: break-word;
-}
-.cbf-bar-item-area {
-  padding: 0;
-  color: #757575; /* grey 600 */
-}
-.cbf-margin-slim {
-  margin-bottom: 1rem;
-}
-
-@media only screen and (min-width: 769px) {
-  .cbf-margin-slim {
-    margin-bottom: 2rem;
-  }
 }
 </style>

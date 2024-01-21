@@ -1,32 +1,43 @@
 <template>
   <div class="beer-list">
     <transition-group tag="div" name="beer-list">
-      <div v-for="beerItem in data" :key="beerItem.beer_id">
+      <Lazy
+        v-for="beerItem in beerList"
+        :unrender="true"
+        :min-height="110"
+        :key="`beer-${beerItem.beerId}`"
+      >
         <BeerItem :item="beerItem" :day-limit="dayLimit" />
-      </div>
+      </Lazy>
     </transition-group>
   </div>
 </template>
 
-<script>
-import BeerItem from '@/components/BeerItem.vue'
+<script lang="ts">
+import { type Beer } from '../types'
 
-export default {
+import { defineComponent, type PropType } from 'vue'
+
+import BeerItem from '@/components/BeerItem.vue'
+import Lazy from '@/components/Lazy.vue'
+
+export default defineComponent({
   name: 'BeerList',
   components: {
-    BeerItem
+    BeerItem,
+    Lazy,
   },
   props: {
-    data: {
-      type: Array,
-      required: true
+    beerList: {
+      type: Array as PropType<Readonly<Array<Beer>>>,
+      required: true,
     },
     dayLimit: {
       type: Number,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+})
 </script>
 
 <style scoped>
@@ -38,7 +49,7 @@ export default {
 
 @media only screen and (min-width: 769px) {
   .beer-list {
-    margin: 4rem 0;
+    margin: 1.5rem 0 0 0;
     padding: 0 2rem;
   }
 }
@@ -48,7 +59,7 @@ export default {
 .beer-list-enter-active,
 .beer-list-leave-active,
 .beer-list-move {
-  transition-duration: 300ms;
+  transition-duration: 500ms;
   transition-timing-function: ease-out;
   transition-property: opacity, transform;
 }

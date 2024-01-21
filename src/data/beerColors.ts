@@ -1,4 +1,4 @@
-const beerColors = {
+export const beerColors = {
   other: [
     /brett/,
     /cider/,
@@ -9,7 +9,7 @@ const beerColors = {
     /mead/,
     /radler/,
     /sour/,
-    /wild/
+    /wild/,
   ],
   dark: [
     /barleywine/,
@@ -37,7 +37,7 @@ const beerColors = {
     /spiced/,
     /stout/,
     /wee heavy/,
-    /winter/
+    /winter/,
   ],
   light: [
     /bitter/,
@@ -74,8 +74,6 @@ const beerColors = {
     /tripel/,
     /weizen/,
     /wheat/,
-    /witbier/
-  ]
+    /witbier/,
+  ],
 }
-
-export default beerColors
