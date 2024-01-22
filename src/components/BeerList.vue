@@ -1,14 +1,14 @@
 <template>
   <div class="beer-list">
     <transition-group tag="ul" name="beer-list">
-      <Lazy
+      <LazyItem
         v-for="beerItem in beerList"
         :unrender="true"
         :min-height="110"
         :key="`beer-${beerItem.beerId}`"
       >
         <BeerItem :item="beerItem" :day-limit="dayLimit" />
-      </Lazy>
+      </LazyItem>
     </transition-group>
   </div>
 </template>
