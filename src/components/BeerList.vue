@@ -2,12 +2,12 @@
   <div class="beer-list">
     <transition-group tag="ul" name="beer-list">
       <LazyItem
-        v-for="beerItem in beerList"
+        v-for="beer in beerList"
         :unrender="true"
         :min-height="110"
-        :key="`beer-${beerItem.beerId}`"
+        :key="`beer-${beer.beerId}`"
       >
-        <BeerItem :item="beerItem" :day-limit="dayLimit" />
+        <BeerItem :beer="beer" :day-limit="dayLimit" />
       </LazyItem>
     </transition-group>
   </div>

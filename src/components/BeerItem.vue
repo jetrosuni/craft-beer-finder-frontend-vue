@@ -12,12 +12,12 @@
         />
       </div>
       <div class="mx-auto text-center text-xs leading-7 md:mt-1 md:text-base">
-        <strong>{{ item.rating }}</strong>
-        <div class="is-size-7">({{ item.ratingCount }})</div>
+        <strong>{{ beer.rating }}</strong>
+        <div class="is-size-7">({{ beer.ratingCount }})</div>
       </div>
       <div class="col-span-8 ml-2 leading-7">
         <p class="break-words">
-          {{ item.name }}
+          {{ beer.name }}
         </p>
         <div class="cbf-tiny-flag float-left mr-2">
           <div
@@ -25,7 +25,7 @@
             class="h-full bg-cover bg-center bg-no-repeat"
           ></div>
         </div>
-        <p class="my-1 text-sm uppercase leading-6">({{ item.country }}) {{ item.styleName }}</p>
+        <p class="my-1 text-sm uppercase leading-6">({{ beer.country }}) {{ beer.styleName }}</p>
         <div class="mt-1 text-gray-500">
           <span v-html="venuesList"></span>
         </div>
@@ -43,7 +43,7 @@ import { beerColors } from '../config/beerColors'
 
 export default defineComponent({
   props: {
-    item: {
+    beer: {
       type: Object as PropType<Beer>,
       required: true,
     },
@@ -56,7 +56,7 @@ export default defineComponent({
     venuesList(): string {
       let venueStr = ''
 
-      this.item.venues.forEach((venue: Venue) => {
+      this.beer.venues.forEach((venue: Venue) => {
         venueStr +=
           venue.daysAgo <= this.dayLimit
             ? venue.name + ' (' + this.daysAgoString(venue.daysAgo) + ') — '
@@ -69,15 +69,15 @@ export default defineComponent({
       return new URL(
         import.meta.env.VITE_CRAFT_BEER_FINDER_PUBLIC_PATH +
           'img/flags/' +
-          this.item.country.toLowerCase() +
+          this.beer.country.toLowerCase() +
           '.svg',
         import.meta.url,
       ).toString()
     },
     tulipGlassSvg(): string {
-      if (beerColors.dark.some((bc) => bc.test(this.item.styleName.toLowerCase()))) {
+      if (beerColors.dark.some((bc) => bc.test(this.beer.styleName.toLowerCase()))) {
         return new URL('../assets/img/tulip-glass-dark.svg', import.meta.url).toString()
-      } else if (beerColors.light.some((bc) => bc.test(this.item.styleName.toLowerCase()))) {
+      } else if (beerColors.light.some((bc) => bc.test(this.beer.styleName.toLowerCase()))) {
         return new URL('../assets/img/tulip-glass-light.svg', import.meta.url).toString()
       }
 
