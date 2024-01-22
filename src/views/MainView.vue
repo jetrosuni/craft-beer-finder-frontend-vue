@@ -66,10 +66,10 @@ export default defineComponent({
       genericErrorMessage: 'Connection failed ... please try again later ...',
       beerList: <Readonly<Array<Beer>>>[],
       venues: <Readonly<Array<Venue>>>[],
-      waitingForResponse: false,
       isDisplayLoadingIcon: true,
-      isLoading: false,
       isFullListLoaded: false,
+      isLoading: false,
+      isWaitingForResponse: false,
       filterValues: <FilterValues>{
         searchBeerString: '',
         searchVenueString: '',
@@ -150,7 +150,7 @@ export default defineComponent({
           )
     },
     isBeerListItems(): boolean {
-      return !!(!this.waitingForResponse && this.filteredBeerList && this.filteredBeerList.length)
+      return !!(!this.isWaitingForResponse && this.filteredBeerList && this.filteredBeerList.length)
     },
     isBeerNameSearch(): boolean {
       return !!(this.filterValues.searchBeerString && this.filterValues.searchBeerString.length > 2)
@@ -175,7 +175,7 @@ export default defineComponent({
         })
     },
     requestBeers(initialDataOnly = false, isSilent = false): void {
-      if (this.waitingForResponse) {
+      if (this.isWaitingForResponse) {
         return
       }
 
@@ -197,7 +197,7 @@ export default defineComponent({
             this.errorMessage = this.genericErrorMessage
           })
           .finally(() => {
-            this.waitingForResponse = false
+            this.isWaitingForResponse = false
             this.isLoading = false
           })
 
@@ -217,7 +217,7 @@ export default defineComponent({
           this.errorMessage = this.genericErrorMessage
         })
         .finally(() => {
-          this.waitingForResponse = false
+          this.isWaitingForResponse = false
           this.isLoading = false
         })
     },
