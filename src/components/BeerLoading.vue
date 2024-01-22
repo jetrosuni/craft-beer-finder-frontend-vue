@@ -1,5 +1,5 @@
 <template>
-  <div :class="[size === 'small' ? 'cbf-loading cbf-is-small' : 'cbf-loading']">
+  <div class="cbf-loading" :class="{ 'cbf-is-small': size === 'small' }">
     <div id="glass">
       <div id="beer"></div>
     </div>
