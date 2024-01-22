@@ -39,7 +39,7 @@ import { type Beer, type Venue } from '../types'
 
 import { defineComponent, type PropType } from 'vue'
 
-import { beerColors } from '../data/beerColors'
+import { beerColors } from '../config/beerColors'
 
 export default defineComponent({
   props: {
