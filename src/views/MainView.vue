@@ -3,11 +3,7 @@
     <h1 class="text-2xl font-bold sm:mb-3 lg:mb-5 lg:text-4xl xl:text-5xl">
       {{ titleText }}
     </h1>
-    <div v-if="isDisplayLoadingIcon && isLoading">
-      <div class="cbf-loading">
-        <BeerLoading />
-      </div>
-    </div>
+    <BeerLoading v-if="isDisplayLoadingIcon && isLoading" />
     <div v-if="!!errorMessage" class="mb-3 text-red-600">{{ errorMessage }}</div>
     <div
       class="sticky top-0 z-50 border-b-4 border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"
