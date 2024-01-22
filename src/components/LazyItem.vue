@@ -1,7 +1,7 @@
 <template>
-  <div ref="targetEl" :style="`min-height:${fixedMinHeight ? fixedMinHeight : minHeight}px`">
+  <li ref="targetEl" :style="`min-height:${fixedMinHeight ? fixedMinHeight : minHeight}px`">
     <slot v-if="shouldRender"></slot>
-  </div>
+  </li>
 </template>
 <script lang="ts">
 import { useIntersectionObserver } from '@vueuse/core'

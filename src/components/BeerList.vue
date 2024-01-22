@@ -1,6 +1,6 @@
 <template>
   <div class="beer-list">
-    <transition-group tag="div" name="beer-list">
+    <transition-group tag="ul" name="beer-list">
       <Lazy
         v-for="beerItem in beerList"
         :unrender="true"
@@ -19,13 +19,13 @@ import { type Beer } from '../types'
 import { defineComponent, type PropType } from 'vue'
 
 import BeerItem from '@/components/BeerItem.vue'
-import Lazy from '@/components/Lazy.vue'
+import LazyItem from '@/components/LazyItem.vue'
 
 export default defineComponent({
   name: 'BeerList',
   components: {
     BeerItem,
-    Lazy,
+    LazyItem,
   },
   props: {
     beerList: {
