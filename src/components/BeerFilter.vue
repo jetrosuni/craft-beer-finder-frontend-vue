@@ -102,10 +102,6 @@ export default defineComponent({
     DarkModeButton,
   },
   props: {
-    beerList: {
-      type: Array as PropType<Readonly<Array<Beer>>>,
-      required: true,
-    },
     venues: {
       type: Array as PropType<Readonly<Array<Venue>>>,
       required: true,

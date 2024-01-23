@@ -10,7 +10,6 @@
       v-if="!isLoading && venues && !!!errorMessage"
     >
       <BeerFilter
-        :beer-list="beerList"
         :venues="venues"
         :filter-values="filterValues"
         :is-beer-search="isBeerNameSearch"
