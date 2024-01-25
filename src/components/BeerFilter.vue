@@ -137,19 +137,17 @@ export default defineComponent({
     this.emitRatingChange = debounce(this.emitRatingChange, 320)
     this.onSearchStringChanged = debounce(this.onSearchStringChanged, 320)
 
-    const venueAutocomplete = document.querySelector('#venueFilter')
+    const venueFilterEl = document.getElementById('venueFilter')
 
-    const dataFilter = (input: string) =>
-      this.venueNames.filter((venue: string) => venue.toLowerCase().includes(input.toLowerCase()))
+    if (venueFilterEl) {
+      const filter = (input: string) =>
+        this.venueNames.filter((venue: string) => venue.toLowerCase().includes(input.toLowerCase()))
 
-    new Autocomplete(venueAutocomplete, {
-      filter: dataFilter,
-      noResults: 'No venue found.',
-    })
+      new Autocomplete(venueFilterEl, {
+        filter,
+        noResults: 'No venue found.',
+      })
 
-    const venueFilter = document.getElementById('venueFilter')
-
-    if (venueFilter) {
       const emitVenueChange = (e: CustomEvent) => {
         // NOTE: value property doesn't exist in CustomEvent as it's unique for TW Elements Autocomplete component
         const selection = (e as any).value
@@ -157,8 +155,8 @@ export default defineComponent({
         this.$emit('change-filter-venue-string', this.ensureMinimumInputLength(selection))
       }
 
-      venueFilter.addEventListener('itemSelect.te.autocomplete', emitVenueChange as EventListener)
-      venueFilter.addEventListener('update.te.autocomplete', emitVenueChange as EventListener)
+      venueFilterEl.addEventListener('itemSelect.te.autocomplete', emitVenueChange as EventListener)
+      venueFilterEl.addEventListener('update.te.autocomplete', emitVenueChange as EventListener)
     }
   },
   methods: {
