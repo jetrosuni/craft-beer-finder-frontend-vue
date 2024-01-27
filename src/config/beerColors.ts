@@ -12,6 +12,7 @@ export const beerColors = {
     /wild/,
   ],
   dark: [
+    /adambier/,
     /barleywine/,
     /black/,
     /bock - doppelbock/,
