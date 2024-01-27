@@ -50,7 +50,6 @@ import { defineComponent, type PropType } from 'vue'
 export default defineComponent({
   name: 'BeerFilterRange',
   props: {
-    isDisabled: { type: Boolean, default: () => false },
     min: { type: [String, Number, undefined] as PropType<string | number | undefined> },
     max: { type: [String, Number, undefined] as PropType<string | number | undefined> },
     step: { type: [String, Number, undefined] as PropType<string | number | undefined> },

@@ -21,7 +21,6 @@
         :class="{ 'cbf-global-is-ignored pointer-events-none': isBeerSearch }"
       >
         <BeerFilterRange
-          :is-disabled="isBeerSearch"
           :min="0"
           :max="7"
           :step="1"
@@ -38,7 +37,6 @@
         :class="{ 'cbf-global-is-ignored pointer-events-none': isBeerSearch || isVenueSearch }"
       >
         <BeerFilterRange
-          :is-disabled="isBeerSearch || isVenueSearch"
           :min="3.5"
           :max="4.5"
           :step="0.25"
