@@ -3,6 +3,7 @@
     <slot v-if="shouldRender"></slot>
   </li>
 </template>
+
 <script lang="ts">
 import { useIntersectionObserver } from '@vueuse/core'
 import { ref, nextTick } from 'vue'
