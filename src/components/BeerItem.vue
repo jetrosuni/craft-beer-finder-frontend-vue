@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { type Beer, type Venue } from '../types'
+import type { Beer, Venue } from '../types'
 
 import { defineComponent, type PropType } from 'vue'
 

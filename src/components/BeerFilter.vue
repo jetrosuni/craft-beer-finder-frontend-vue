@@ -82,7 +82,7 @@
 </template>
 
 <script lang="ts">
-import { type FilterValues, type Venue } from '../types'
+import type { FilterValues, Venue } from '../types'
 
 import { defineComponent, type PropType } from 'vue'
 import debounce from 'lodash.debounce'

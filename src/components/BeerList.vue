@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { type Beer } from '../types'
+import type { Beer } from '../types'
 
 import { defineComponent, type PropType } from 'vue'
 

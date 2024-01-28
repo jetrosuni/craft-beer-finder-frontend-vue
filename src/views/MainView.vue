@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { type Beer, type FilterValues, type Venue } from '../types'
+import type { Beer, FilterValues, Venue } from '../types'
 
 import { defineComponent, readonly } from 'vue'
 
