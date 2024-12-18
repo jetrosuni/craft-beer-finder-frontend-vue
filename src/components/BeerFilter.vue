@@ -136,7 +136,6 @@ export default defineComponent({
     this.onSearchStringChanged = debounce(this.onSearchStringChanged, 320)
 
     const venueFilterEl = document.getElementById('venueFilter')
-
     if (venueFilterEl) {
       const filter = (input: string) =>
         this.venueNames.filter((venue: string) => venue.toLowerCase().includes(input.toLowerCase()))

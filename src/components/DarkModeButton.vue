@@ -44,9 +44,7 @@ export default {
     const isDark = useDark({
       selector: 'html',
     })
-
     const toggleDark = useToggle(isDark)
-
     return { isDark, toggleDark }
   },
 }
