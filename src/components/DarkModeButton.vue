@@ -4,7 +4,7 @@
     <label
       class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600/80"
       for="light-switch"
-      @click="toggleDark()"
+      @click.prevent="toggleDark()"
     >
       <svg class="h-4 w-4 dark:hidden" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
         <path
