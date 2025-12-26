@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   service:
     container_name: craft-beer-finder-frontend-vue
