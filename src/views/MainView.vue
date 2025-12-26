@@ -165,10 +165,18 @@ export default defineComponent({
       backendService
         .getVenues()
         .then((res) => {
+          if (res?.error) {
+            console.error(res.error?.description || 'Unknown error while fetching venues')
+
+            this.venues = []
+
+            return
+          }
+
           this.venues = res
         })
         .catch((err) => {
-          console.log(err)
+          console.error(err)
 
           this.errorMessage = this.genericErrorMessage
         })
@@ -191,7 +199,7 @@ export default defineComponent({
             this.isDisplayLoadingIcon = false
           })
           .catch((err) => {
-            console.log(err)
+            console.error(err)
 
             this.errorMessage = this.genericErrorMessage
           })
@@ -211,7 +219,7 @@ export default defineComponent({
           this.isFullListLoaded = true
         })
         .catch((err) => {
-          console.log(err)
+          console.error(err)
 
           this.errorMessage = this.genericErrorMessage
         })

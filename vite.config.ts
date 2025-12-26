@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   return {
     base: '/craft-beer-finder/', // NOTE: Change to match the production environment
     esbuild: {
-      pure: mode === 'production' ? ['console.log'] : [],
+      pure: mode === 'production' ? ['console.log', 'console.error'] : [],
     },
     plugins: [
       vue(),
