@@ -39,8 +39,8 @@ export default {
 
     const { stop } = useIntersectionObserver(
       targetEl,
-      ([{ isIntersecting }]) => {
-        if (isIntersecting) {
+      ([entry]) => {
+        if (entry?.isIntersecting) {
           clearTimeout(unrenderTimer)
 
           renderTimer = setTimeout(() => (shouldRender.value = true), props.unrender ? 200 : 0)

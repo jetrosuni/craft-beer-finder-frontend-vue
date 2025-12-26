@@ -25,7 +25,7 @@
           :max="7"
           :step="1"
           :value="filterValues.dayLimit"
-          @change="(value) => onDayRangeChanged(value)"
+          @change="(value: number) => onDayRangeChanged(value)"
         />
       </div>
       <div class="pr-1 pt-5" :class="{ 'cbf-global-is-ignored': isBeerSearch || isVenueSearch }">
@@ -42,7 +42,7 @@
           :step="0.25"
           :ticks="['3.5', '3.75', '4.0', '4.25', '4.5']"
           :value="filterValues.ratingMin"
-          @change="(value) => onRatingRangeChanged(value)"
+          @change="(value: number) => onRatingRangeChanged(value)"
         />
       </div>
       <div class="col-span-3 pr-5 pt-5">
